@@ -319,7 +319,233 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   outline: 0;
 }
 
-/* line 7, ../sass/screen.scss */
+/*
+    Colorbox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
+*/
+/* line 5, ../sass/_colorbox.scss */
+#colorbox, #cboxOverlay, #cboxWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* line 6, ../sass/_colorbox.scss */
+#cboxOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 7, ../sass/_colorbox.scss */
+#cboxMiddleLeft, #cboxBottomLeft {
+  clear: left;
+}
+
+/* line 8, ../sass/_colorbox.scss */
+#cboxContent {
+  position: relative;
+}
+
+/* line 9, ../sass/_colorbox.scss */
+#cboxLoadedContent {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* line 10, ../sass/_colorbox.scss */
+#cboxTitle {
+  margin: 0;
+}
+
+/* line 11, ../sass/_colorbox.scss */
+#cboxLoadingOverlay, #cboxLoadingGraphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 12, ../sass/_colorbox.scss */
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow {
+  cursor: pointer;
+}
+
+/* line 13, ../sass/_colorbox.scss */
+.cboxPhoto {
+  float: left;
+  margin: auto;
+  border: 0;
+  display: block;
+  max-width: none;
+  -ms-interpolation-mode: bicubic;
+}
+
+/* line 14, ../sass/_colorbox.scss */
+.cboxIframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+/* line 15, ../sass/_colorbox.scss */
+#colorbox, #cboxContent, #cboxLoadedContent {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+/* 
+    User Style:
+    Change the following styles to modify the appearance of Colorbox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
+*/
+/* line 22, ../sass/_colorbox.scss */
+#cboxOverlay {
+  background: #fff;
+}
+
+/* line 23, ../sass/_colorbox.scss */
+#colorbox {
+  outline: 0;
+}
+
+/* line 24, ../sass/_colorbox.scss */
+#cboxContent {
+  margin-top: 32px;
+  overflow: visible;
+  background: #000;
+}
+
+/* line 25, ../sass/_colorbox.scss */
+.cboxIframe {
+  background: #fff;
+}
+
+/* line 26, ../sass/_colorbox.scss */
+#cboxError {
+  padding: 50px;
+  border: 1px solid #ccc;
+}
+
+/* line 27, ../sass/_colorbox.scss */
+#cboxLoadedContent {
+  background: #000;
+  padding: 1px;
+}
+
+/* line 28, ../sass/_colorbox.scss */
+#cboxLoadingGraphic {
+  background: url(images/loading.gif) no-repeat center center;
+}
+
+/* line 29, ../sass/_colorbox.scss */
+#cboxLoadingOverlay {
+  background: #000;
+}
+
+/* line 30, ../sass/_colorbox.scss */
+#cboxTitle {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  color: #000;
+}
+
+/* line 31, ../sass/_colorbox.scss */
+#cboxCurrent {
+  position: absolute;
+  top: -22px;
+  right: 205px;
+  text-indent: -9999px;
+}
+
+/* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+/* line 34, ../sass/_colorbox.scss */
+#cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  text-indent: -9999px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -20px;
+  background: url(images/controls.png) no-repeat 0 0;
+}
+
+/* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+/* line 37, ../sass/_colorbox.scss */
+#cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {
+  outline: 0;
+}
+
+/* line 39, ../sass/_colorbox.scss */
+#cboxPrevious {
+  background-position: 0px 0px;
+  right: 44px;
+}
+
+/* line 40, ../sass/_colorbox.scss */
+#cboxPrevious:hover {
+  background-position: 0px -25px;
+}
+
+/* line 41, ../sass/_colorbox.scss */
+#cboxNext {
+  background-position: -25px 0px;
+  right: 22px;
+}
+
+/* line 42, ../sass/_colorbox.scss */
+#cboxNext:hover {
+  background-position: -25px -25px;
+}
+
+/* line 43, ../sass/_colorbox.scss */
+#cboxClose {
+  background-position: -50px 0px;
+  right: 0;
+}
+
+/* line 44, ../sass/_colorbox.scss */
+#cboxClose:hover {
+  background-position: -50px -25px;
+}
+
+/* line 45, ../sass/_colorbox.scss */
+.cboxSlideshow_on #cboxPrevious, .cboxSlideshow_off #cboxPrevious {
+  right: 66px;
+}
+
+/* line 46, ../sass/_colorbox.scss */
+.cboxSlideshow_on #cboxSlideshow {
+  background-position: -75px -25px;
+  right: 44px;
+}
+
+/* line 47, ../sass/_colorbox.scss */
+.cboxSlideshow_on #cboxSlideshow:hover {
+  background-position: -100px -25px;
+}
+
+/* line 48, ../sass/_colorbox.scss */
+.cboxSlideshow_off #cboxSlideshow {
+  background-position: -100px 0px;
+  right: 44px;
+}
+
+/* line 49, ../sass/_colorbox.scss */
+.cboxSlideshow_off #cboxSlideshow:hover {
+  background-position: -75px -25px;
+}
+
+/* line 8, ../sass/screen.scss */
 html,
 body,
 .zoomer {
@@ -327,7 +553,7 @@ body,
   height: 100%;
 }
 
-/* line 12, ../sass/screen.scss */
+/* line 13, ../sass/screen.scss */
 body {
   background: #000;
   color: #fff;
@@ -338,57 +564,62 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 22, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
 em {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 27, ../sass/screen.scss */
+/* line 28, ../sass/screen.scss */
 a {
   color: #fff;
   text-decoration: none;
 }
 
-/* line 32, ../sass/screen.scss */
+/* line 33, ../sass/screen.scss */
 video {
   max-width: 100%;
   height: auto;
 }
 
-/* line 37, ../sass/screen.scss */
+/* line 38, ../sass/screen.scss */
 .swipe {
   position: relative;
   overflow: hidden;
   visibility: hidden;
   height: 100%;
 }
-/* line 43, ../sass/screen.scss */
+/* line 44, ../sass/screen.scss */
 .swipe .swipe-wrap {
   position: relative;
   overflow: hidden;
   height: 100%;
 }
-/* line 48, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 .swipe .swipe-wrap > div {
   position: relative;
   float: left;
 }
 
-/* line 55, ../sass/screen.scss */
+/* line 56, ../sass/screen.scss */
 .video {
   width: 80%;
   height: 100%;
   margin: 0 auto;
   display: table;
 }
-/* line 61, ../sass/screen.scss */
+/* line 62, ../sass/screen.scss */
 .video .video-container {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 67, ../sass/screen.scss */
+/* line 68, ../sass/screen.scss */
+.info {
+  display: none;
+}
+
+/* line 72, ../sass/screen.scss */
 .tombstone {
   position: fixed;
   bottom: 0;
@@ -398,26 +629,23 @@ video {
   background: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
-/* line 76, ../sass/screen.scss */
+/* line 81, ../sass/screen.scss */
 .tombstone .title {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 82, ../sass/screen.scss */
-.info {
-  display: none;
-  height: 300px;
-  width: 500px;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-/* line 89, ../sass/screen.scss */
+/* line 87, ../sass/screen.scss */
 nav {
+  display: none;
   position: fixed;
   bottom: 0;
   right: 0;
   padding: 20px 40px 25px 30px;
   z-index: 9999;
   background: rgba(0, 0, 0, 0.6);
+}
+/* line 96, ../sass/screen.scss */
+.no-touch nav {
+  display: block;
 }

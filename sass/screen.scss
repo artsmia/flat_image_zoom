@@ -1,6 +1,7 @@
 @import "compass/reset";
 @import "fonts";
 @import "leaflet";
+@import "colorbox";
 
 html,
 body,
@@ -64,6 +65,10 @@ video {
     }
 }
 
+.info {
+    display: none;
+}
+
 .tombstone {
     position: fixed;
     bottom: 0;
@@ -79,18 +84,16 @@ video {
     }
 }
 
-.info {
-    display: none;
-    height: 300px;
-    width: 500px;
-    background: rgba(0, 0, 0, 0.6);
-}
-
 nav {
+    display: none;
     position: fixed;
     bottom: 0;
     right: 0;
     padding: 20px 40px 25px 30px;
     z-index: 9999;
     background: rgba(0, 0, 0, 0.6);
+    
+    .no-touch & {
+        display: block;
+    }
 }
