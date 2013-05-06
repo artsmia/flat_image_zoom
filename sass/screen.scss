@@ -1,7 +1,9 @@
 @import "compass/reset";
 @import "leaflet";
 
-html, body {
+html,
+body,
+.zoomer {
     width: 100%;
     height: 100%;
 }
@@ -14,6 +16,16 @@ body {
     line-height: 24px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+video {
+    max-width: 100%;
+    height: auto;
 }
 
 .swipe {
@@ -37,7 +49,7 @@ body {
 .video {
     width: 80%;
     height: 100%;
-    margin: 0px auto;
+    margin: 0 auto;
     display: table;
     
     .video-container {
@@ -46,28 +58,12 @@ body {
     }
 }
 
-.zoomer {
-    width: 100%;
-    height: 100%;
-}
-
-nav {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-}
-
-video {
-    max-width: 100%;
-    height: auto;
-}
-
 .tombstone {
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 10000;
     padding: 20px;
+    z-index: 10000;
     background: rgba(0, 0, 0, 0.75);
 }
 
@@ -75,5 +71,14 @@ video {
     display: none;
     height: 300px;
     width: 500px;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 9999;
     background: rgba(0, 0, 0, 0.75);
 }

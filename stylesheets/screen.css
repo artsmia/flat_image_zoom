@@ -303,13 +303,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   outline: 0;
 }
 
-/* line 4, ../sass/screen.scss */
-html, body {
+/* line 6, ../sass/screen.scss */
+html,
+body,
+.zoomer {
   width: 100%;
   height: 100%;
 }
 
-/* line 9, ../sass/screen.scss */
+/* line 11, ../sass/screen.scss */
 body {
   background: #000;
   color: #fff;
@@ -320,71 +322,74 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 19, ../sass/screen.scss */
+/* line 21, ../sass/screen.scss */
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* line 26, ../sass/screen.scss */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* line 31, ../sass/screen.scss */
 .swipe {
   position: relative;
   overflow: hidden;
   visibility: hidden;
   height: 100%;
 }
-/* line 25, ../sass/screen.scss */
+/* line 37, ../sass/screen.scss */
 .swipe .swipe-wrap {
   position: relative;
   overflow: hidden;
   height: 100%;
 }
-/* line 30, ../sass/screen.scss */
+/* line 42, ../sass/screen.scss */
 .swipe .swipe-wrap > div {
   position: relative;
   float: left;
 }
 
-/* line 37, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 .video {
   width: 80%;
   height: 100%;
-  margin: 0px auto;
+  margin: 0 auto;
   display: table;
 }
-/* line 43, ../sass/screen.scss */
+/* line 55, ../sass/screen.scss */
 .video .video-container {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 49, ../sass/screen.scss */
-.zoomer {
-  width: 100%;
-  height: 100%;
-}
-
-/* line 54, ../sass/screen.scss */
-nav {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-}
-
-/* line 60, ../sass/screen.scss */
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* line 65, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 .tombstone {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 10000;
   padding: 20px;
+  z-index: 10000;
   background: rgba(0, 0, 0, 0.75);
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 70, ../sass/screen.scss */
 .info {
   display: none;
   height: 300px;
   width: 500px;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* line 77, ../sass/screen.scss */
+nav {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 9999;
   background: rgba(0, 0, 0, 0.75);
 }
