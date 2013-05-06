@@ -3,20 +3,13 @@
 <head>
     <title>Info Lounge &mdash; Walker Art Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="javascripts/jquery.lightbox_me.js"></script>
-    <script src="javascripts/swipe.js"></script>
-    <script src="javascripts/leaflet-src.js"></script>
-    <script src="javascripts/zoom_swipe.js"></script>
-    <script src="javascripts/flat_image_zoom.js"></script>
-    <script src="javascripts/jquery.actual.min.js"></script>
-    <script src="http://vjs.zencdn.net/c/video.js"></script>
     <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
     <link href="stylesheets/screen.css" rel="stylesheet">
 </head>
 <body>
-    <div id='slider' class='swipe'>
-        <div class='swipe-wrap'>
+    
+    <div id="slider" class="swipe">
+        <div class="swipe-wrap">
             <div class="image-view-1 zoomer">
                 <div class="info">
                     <div class="info_btn">
@@ -46,9 +39,8 @@
             </div>
             <div id="video1" class="zoomer video">
                 <div class="centerVideo">
-                    <video id="video1_player" class="video-js vjs-default-skin" controls preload="none"
-data-setup="{}" poster="http://video-js.zencoder.com/oceans-clip.jpg">
-                            <source src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" />
+                    <video id="video1_player" class="video-js vjs-default-skin" controls preload="none" data-setup="{}" poster="http://video-js.zencoder.com/oceans-clip.jpg">
+                        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" />
                     </video>
                 </div>
                 <div class="info">
@@ -95,18 +87,25 @@ data-setup="{}" poster="http://video-js.zencoder.com/oceans-clip.jpg">
             </div>
         </div>
     </div>
+    
     <nav>
-        <a href='#' id='prev' onclick='window.mySwipe.prev();return false;'><em>prev</em></a>
-        <span id='position'><em class='on'>&bull;</em><em>&bull;</em><em>&bull;</em></span>
-        <a href='#' id='next' onclick='window.mySwipe.next();return false;'><em>next</em></a>
+        <a href="" id="prev" onclick="window.mySwipe.prev(); return false;"><em>prev</em></a>
+        <span id="position"><em class="on">&bull;</em><em>&bull;</em><em>&bull;</em></span>
+        <a href="" id="next" onclick="window.mySwipe.next(); return false;"><em>next</em></a>
     </nav>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="javascripts/jquery.lightbox_me.js"></script>
+    <script src="javascripts/swipe.js"></script>
+    <script src="javascripts/leaflet-src.js"></script>
+    <script src="javascripts/zoom_swipe.js"></script>
+    <script src="javascripts/flat_image_zoom.js"></script>
+    <script src="javascripts/jquery.actual.min.js"></script>
+    <script src="http://vjs.zencdn.net/c/video.js"></script>
     <script>
         var lastSlideId = "image-view-1";
-		$(document).ready(function() {
-      
-      
-      
-          
+        $(document).ready(function() {
+            
             window.mySwipe = new Swipe(document.getElementById('slider'), {
                 callback: function(index,slide) {
                     //console.log(slide.id)
@@ -132,46 +131,46 @@ data-setup="{}" poster="http://video-js.zencoder.com/oceans-clip.jpg">
             Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
             
             _V_("video1_player").ready(function(){
-              // Store the video object
-              var myPlayer = this; 
-              // Make up an aspect ratio
-              var aspectRatio = 264/640; 
-              
-              function resizeVideoJS(){
-                var width = document.getElementById(myPlayer.id).parentElement.offsetWidth;
-                var w=window.innerWidth;
-                if(width > w){
-                  myPlayer.width(w).height( w * aspectRatio );
-                }else{
-                  myPlayer.width(width).height( width * aspectRatio );
+                // Store the video object
+                var myPlayer = this; 
+                // Make up an aspect ratio
+                var aspectRatio = 264/640; 
+                
+                function resizeVideoJS(){
+                    var width = document.getElementById(myPlayer.id).parentElement.offsetWidth;
+                    var w=window.innerWidth;
+                    if(width > w){
+                        myPlayer.width(w).height( w * aspectRatio );
+                    }else{
+                        myPlayer.width(width).height( width * aspectRatio );
+                    }
+                    
+                    
                 }
+                 // Initialize resizeVideoJS()
+                resizeVideoJS();
+                // Then on resize call resizeVideoJS()
                 
+                var id;
+                $(window).resize(function() {
+                        clearTimeout(id);
+                        id = setTimeout(resizeVideoJS, 100);
+
+                });
                 
-              }
-               // Initialize resizeVideoJS()
-              resizeVideoJS();
-              // Then on resize call resizeVideoJS()
-              
-              var id;
-              $(window).resize(function() {
-                  clearTimeout(id);
-                  id = setTimeout(resizeVideoJS, 100);
-    
-              });
-              
-              //window.onresize = resizeVideoJS; 
+                //window.onresize = resizeVideoJS; 
             });
             $('.info_btn').click(function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              console.log($(this));
-              $lightbx = $(this).parent().children(".info_extended").clone();
-              $lightbx.lightbox_me({
-                destroyOnClose:true
-              });
+                e.preventDefault();
+                e.stopPropagation();
+                console.log($(this));
+                $lightbx = $(this).parent().children(".info_extended").clone();
+                $lightbx.lightbox_me({
+                    destroyOnClose:true
+                });
             });
 
-		});
+        });
 
 
     </script>

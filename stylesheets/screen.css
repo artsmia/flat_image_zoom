@@ -672,45 +672,37 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 4, ../sass/screen.scss */
-html {
+html, body {
   width: 100%;
   height: 100%;
 }
 
 /* line 9, ../sass/screen.scss */
 body {
-  background-color: black;
-  color: white;
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-  height: 100%;
+  background: #000;
+  color: #fff;
 }
 
-/* line 17, ../sass/screen.scss */
+/* line 14, ../sass/screen.scss */
 .swipe {
+  position: relative;
   overflow: hidden;
   visibility: hidden;
-  position: relative;
-  width: 100%;
   height: 100%;
 }
-
-/* line 24, ../sass/screen.scss */
-.swipe-wrap {
+/* line 20, ../sass/screen.scss */
+.swipe .swipe-wrap {
+  position: relative;
   overflow: hidden;
-  position: relative;
-  width: 100%;
   height: 100%;
 }
-
-/* line 30, ../sass/screen.scss */
-.swipe-wrap div {
-  float: left;
+/* line 25, ../sass/screen.scss */
+.swipe .swipe-wrap > div {
   position: relative;
+  float: left;
 }
 
-/* line 34, ../sass/screen.scss */
+/* line 32, ../sass/screen.scss */
 .video {
   width: 80%;
   height: 100%;
@@ -718,38 +710,38 @@ body {
   display: table;
 }
 
-/* line 40, ../sass/screen.scss */
+/* line 38, ../sass/screen.scss */
 .video div {
   float: none;
 }
 
-/* line 43, ../sass/screen.scss */
+/* line 41, ../sass/screen.scss */
 .centerVideo {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 47, ../sass/screen.scss */
+/* line 45, ../sass/screen.scss */
 .zoomer {
   width: 100%;
   height: 100%;
   background-color: black;
 }
 
-/* line 53, ../sass/screen.scss */
+/* line 51, ../sass/screen.scss */
 nav {
   position: absolute;
   bottom: 5px;
   right: 5px;
 }
 
-/* line 58, ../sass/screen.scss */
+/* line 56, ../sass/screen.scss */
 video {
   max-width: 100%;
   height: auto;
 }
 
-/* line 62, ../sass/screen.scss */
+/* line 60, ../sass/screen.scss */
 .info {
   position: absolute !important;
   bottom: 5px;
@@ -757,7 +749,7 @@ video {
   z-index: 10000;
 }
 
-/* line 68, ../sass/screen.scss */
+/* line 66, ../sass/screen.scss */
 .info_btn {
   padding: 5px;
   background: #FFF;
@@ -765,7 +757,7 @@ video {
   color: #222;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 72, ../sass/screen.scss */
 .info_extended {
   height: 300px;
   width: 500px;
@@ -774,19 +766,19 @@ video {
   display: none;
 }
 
-/* line 81, ../sass/screen.scss */
+/* line 79, ../sass/screen.scss */
 .info_title {
   display: block;
   color: #222;
 }
 
-/* line 85, ../sass/screen.scss */
+/* line 83, ../sass/screen.scss */
 .info_artist {
   display: block;
   color: #222;
 }
 
-/* line 89, ../sass/screen.scss */
+/* line 87, ../sass/screen.scss */
 .info_artist {
   display: block;
   color: #222;
