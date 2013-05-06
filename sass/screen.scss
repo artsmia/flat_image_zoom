@@ -1,6 +1,26 @@
 @import "compass/reset";
 @import "leaflet";
 
+@font-face {
+    font-family: 'Fox Regular';
+    src: url('../fonts/foxroman-webfont.eot');
+    src: url('../fonts/foxroman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/foxroman-webfont.woff') format('woff'),
+         url('../fonts/foxroman-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fox Italic';
+    src: url('../fonts/foxitalic-webfont.eot');
+    src: url('../fonts/foxitalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/foxitalic-webfont.woff') format('woff'),
+         url('../fonts/foxitalic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
 html,
 body,
 .zoomer {
@@ -11,11 +31,16 @@ body,
 body {
     background: #000;
     color: #fff;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 20px;
-    line-height: 24px;
+    font-family: 'Fox Regular', Helvetica, Arial, sans-serif;
+    font-size: 34px;
+    line-height: 44px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+}
+
+em {
+    font-family: 'Fox Italic';
+    font-style: italic;
 }
 
 a {
@@ -62,23 +87,28 @@ video {
     position: fixed;
     bottom: 0;
     left: 0;
-    padding: 20px;
+    padding: 20px 40px 25px 30px;
     z-index: 10000;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.5);
+    
+    .title {
+        font-family: 'Fox Italic';
+        font-style: italic;
+    }
 }
 
 .info {
     display: none;
     height: 300px;
     width: 500px;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 nav {
     position: fixed;
     bottom: 0;
     right: 0;
-    padding: 20px;
+    padding: 20px 40px 25px 30px;
     z-index: 9999;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.5);
 }
