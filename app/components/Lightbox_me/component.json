@@ -1,0 +1,9 @@
+{
+  "name": "Lightbox_me",
+  "version": "0.0.0",
+  "commit": "8ff1a2ba555f5ccb05679c733ee13bf7e5161089",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/buckwilson/Lightbox_me.git"
+  }
+}
