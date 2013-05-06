@@ -128,9 +128,9 @@
                 });
             });
             $('.tombstone').click(function() {
-                $lightbx = $(this).parent().children('.info').clone();
-                $lightbx.lightbox_me({
-                    destroyOnClose: true
+                $artwork-info = $(this).parent().children('.info').html();
+                $.colorbox({
+                    html: artwork-info
                 });
             });
 
