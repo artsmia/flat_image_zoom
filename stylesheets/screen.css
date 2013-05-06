@@ -1,0 +1,793 @@
+/* line 17, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../.rvm/gems/ruby-2.0.0-p0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* required styles */
+/* line 15, ../sass/_leaflet.scss */
+.leaflet-map-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-popup-pane,
+.leaflet-overlay-pane svg,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* line 20, ../sass/_leaflet.scss */
+.leaflet-container {
+  overflow: hidden;
+  -ms-touch-action: none;
+}
+
+/* line 26, ../sass/_leaflet.scss */
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* line 32, ../sass/_leaflet.scss */
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  display: block;
+}
+
+/* map is broken in FF if you have max-width: 100% on tiles */
+/* line 36, ../sass/_leaflet.scss */
+.leaflet-container img {
+  max-width: none !important;
+}
+
+/* stupid Android 2 doesn't understand "max-width: none" properly */
+/* line 40, ../sass/_leaflet.scss */
+.leaflet-container img.leaflet-image-layer {
+  max-width: 15000px !important;
+}
+
+/* line 43, ../sass/_leaflet.scss */
+.leaflet-tile {
+  filter: inherit;
+  visibility: hidden;
+}
+
+/* line 47, ../sass/_leaflet.scss */
+.leaflet-tile-loaded {
+  visibility: inherit;
+}
+
+/* line 50, ../sass/_leaflet.scss */
+.leaflet-zoom-box {
+  width: 0;
+  height: 0;
+}
+
+/* line 55, ../sass/_leaflet.scss */
+.leaflet-tile-pane {
+  z-index: 2;
+}
+
+/* line 56, ../sass/_leaflet.scss */
+.leaflet-objects-pane {
+  z-index: 3;
+}
+
+/* line 57, ../sass/_leaflet.scss */
+.leaflet-overlay-pane {
+  z-index: 4;
+}
+
+/* line 58, ../sass/_leaflet.scss */
+.leaflet-shadow-pane {
+  z-index: 5;
+}
+
+/* line 59, ../sass/_leaflet.scss */
+.leaflet-marker-pane {
+  z-index: 6;
+}
+
+/* line 60, ../sass/_leaflet.scss */
+.leaflet-popup-pane {
+  z-index: 7;
+}
+
+/* control positioning */
+/* line 65, ../sass/_leaflet.scss */
+.leaflet-control {
+  position: relative;
+  z-index: 7;
+  pointer-events: auto;
+}
+
+/* line 71, ../sass/_leaflet.scss */
+.leaflet-top,
+.leaflet-bottom {
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* line 76, ../sass/_leaflet.scss */
+.leaflet-top {
+  top: 0;
+}
+
+/* line 79, ../sass/_leaflet.scss */
+.leaflet-right {
+  right: 0;
+}
+
+/* line 82, ../sass/_leaflet.scss */
+.leaflet-bottom {
+  bottom: 0;
+}
+
+/* line 85, ../sass/_leaflet.scss */
+.leaflet-left {
+  left: 0;
+}
+
+/* line 88, ../sass/_leaflet.scss */
+.leaflet-control {
+  float: left;
+  clear: both;
+}
+
+/* line 92, ../sass/_leaflet.scss */
+.leaflet-right .leaflet-control {
+  float: right;
+}
+
+/* line 95, ../sass/_leaflet.scss */
+.leaflet-top .leaflet-control {
+  margin-top: 10px;
+}
+
+/* line 98, ../sass/_leaflet.scss */
+.leaflet-bottom .leaflet-control {
+  margin-bottom: 10px;
+}
+
+/* line 101, ../sass/_leaflet.scss */
+.leaflet-left .leaflet-control {
+  margin-left: 10px;
+}
+
+/* line 104, ../sass/_leaflet.scss */
+.leaflet-right .leaflet-control {
+  margin-right: 10px;
+}
+
+/* zoom and fade animations */
+/* line 112, ../sass/_leaflet.scss */
+.leaflet-fade-anim .leaflet-tile,
+.leaflet-fade-anim .leaflet-popup {
+  opacity: 0;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+
+/* line 120, ../sass/_leaflet.scss */
+.leaflet-fade-anim .leaflet-tile-loaded,
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+  opacity: 1;
+}
+
+/* line 124, ../sass/_leaflet.scss */
+.leaflet-zoom-anim .leaflet-zoom-animated {
+  -webkit-transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -moz-transition: -moz-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  -o-transition: -o-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+}
+
+/* line 132, ../sass/_leaflet.scss */
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile,
+.leaflet-touching .leaflet-zoom-animated {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+/* line 139, ../sass/_leaflet.scss */
+.leaflet-zoom-anim .leaflet-zoom-hide {
+  visibility: hidden;
+}
+
+/* cursors */
+/* line 146, ../sass/_leaflet.scss */
+.leaflet-clickable {
+  cursor: pointer;
+}
+
+/* line 149, ../sass/_leaflet.scss */
+.leaflet-container {
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+/* line 154, ../sass/_leaflet.scss */
+.leaflet-popup-pane,
+.leaflet-control {
+  cursor: auto;
+}
+
+/* line 159, ../sass/_leaflet.scss */
+.leaflet-dragging,
+.leaflet-dragging .leaflet-clickable,
+.leaflet-dragging .leaflet-container {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+}
+
+/* visual tweaks */
+/* line 168, ../sass/_leaflet.scss */
+.leaflet-container {
+  background: #ddd;
+  outline: 0;
+}
+
+/* line 172, ../sass/_leaflet.scss */
+.leaflet-container a {
+  color: #0078A8;
+}
+
+/* line 175, ../sass/_leaflet.scss */
+.leaflet-container a.leaflet-active {
+  outline: 2px solid orange;
+}
+
+/* line 178, ../sass/_leaflet.scss */
+.leaflet-zoom-box {
+  border: 2px dotted #05f;
+  background: white;
+  opacity: 0.5;
+}
+
+/* general typography */
+/* line 186, ../sass/_leaflet.scss */
+.leaflet-container {
+  font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+/* general toolbar styles */
+/* line 193, ../sass/_leaflet.scss */
+.leaflet-bar {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid #888;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 199, ../sass/_leaflet.scss */
+.leaflet-bar-part {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #aaa;
+}
+
+/* line 203, ../sass/_leaflet.scss */
+.leaflet-bar-part-top {
+  -webkit-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
+/* line 207, ../sass/_leaflet.scss */
+.leaflet-bar-part-bottom {
+  -webkit-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  border-bottom: none;
+}
+
+/* line 213, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-bar {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* line 217, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-bar-part {
+  border-bottom: 4px solid rgba(0, 0, 0, 0.3);
+}
+
+/* line 220, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-bar-part-top {
+  -webkit-border-radius: 7px 7px 0 0;
+  border-radius: 7px 7px 0 0;
+}
+
+/* line 224, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-bar-part-bottom {
+  -webkit-border-radius: 0 0 7px 7px;
+  border-radius: 0 0 7px 7px;
+  border-bottom: none;
+}
+
+/* zoom control */
+/* line 233, ../sass/_leaflet.scss */
+.leaflet-container .leaflet-control-zoom {
+  margin-left: 13px;
+  margin-top: 12px;
+}
+
+/* line 237, ../sass/_leaflet.scss */
+.leaflet-control-zoom a {
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+
+/* line 245, ../sass/_leaflet.scss */
+.leaflet-control-zoom a,
+.leaflet-control-layers-toggle {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+/* line 250, ../sass/_leaflet.scss */
+.leaflet-control-zoom a:hover {
+  background-color: #fff;
+  color: #777;
+}
+
+/* line 254, ../sass/_leaflet.scss */
+.leaflet-control-zoom-in {
+  font: bold 18px/24px Arial, Helvetica, sans-serif;
+}
+
+/* line 257, ../sass/_leaflet.scss */
+.leaflet-control-zoom-out {
+  font: bold 23px/20px Tahoma, Verdana, sans-serif;
+}
+
+/* line 260, ../sass/_leaflet.scss */
+.leaflet-control-zoom a.leaflet-control-zoom-disabled {
+  cursor: default;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #bbb;
+}
+
+/* line 266, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-control-zoom a {
+  width: 30px;
+  height: 30px;
+}
+
+/* line 270, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-control-zoom-in {
+  font-size: 24px;
+  line-height: 29px;
+}
+
+/* line 274, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-control-zoom-out {
+  font-size: 28px;
+  line-height: 24px;
+}
+
+/* layers control */
+/* line 281, ../sass/_leaflet.scss */
+.leaflet-control-layers {
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
+  background: #f8f8f9;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+
+/* line 287, ../sass/_leaflet.scss */
+.leaflet-control-layers-toggle {
+  background-image: url(images/layers.png);
+  width: 36px;
+  height: 36px;
+}
+
+/* line 292, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-control-layers-toggle {
+  width: 44px;
+  height: 44px;
+}
+
+/* line 297, ../sass/_leaflet.scss */
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+  display: none;
+}
+
+/* line 300, ../sass/_leaflet.scss */
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+  display: block;
+  position: relative;
+}
+
+/* line 304, ../sass/_leaflet.scss */
+.leaflet-control-layers-expanded {
+  padding: 6px 10px 6px 6px;
+  color: #333;
+  background: #fff;
+}
+
+/* line 309, ../sass/_leaflet.scss */
+.leaflet-control-layers-selector {
+  margin-top: 2px;
+  position: relative;
+  top: 1px;
+}
+
+/* line 314, ../sass/_leaflet.scss */
+.leaflet-control-layers label {
+  display: block;
+}
+
+/* line 317, ../sass/_leaflet.scss */
+.leaflet-control-layers-separator {
+  height: 0;
+  border-top: 1px solid #ddd;
+  margin: 5px -10px 5px -6px;
+}
+
+/* attribution and scale controls */
+/* line 326, ../sass/_leaflet.scss */
+.leaflet-container .leaflet-control-attribution {
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 5px #bbb;
+  margin: 0;
+}
+
+/* line 332, ../sass/_leaflet.scss */
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+  padding: 0 5px;
+  color: #333;
+}
+
+/* line 337, ../sass/_leaflet.scss */
+.leaflet-container .leaflet-control-attribution,
+.leaflet-container .leaflet-control-scale {
+  font-size: 11px;
+}
+
+/* line 340, ../sass/_leaflet.scss */
+.leaflet-left .leaflet-control-scale {
+  margin-left: 5px;
+}
+
+/* line 343, ../sass/_leaflet.scss */
+.leaflet-bottom .leaflet-control-scale {
+  margin-bottom: 5px;
+}
+
+/* line 346, ../sass/_leaflet.scss */
+.leaflet-control-scale-line {
+  border: 2px solid #777;
+  border-top: none;
+  color: black;
+  line-height: 1.1;
+  padding: 2px 5px 1px;
+  font-size: 11px;
+  text-shadow: 1px 1px 1px #fff;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* line 359, ../sass/_leaflet.scss */
+.leaflet-control-scale-line:not(:first-child) {
+  border-top: 2px solid #777;
+  border-bottom: none;
+  margin-top: -2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* line 365, ../sass/_leaflet.scss */
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+  border-bottom: 2px solid #777;
+}
+
+/* line 371, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-control-zoom {
+  box-shadow: none;
+}
+
+/* line 375, ../sass/_leaflet.scss */
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-control-zoom {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+}
+
+/* popup */
+/* line 382, ../sass/_leaflet.scss */
+.leaflet-popup {
+  position: absolute;
+  text-align: center;
+}
+
+/* line 386, ../sass/_leaflet.scss */
+.leaflet-popup-content-wrapper {
+  padding: 1px;
+  text-align: left;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+}
+
+/* line 392, ../sass/_leaflet.scss */
+.leaflet-popup-content {
+  margin: 14px 20px;
+  line-height: 1.4;
+}
+
+/* line 396, ../sass/_leaflet.scss */
+.leaflet-popup-content p {
+  margin: 18px 0;
+}
+
+/* line 399, ../sass/_leaflet.scss */
+.leaflet-popup-tip-container {
+  margin: 0 auto;
+  width: 40px;
+  height: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 406, ../sass/_leaflet.scss */
+.leaflet-popup-tip {
+  width: 15px;
+  height: 15px;
+  padding: 1px;
+  margin: -8px auto 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* line 419, ../sass/_leaflet.scss */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: white;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* line 424, ../sass/_leaflet.scss */
+.leaflet-container a.leaflet-popup-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 5px 0 0;
+  text-align: center;
+  width: 18px;
+  height: 14px;
+  font: 16px/14px Tahoma, Verdana, sans-serif;
+  color: #c3c3c3;
+  text-decoration: none;
+  font-weight: bold;
+  background: transparent;
+}
+
+/* line 438, ../sass/_leaflet.scss */
+.leaflet-container a.leaflet-popup-close-button:hover {
+  color: #999;
+}
+
+/* line 441, ../sass/_leaflet.scss */
+.leaflet-popup-scrolled {
+  overflow: auto;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+
+/* div icon */
+/* line 450, ../sass/_leaflet.scss */
+.leaflet-div-icon {
+  background: #fff;
+  border: 1px solid #666;
+}
+
+/* line 454, ../sass/_leaflet.scss */
+.leaflet-editing-icon {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* line 4, ../sass/screen.scss */
+html {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 9, ../sass/screen.scss */
+body {
+  background-color: black;
+  color: white;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 17, ../sass/screen.scss */
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 24, ../sass/screen.scss */
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 30, ../sass/screen.scss */
+.swipe-wrap div {
+  float: left;
+  position: relative;
+}
+
+/* line 34, ../sass/screen.scss */
+.video {
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+  display: table;
+}
+
+/* line 40, ../sass/screen.scss */
+.video div {
+  float: none;
+}
+
+/* line 43, ../sass/screen.scss */
+.centerVideo {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* line 47, ../sass/screen.scss */
+.zoomer {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+/* line 53, ../sass/screen.scss */
+nav {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+/* line 58, ../sass/screen.scss */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* line 62, ../sass/screen.scss */
+.info {
+  position: absolute !important;
+  bottom: 5px;
+  left: 5px;
+  z-index: 10000;
+}
+
+/* line 68, ../sass/screen.scss */
+.info_btn {
+  padding: 5px;
+  background: #FFF;
+  margin: 5px;
+  color: #222;
+}
+
+/* line 74, ../sass/screen.scss */
+.info_extended {
+  height: 300px;
+  width: 500px;
+  background: white;
+  color: black;
+  display: none;
+}
+
+/* line 81, ../sass/screen.scss */
+.info_title {
+  display: block;
+  color: #222;
+}
+
+/* line 85, ../sass/screen.scss */
+.info_artist {
+  display: block;
+  color: #222;
+}
+
+/* line 89, ../sass/screen.scss */
+.info_artist {
+  display: block;
+  color: #222;
+}
