@@ -63,6 +63,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+@font-face {
+  font-family: 'Fox Regular';
+  src: url("../fonts/foxroman-webfont.eot");
+  src: url("../fonts/foxroman-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/foxroman-webfont.woff") format("woff"), url("../fonts/foxroman-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fox Italic';
+  src: url("../fonts/foxitalic-webfont.eot");
+  src: url("../fonts/foxitalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/foxitalic-webfont.woff") format("woff"), url("../fonts/foxitalic-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
 /* required styles */
 /* line 15, ../sass/_leaflet.scss */
 .leaflet-map-pane,
@@ -303,23 +319,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   outline: 0;
 }
 
-@font-face {
-  font-family: 'Fox Regular';
-  src: url("../fonts/foxroman-webfont.eot");
-  src: url("../fonts/foxroman-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/foxroman-webfont.woff") format("woff"), url("../fonts/foxroman-webfont.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Fox Italic';
-  src: url("../fonts/foxitalic-webfont.eot");
-  src: url("../fonts/foxitalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/foxitalic-webfont.woff") format("woff"), url("../fonts/foxitalic-webfont.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-
-/* line 26, ../sass/screen.scss */
+/* line 7, ../sass/screen.scss */
 html,
 body,
 .zoomer {
@@ -327,7 +327,7 @@ body,
   height: 100%;
 }
 
-/* line 31, ../sass/screen.scss */
+/* line 12, ../sass/screen.scss */
 body {
   background: #000;
   color: #fff;
@@ -338,57 +338,57 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 41, ../sass/screen.scss */
+/* line 22, ../sass/screen.scss */
 em {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 46, ../sass/screen.scss */
+/* line 27, ../sass/screen.scss */
 a {
   color: #fff;
   text-decoration: none;
 }
 
-/* line 51, ../sass/screen.scss */
+/* line 32, ../sass/screen.scss */
 video {
   max-width: 100%;
   height: auto;
 }
 
-/* line 56, ../sass/screen.scss */
+/* line 37, ../sass/screen.scss */
 .swipe {
   position: relative;
   overflow: hidden;
   visibility: hidden;
   height: 100%;
 }
-/* line 62, ../sass/screen.scss */
+/* line 43, ../sass/screen.scss */
 .swipe .swipe-wrap {
   position: relative;
   overflow: hidden;
   height: 100%;
 }
-/* line 67, ../sass/screen.scss */
+/* line 48, ../sass/screen.scss */
 .swipe .swipe-wrap > div {
   position: relative;
   float: left;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 55, ../sass/screen.scss */
 .video {
   width: 80%;
   height: 100%;
   margin: 0 auto;
   display: table;
 }
-/* line 80, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 .video .video-container {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 86, ../sass/screen.scss */
+/* line 67, ../sass/screen.scss */
 .tombstone {
   position: fixed;
   bottom: 0;
@@ -398,13 +398,13 @@ video {
   background: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
-/* line 95, ../sass/screen.scss */
+/* line 76, ../sass/screen.scss */
 .tombstone .title {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 101, ../sass/screen.scss */
+/* line 82, ../sass/screen.scss */
 .info {
   display: none;
   height: 300px;
@@ -412,7 +412,7 @@ video {
   background: rgba(0, 0, 0, 0.6);
 }
 
-/* line 108, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 nav {
   position: fixed;
   bottom: 0;
