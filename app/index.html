@@ -11,44 +11,209 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link type="text/css" rel="stylesheet" href="components/leaflet/dist/leaflet.css">
         <link rel="stylesheet" href="styles/main.css">
+        
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
+        
+        <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
+        <script src="http://vjs.zencdn.net/c/video.js"></script>
+        
     </head>
     <body>
-        <div class="container">
-            <div class="hero-unit">
-                <h1>'Allo, 'Allo!</h1>
-                <p>You now have</p>
-                <ul>
-                    <li>HTML5 Boilerplate</li>
-                    <li>Twitter Bootstrap</li>
-                </ul>
-                <p>installed.</p>
-                <h3>Enjoy coding! - Yeoman</h3>
+      <div id='slider' class='swipe'>
+        <div class='swipe-wrap'>
+          <div class="image-view-1 zoomer">
+            <div class="info">
+              <div class="info_btn">
+                <span class="info_title">Title</span>
+                <span class="info_artist">Artist</span>
+                <span class="info_artist">Year</span>
+                MORE...
+              </div>
+              <div class="info_extended">
+                image-view-1
+              </div>
             </div>
+          </div>
+          <div class="image-view-2 zoomer">
+            <div class="info">
+              <div class="info_btn">
+                <span class="info_title">Title</span>
+                <span class="info_artist">Artist</span>
+                <span class="info_artist">Year</span>
+                MORE...
+              </div>
+            
+              <div class="info_extended">
+                image-view-2
+              </div>
+            </div>
+          </div>
+          <div id="video1" class="zoomer video">
+            <div class="centerVideo">
+              <video id="video1_player" class="video-js vjs-default-skin" controls preload="none"
+    data-setup="{}" poster="http://video-js.zencoder.com/oceans-clip.jpg">
+                  <source src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="info">
+              <div class="info_btn">
+                <span class="info_title">Title</span>
+                <span class="info_artist">Artist</span>
+                <span class="info_artist">Year</span>
+                MORE...
+              </div>
+            
+              <div class="info_extended">
+                video
+              </div>
+            </div>
+        
+          </div>
+          <div class="image-view-3 zoomer">
+            <div class="info">
+              <div class="info_btn">
+                <span class="info_title">Title</span>
+                <span class="info_artist">Artist</span>
+                <span class="info_artist">Year</span>
+                MORE...
+              </div>
+            
+              <div class="info_extended">
+                image-view-3
+              </div>
+            </div>
+          </div>
+          <div class="image-view-4 zoomer">
+            <div class="info">
+              <div class="info_btn">
+                <span class="info_title">Title</span>
+                <span class="info_artist">Artist</span>
+                <span class="info_artist">Year</span>
+                MORE...
+              </div>
+            
+              <div class="info_extended">
+                image-view-4
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <nav>
+        <a href='#' id='prev' onclick='window.mySwipe.prev();return false;'><em>prev</em></a>
+        <span id='position'><em class='on'>&bull;</em><em>&bull;</em><em>&bull;</em></span>
+        <a href='#' id='next' onclick='window.mySwipe.next();return false;'><em>next</em></a>
+      </nav>
+      
+        
 
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <!--
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
-
+        -->
         <!-- build:js scripts/main.js -->
         <script src="components/jquery/jquery.js"></script>
+        <script src="components/jquery.actual/jquery.actual.min.js"></script>
+        <script src="components/Swipe/swipe.js"></script>
+        <script src="components/leaflet/dist/leaflet-src.js"></script>
+        <script src="components/Lightbox_me/jquery.lightbox_me.js"></script>
+        
         <script src="scripts/main.js"></script>
+        <script src="scripts/flat_image_zoom.js"></script>
+        <script src="scripts/zoom_swipe.js"></script>
         <!-- endbuild -->
 
         <!-- build:js(.tmp) scripts/coffee.js -->
         <script src="scripts/hello.js"></script>
         <!-- endbuild -->
+        
+        <script>
+            var lastSlideId = "image-view-1";
+    		$(document).ready(function() {
+      
+      
+      
+          
+                window.mySwipe = new Swipe(document.getElementById('slider'), {
+                    callback: function(index,slide) {
+                        //console.log(slide.id)
+                        if (Zoomer.zoomers[lastSlideId]) {
+                            Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+                        }
+                        var videoId = lastSlideId+"_player";
+                        if ($('#'+videoId).length) {
+                            var myPlayer = _V_(videoId);
+                            if (myPlayer) {
+                                myPlayer.pause();
+                                //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                            }
+                        }
+                        lastSlideId = slide.id; // record this so we know what we're leaving next time
+                    }
+                });
+                L.DomUtil.disableTextSelection();
+                Zoomer.zoom_image_by_class({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+                Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+                //Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": 'https://stewart.walkerart.org/zoomtest/wac_1729/{z}_{x}_{y}.jpg', "imageWidth": 2560, "imageHeight": 1702});
+                Zoomer.zoom_image_by_class({"container":"image-view-3", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_3691/{z}_{x}_{y}.jpg", "imageWidth": 1445, "imageHeight": 1920});
+                Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
+            
+                _V_("video1_player").ready(function(){
+                  // Store the video object
+                  var myPlayer = this; 
+                  // Make up an aspect ratio
+                  var aspectRatio = 264/640; 
+              
+                  function resizeVideoJS(){
+                    var width = document.getElementById(myPlayer.id).parentElement.offsetWidth;
+                    var w=window.innerWidth;
+                    if(width > w){
+                      myPlayer.width(w).height( w * aspectRatio );
+                    }else{
+                      myPlayer.width(width).height( width * aspectRatio );
+                    }
+                
+                
+                  }
+                   // Initialize resizeVideoJS()
+                  resizeVideoJS();
+                  // Then on resize call resizeVideoJS()
+              
+                  var id;
+                  $(window).resize(function() {
+                      clearTimeout(id);
+                      id = setTimeout(resizeVideoJS, 100);
+    
+                  });
+              
+                  //window.onresize = resizeVideoJS; 
+                });
+                $('.info_btn').click(function(e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log($(this));
+                  $lightbx = $(this).parent().children(".info_extended").clone();
+                  $lightbx.lightbox_me({
+                    destroyOnClose:true
+                  });
+                });
+
+    		});
+
+
+        </script>
 </body>
 </html>

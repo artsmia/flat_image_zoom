@@ -1,0 +1,8 @@
+{
+  "name": "video-js",
+  "version": "3.2.3",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zencoder/video-js.git"
+  }
+}
