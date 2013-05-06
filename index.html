@@ -69,7 +69,7 @@
     </nav>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="javascripts/jquery.lightbox_me.js"></script>
+    <script src="javascripts/jquery.colorbox-min.js"></script>
     <script src="javascripts/swipe.js"></script>
     <script src="javascripts/leaflet-src.js"></script>
     <script src="javascripts/zoom_swipe.js"></script>
@@ -109,38 +109,28 @@
                 var myPlayer = this; 
                 // Make up an aspect ratio
                 var aspectRatio = 264/640; 
-                
                 function resizeVideoJS(){
                     var width = document.getElementById(myPlayer.id).parentElement.offsetWidth;
                     var w=window.innerWidth;
-                    if(width > w){
+                    if (width > w){
                         myPlayer.width(w).height( w * aspectRatio );
-                    }else{
+                    } else {
                         myPlayer.width(width).height( width * aspectRatio );
                     }
-                    
-                    
                 }
                  // Initialize resizeVideoJS()
                 resizeVideoJS();
                 // Then on resize call resizeVideoJS()
-                
                 var id;
                 $(window).resize(function() {
-                        clearTimeout(id);
-                        id = setTimeout(resizeVideoJS, 100);
-
+                    clearTimeout(id);
+                    id = setTimeout(resizeVideoJS, 100);
                 });
-                
-                //window.onresize = resizeVideoJS; 
             });
-            $('.info_btn').click(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log($(this));
-                $lightbx = $(this).parent().children(".info_extended").clone();
+            $('.tombstone').click(function() {
+                $lightbx = $(this).parent().children('.info').clone();
                 $lightbx.lightbox_me({
-                    destroyOnClose:true
+                    destroyOnClose: true
                 });
             });
 

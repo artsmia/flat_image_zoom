@@ -395,28 +395,29 @@ video {
   left: 0;
   padding: 20px 40px 25px 30px;
   z-index: 10000;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
-/* line 94, ../sass/screen.scss */
+/* line 95, ../sass/screen.scss */
 .tombstone .title {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 100, ../sass/screen.scss */
+/* line 101, ../sass/screen.scss */
 .info {
   display: none;
   height: 300px;
   width: 500px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
 }
 
-/* line 107, ../sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 nav {
   position: fixed;
   bottom: 0;
   right: 0;
   padding: 20px 40px 25px 30px;
   z-index: 9999;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
 }
