@@ -1,4 +1,4 @@
-var lastSlideId = "image-view-1",
+var lastSlideId = 'image-view-1',
     artworkInfo = '';
 
 $(document).ready(function() {
@@ -20,6 +20,7 @@ $(document).ready(function() {
             lastSlideId = slide.id; // record this so we know what we're leaving next time
         }
     });
+    
     L.DomUtil.disableTextSelection();
     Zoomer.zoom_image_by_class({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
     Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
@@ -27,7 +28,7 @@ $(document).ready(function() {
     Zoomer.zoom_image_by_class({"container":"image-view-3", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_3691/{z}_{x}_{y}.jpg", "imageWidth": 1445, "imageHeight": 1920});
     Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
     
-    _V_("video1_player").ready(function(){
+    _V_('video1_player').ready(function(){
         // Store the video object
         var myPlayer = this; 
         // Make up an aspect ratio
@@ -41,7 +42,7 @@ $(document).ready(function() {
                 myPlayer.width(width).height( width * aspectRatio );
             }
         }
-         // Initialize resizeVideoJS()
+        // Initialize resizeVideoJS()
         resizeVideoJS();
         // Then on resize call resizeVideoJS()
         var id;
@@ -50,6 +51,7 @@ $(document).ready(function() {
             id = setTimeout(resizeVideoJS, 100);
         });
     });
+    
     $('.tombstone').click(function() {
         artworkInfo = $(this).parent().children('.info').html();
         $.colorbox({
