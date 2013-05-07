@@ -84,7 +84,16 @@ video {
     
     .info {
         display: block;
+        width: 1100px;
         margin: 0 auto;
+        
+        p {
+            text-indent: 66px;
+            
+            &:first-child {
+                text-indent: 0;
+            }
+        }
     }
 }
 

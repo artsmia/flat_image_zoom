@@ -636,10 +636,19 @@ video {
 /* line 85, ../sass/screen.scss */
 .info-container .info {
   display: block;
+  width: 1100px;
   margin: 0 auto;
 }
+/* line 90, ../sass/screen.scss */
+.info-container .info p {
+  text-indent: 66px;
+}
+/* line 93, ../sass/screen.scss */
+.info-container .info p:first-child {
+  text-indent: 0;
+}
 
-/* line 91, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 .tombstone {
   position: fixed;
   bottom: 0;
@@ -649,13 +658,13 @@ video {
   background: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
-/* line 100, ../sass/screen.scss */
+/* line 109, ../sass/screen.scss */
 .tombstone .title {
   font-family: Fox;
   font-style: italic;
 }
 
-/* line 106, ../sass/screen.scss */
+/* line 115, ../sass/screen.scss */
 nav {
   display: none;
   position: fixed;
@@ -665,7 +674,7 @@ nav {
   z-index: 9998;
   background: rgba(0, 0, 0, 0.6);
 }
-/* line 115, ../sass/screen.scss */
+/* line 124, ../sass/screen.scss */
 .no-touch nav {
   display: block;
 }
