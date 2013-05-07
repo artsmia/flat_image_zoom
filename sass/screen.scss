@@ -1,8 +1,10 @@
+<<<<<<< HEAD
 @import "compass/reset";
 @import "compass/css3/box-sizing";
 @import "fonts";
 @import "leaflet";
 @import "colorbox";
+@import "mediaelementplayer";
 
 * {
     @include box-sizing(border-box);
