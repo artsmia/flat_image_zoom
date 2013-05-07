@@ -1,0 +1,36 @@
+{
+    "name": "info",
+    "slides": [
+      { 
+          "type": "zoomer",
+          "title": "Title1",
+          "artist": "artist1",
+          "year": "year1",
+          "text": "text1",
+          "zoomer_url": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg",
+          "zoomer_width": 4000 ,
+          "zoomer_height": 3187
+      },
+      {
+          "type": "video",
+          "id": "video1",
+          "player_id": "player1", 
+          "title": "Title2",
+          "artist": "artist2",
+          "year": "year2",
+          "text": "text2",
+          "video_src": "http://video-js.zencoder.com/oceans-clip.mp4" 
+      },
+      { 
+          "type": "zoomer",
+          "title": "Title1",
+          "artist": "artist1",
+          "year": "year1",
+          "text": "text1",
+          "zoomer_url": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg",
+          "zoomer_width": 4000 ,
+          "zoomer_height": 3187
+      
+      }
+    ]
+}
