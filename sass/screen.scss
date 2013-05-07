@@ -1,6 +1,6 @@
 @import "compass/reset";
 @import "compass/css3/box-sizing";
-@import "fonts";
+@import "base";
 @import "leaflet";
 @import "colorbox";
 @import "mediaelementplayer";
@@ -19,7 +19,7 @@ body,
 body {
     background: #000;
     color: #fff;
-    font-family: Fox, Helvetica, Arial, sans-serif;
+    font-family: 'Fox Regular', Helvetica, Arial, sans-serif;
     font-size: 34px;
     line-height: 44px;
     text-rendering: optimizeLegibility;
@@ -27,6 +27,7 @@ body {
 }
 
 em {
+    font-family: 'Fox Italic';
     font-style: italic;
 }
 
@@ -74,6 +75,23 @@ video {
     }
 }
 
+.info-link {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 68px + 50px;
+    height: 68px + 50px;
+    z-index: 9997;
+    
+    a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: url(../images/info.png) center center no-repeat;
+        @include hide-text;
+    }
+}
+
 .info {
     hyphens: auto;
     
@@ -93,10 +111,9 @@ video {
     padding: 20px 40px 25px 30px;
     z-index: 9999;
     background: rgba(0, 0, 0, 0.6);
-    cursor: pointer;
     
     .title {
-        font-family: Fox;
+        font-family: 'Fox Italic';
         font-style: italic;
     }
 }
@@ -104,7 +121,7 @@ video {
 nav {
     display: none;
     position: fixed;
-    bottom: 0;
+    top: 0;
     right: 0;
     padding: 20px 40px 25px 30px;
     z-index: 9998;
