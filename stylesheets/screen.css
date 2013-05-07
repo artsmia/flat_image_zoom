@@ -1553,6 +1553,7 @@ video {
 
 /* line 107, ../sass/screen.scss */
 .tombstone {
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -1560,13 +1561,13 @@ video {
   z-index: 9999;
   background: rgba(0, 0, 0, 0.6);
 }
-/* line 115, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .tombstone .title {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 121, ../sass/screen.scss */
+/* line 122, ../sass/screen.scss */
 nav {
   display: none;
   position: fixed;
@@ -1576,7 +1577,7 @@ nav {
   z-index: 9998;
   background: rgba(0, 0, 0, 0.6);
 }
-/* line 130, ../sass/screen.scss */
+/* line 131, ../sass/screen.scss */
 .no-touch nav {
   display: block;
 }

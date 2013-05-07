@@ -1,10 +1,16 @@
 var lastSlideId = 'image-view-1',
-    artworkInfo = '';
+    artworkInfo = '',
+    tombstoneTimeout = '';
 
 $(document).ready(function() {
     
     window.mySwipe = new Swipe(document.getElementById('slider'), {
         callback: function(index,slide) {
+            clearTimeout(tombstoneTimeout);
+            $('.tombstone').stop(true, true).delay(250).fadeIn(150);
+            tombstoneTimeout = setTimeout(function() {
+                $('.tombstone').stop(true, true).fadeOut(250);
+            }, 3000);
             //console.log(slide.id)
             if (Zoomer.zoomers[lastSlideId]) {
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
@@ -47,15 +53,15 @@ $(document).ready(function() {
         event.preventDefault();
         //artworkInfo = $(this).parent().children('.info').html();
         artworkInfo = '<article class="info">\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>\
+                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
+                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
                        </article>';
         $.colorbox({
             transition: 'none',
             width: '60%',
             initialWidth: '50%',
             fadeOut: 250,
-            opacity: 0.75,
+            opacity: 0.8,
             html: artworkInfo
         });
     });
