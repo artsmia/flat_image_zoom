@@ -53,6 +53,10 @@ video {
         > div {
             position: relative;
             float: left;
+            
+            .info {
+                display: none;
+            }
         }
     }
 }
@@ -70,29 +74,11 @@ video {
 }
 
 .info {
-    display: none;
-}
-
-.info-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 10000;
-    background: rgba(0, 0, 0, 0.6);
-    
-    .info {
-        display: block;
-        width: 1100px;
-        margin: 0 auto;
+    p {
+        text-indent: 66px;
         
-        p {
-            text-indent: 66px;
-            
-            &:first-child {
-                text-indent: 0;
-            }
+        &:first-child {
+            text-indent: 0;
         }
     }
 }
