@@ -134,13 +134,14 @@
             	};
 
             }});
-            $('.tombstone').click(function() {
-                $artwork-info = $(this).parent().children('.info').html();
-                $.colorbox({
-                    html: artwork-info
-                });
+            
+            $('.tombstone').on("click", function(event){
+              $artwork-info = $(this).parent().children('.info').html();
+              $.colorbox({
+                  html: artwork-info
+              });
+              
             });
-
         });
     </script>
     <script type="text/template" id="form-tpl">
