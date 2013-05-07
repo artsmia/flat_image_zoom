@@ -1559,7 +1559,7 @@ video {
   left: 0;
   padding: 20px 40px 25px 30px;
   z-index: 9999;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
 }
 /* line 116, ../sass/screen.scss */
 .tombstone .title {
@@ -1575,7 +1575,7 @@ nav {
   right: 0;
   padding: 20px 40px 25px 30px;
   z-index: 9998;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
 }
 /* line 131, ../sass/screen.scss */
 .no-touch nav {
