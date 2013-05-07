@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Info Lounge &mdash; Walker Art Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
     <link href="stylesheets/screen.css" rel="stylesheet">
     <script src="javascripts/modernizr.js"></script>
 </head>
@@ -12,43 +11,13 @@
     <div id="slider" class="swipe">
         <div class="swipe-wrap">
             
-            <div class="image-view-1 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
             
-            <div class="image-view-2 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
+          
             
-            <div id="video1" class="zoomer video">
-                <div class="video-container">
-                    <video width="360" height="203" id="player1" src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" controls="controls"></video>
-                </div>
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
+        
             
-            <div class="image-view-3 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
             
-            <div class="image-view-4 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
+            
             
         </div>
     </div>
@@ -81,9 +50,58 @@
     <script src="javascripts/jquery.actual.min.js"></script>
     <script src="javascripts/mediaelement.min.js"></script>
     
+    <script type="text/template" id="video">
+    
+      
+    
+    
+      <div id="video1" class="zoomer video">
+          <div class="video-container">
+              <video  id="player1" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
+          </div>
+          <article class="info">
+              <p><%= text %></p>
+          </article>
+          <ul class="hidden meta">
+            <li class="title"><%= title %></li>
+            <li class="artist"><%= artist %></li>
+            <li class="year"><%= year %></li>
+          </ul>
+      </div>
+    </script>
+    
+    <script type="text/template" id="zoomer">
+      <!--<div class="image-view-1 zoomer">
+          <article class="info">
+              <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
+              <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
+          </article>
+      </div>-->
+      <div class="zoomer image-view-1">
+          <article class="info">
+              <p><%= text %></p>
+          </article>
+          <ul class="hidden meta">
+            <li class="title"><%= title %></li>
+            <li class="artist"><%= artist %></li>
+            <li class="year"><%= year %></li>
+          </ul>
+      </div>
+    </script>
+    
+    
+    
+    
     <script>
         var lastSlideId = "image-view-1";
         $(document).ready(function() {
+          
+          var data1 = { title: "Title1",artist: "artist1",year: "year1",text: "text1"}
+          var data2 = { title: "Title2",artist: "artist2",year: "year2",text: "text2",video_src: "http://video-js.zencoder.com/oceans-clip.mp4" }
+          var video_template = _.template($('#video').html());
+          var zoomer_template = _.template($('#zoomer').html());
+          $(".swipe-wrap").append(zoomer_template(data1));
+          $(".swipe-wrap").append(video_template(data2));
             
             window.mySwipe = new Swipe(document.getElementById('slider'), {
                 callback: function(index,slide) {
@@ -103,30 +121,15 @@
                 }
             });
             L.DomUtil.disableTextSelection();
-            Zoomer.zoom_image_by_class({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+            //Zoomer.zoom_image_by_class({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
             Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
             //Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": 'https://stewart.walkerart.org/zoomtest/wac_1729/{z}_{x}_{y}.jpg', "imageWidth": 2560, "imageHeight": 1702});
-            Zoomer.zoom_image_by_class({"container":"image-view-3", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_3691/{z}_{x}_{y}.jpg", "imageWidth": 1445, "imageHeight": 1920});
-            Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
+            //Zoomer.zoom_image_by_class({"container":"image-view-3", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_3691/{z}_{x}_{y}.jpg", "imageWidth": 1445, "imageHeight": 1920});
+            //Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
+            
+            MediaElement('player1');
             
             
-            
-            MediaElement('player1', {success: function(me) {
-	
-            	me.play();
-	
-            	me.addEventListener('timeupdate', function() {
-            		document.getElementById('time').innerHTML = me.currentTime;
-            	}, false);
-	
-            	document.getElementById('pp')['onclick'] = function() {
-            		if (me.paused)
-            			me.play();
-            		else
-            			me.pause();
-            	};
-
-            }});
             
             $('.tombstone').on("click", function(event){
               $artwork-info = $(this).parent().children('.info').html();
@@ -137,25 +140,10 @@
             });
         });
     </script>
-    <script type="text/template" id="form-tpl">
-        <div class="image-view-3 zoomer">
-            <ul class="tombstone">
-                <li class="title"><%= title %></li>
-                <li class="artist"><%= name %></li>
-                <li class="year"><%= year %></li>
-            </ul>
-            <article class="info">
-                <p><%= text %></p>
-            </article>
-        </div>
-    </script>
+    
     
  
-    <script type="text/javascript">
-         var data2 = { title: "Title2",artist: "artist2",year: "year2",text: "text2" }
-         var compileTemplate2 = _.template($('#form-tpl').html());
-         $(".swipe-wrap").append(compileTemplate2(data2));
-    </script>
-    <script src="javascripts/scripts.js"></script>
+    
+    <!--<script src="javascripts/scripts.js"></script>-->
 </body>
 </html>

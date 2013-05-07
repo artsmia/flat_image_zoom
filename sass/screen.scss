@@ -35,9 +35,8 @@ a {
     text-decoration: none;
 }
 
-video {
-    max-width: 100%;
-    height: auto;
+.hidden{
+  display:none;
 }
 
 .swipe {
@@ -62,6 +61,11 @@ video {
     }
 }
 
+
+video {
+    max-width: 100%; 
+    height: auto;
+}
 .video {
     width: 80%;
     height: 100%;
