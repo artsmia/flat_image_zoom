@@ -40,6 +40,29 @@ a {
   display:none;
 }
 
+.intro {
+    display: table;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10001;
+
+    .intro-container {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    
+        h1 {
+            font-size: 400%;
+            line-height: 400%;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            word-spacing: 10px;
+        }
+    }
+}
+
 .swipe {
     position: relative;
     overflow: hidden;
@@ -68,10 +91,10 @@ video {
     width:100%;
 }
 .video {
+    display: table;
     width: 80%;
     height: 100%;
     margin: 0 auto;
-    display: table;
     
     .video-container {
         display: table-cell;

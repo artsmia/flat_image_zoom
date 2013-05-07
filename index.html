@@ -8,6 +8,14 @@
     <script src="javascripts/modernizr.js"></script>
 </head>
 <body>
+    <div class="intro-wrapper">
+        <div class="intro">
+            <div class="intro-container">
+                <h1>Touch Me</h1>
+            </div>
+        </div>
+    </div>
+    
     <div id="slider" class="swipe">
         <div class="swipe-wrap">
             
@@ -89,9 +97,6 @@
       </div>
     </script>
     
-    
-    
-    
     <script>
         var lastSlideId = "image-view-1";
         
@@ -132,22 +137,11 @@
             //Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
             
             MediaElement('player1');
-            
-            
-            
-            $('.tombstone').on("click", function(event){
-              $artwork-info = $(this).parent().children('.info').html();
-              $.colorbox({
-                  html: artwork-info
-              });
-              
-            });
         });
     </script>
     
-    
- 
-    
-    <!--<script src="javascripts/scripts.js"></script>-->
+    <script src="javascripts/scripts.js"></script>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
 </body>
 </html>
