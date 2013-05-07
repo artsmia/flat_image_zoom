@@ -1,7 +1,12 @@
 @import "compass/reset";
+@import "compass/css3/box-sizing";
 @import "fonts";
 @import "leaflet";
 @import "colorbox";
+
+* {
+    @include box-sizing(border-box);
+}
 
 html,
 body,
@@ -69,12 +74,27 @@ video {
     display: none;
 }
 
+.info-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.6);
+    
+    .info {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
 .tombstone {
     position: fixed;
     bottom: 0;
     left: 0;
     padding: 20px 40px 25px 30px;
-    z-index: 10000;
+    z-index: 9999;
     background: rgba(0, 0, 0, 0.6);
     cursor: pointer;
     
@@ -90,7 +110,7 @@ nav {
     bottom: 0;
     right: 0;
     padding: 20px 40px 25px 30px;
-    z-index: 9999;
+    z-index: 9998;
     background: rgba(0, 0, 0, 0.6);
     
     .no-touch & {

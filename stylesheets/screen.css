@@ -545,7 +545,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-position: -75px -25px;
 }
 
-/* line 8, ../sass/screen.scss */
+/* line 7, ../sass/screen.scss */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 13, ../sass/screen.scss */
 html,
 body,
 .zoomer {
@@ -553,7 +560,7 @@ body,
   height: 100%;
 }
 
-/* line 13, ../sass/screen.scss */
+/* line 18, ../sass/screen.scss */
 body {
   background: #000;
   color: #fff;
@@ -564,88 +571,104 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 23, ../sass/screen.scss */
+/* line 28, ../sass/screen.scss */
 em {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 28, ../sass/screen.scss */
+/* line 33, ../sass/screen.scss */
 a {
   color: #fff;
   text-decoration: none;
 }
 
-/* line 33, ../sass/screen.scss */
+/* line 38, ../sass/screen.scss */
 video {
   max-width: 100%;
   height: auto;
 }
 
-/* line 38, ../sass/screen.scss */
+/* line 43, ../sass/screen.scss */
 .swipe {
   position: relative;
   overflow: hidden;
   visibility: hidden;
   height: 100%;
 }
-/* line 44, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 .swipe .swipe-wrap {
   position: relative;
   overflow: hidden;
   height: 100%;
 }
-/* line 49, ../sass/screen.scss */
+/* line 54, ../sass/screen.scss */
 .swipe .swipe-wrap > div {
   position: relative;
   float: left;
 }
 
-/* line 56, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 .video {
   width: 80%;
   height: 100%;
   margin: 0 auto;
   display: table;
 }
-/* line 62, ../sass/screen.scss */
+/* line 67, ../sass/screen.scss */
 .video .video-container {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 68, ../sass/screen.scss */
+/* line 73, ../sass/screen.scss */
 .info {
   display: none;
 }
 
-/* line 72, ../sass/screen.scss */
+/* line 77, ../sass/screen.scss */
+.info-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.6);
+}
+/* line 86, ../sass/screen.scss */
+.info-container .info {
+  display: block;
+  margin: 0 auto;
+}
+
+/* line 92, ../sass/screen.scss */
 .tombstone {
   position: fixed;
   bottom: 0;
   left: 0;
   padding: 20px 40px 25px 30px;
-  z-index: 10000;
+  z-index: 9999;
   background: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
-/* line 81, ../sass/screen.scss */
+/* line 101, ../sass/screen.scss */
 .tombstone .title {
   font-family: 'Fox Italic';
   font-style: italic;
 }
 
-/* line 87, ../sass/screen.scss */
+/* line 107, ../sass/screen.scss */
 nav {
   display: none;
   position: fixed;
   bottom: 0;
   right: 0;
   padding: 20px 40px 25px 30px;
-  z-index: 9999;
+  z-index: 9998;
   background: rgba(0, 0, 0, 0.6);
 }
-/* line 96, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .no-touch nav {
   display: block;
 }

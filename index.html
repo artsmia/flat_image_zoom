@@ -1,82 +1,147 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="utf-8">
-    <title>Info Lounge &mdash; Walker Art Center</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
-    <link href="stylesheets/screen.css" rel="stylesheet">
-    <script src="javascripts/modernizr.js"></script>
-</head>
-<body>
-    
-    <div id="slider" class="swipe">
-        <div class="swipe-wrap">
-            
-            <div class="image-view-1 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
-            
-            <div class="image-view-2 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
-            
-            <div id="video1" class="zoomer video">
-                <div class="video-container">
-                    <video id="video1_player" class="video-js vjs-default-skin" controls preload="none" data-setup="{}" poster="http://video-js.zencoder.com/oceans-clip.jpg">
-                        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" />
-                    </video>
-                </div>
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
-            
-            <div class="image-view-3 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
-            
-            <div class="image-view-4 zoomer">
-                <article class="info">
-                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-                </article>
-            </div>
-            
-        </div>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>Info Lounge &mdash; Walker Art Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
+    <link href="stylesheets/screen.css" rel="stylesheet">
+    <script src="javascripts/modernizr.js"></script>
+</head>
+<body>
+    <div class="info-container">
+        <article class="info">
+            <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
+            <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
+        </article>
     </div>
-    
-    <ul class="tombstone">
-        <li class="title">Lorem Ipsum Dolor Sit</li>
-        <li class="artist">John Doe</li>
-        <li class="year">2013</li>
-    </ul>
-    
-    <nav>
-        <ul>
-            <li><a href="" id="prev" onclick="window.mySwipe.prev(); return false;">Previous</a></li>
-            <li><a href="" id="next" onclick="window.mySwipe.next(); return false;">Next</a></li>
-        </ul>
-    </nav>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="javascripts/jquery.colorbox-min.js"></script>
-    <script src="javascripts/swipe.js"></script>
-    <script src="javascripts/leaflet-src.js"></script>
-    <script src="javascripts/zoom_swipe.js"></script>
-    <script src="javascripts/flat_image_zoom.js"></script>
-    <script src="javascripts/jquery.actual.min.js"></script>
-    <script src="http://vjs.zencdn.net/c/video.js"></script>
-    <script src="javascripts/scripts.js"></script>
-</body>
-</html>
+    
+    <div id="slider" class="swipe">
+        <div class="swipe-wrap">
+            
+            <div class="image-view-1 zoomer">
+                <article class="info">
+                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
+                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
+                </article>
+            </div>
+            
+            <div class="image-view-2 zoomer">
+                <article class="info">
+                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
+                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
+                </article>
+            </div>
+            
+            <div id="video1" class="zoomer video">
+                <div class="centerVideo">
+                    <video width="360" height="203" id="player1" src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" controls="controls"></video>
+                  
+                    
+
+                </div>
+                <article class="info">
+                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
+                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
+                </article>
+            </div>
+            
+            <div class="image-view-3 zoomer">
+                <article class="info">
+                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
+                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
+                </article>
+            </div>
+            
+            <div class="image-view-4 zoomer">
+                <article class="info">
+                    <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
+                    <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
+                </article>
+            </div>
+            
+        </div>
+    </div>
+    
+    <ul class="tombstone">
+        <li class="title">Lorem Ipsum Dolor Sit</li>
+        <li class="artist">John Doe</li>
+        <li class="year">2013</li>
+    </ul>
+    
+    <nav>
+        <ul>
+            <li><a href="" id="prev" onclick="window.mySwipe.prev(); return false;">Previous</a></li>
+            <li><a href="" id="next" onclick="window.mySwipe.next(); return false;">Next</a></li>
+        </ul>
+    </nav>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="javascripts/underscore-min.js"></script>
+    <script src="javascripts/backbone-min.js"></script>
+    <script src="javascripts/jquery.colorbox-min.js"></script>
+    <script src="javascripts/swipe.js"></script>
+    <script src="javascripts/leaflet-src.js"></script>
+    <script src="javascripts/zoom_swipe.js"></script>
+    <script src="javascripts/flat_image_zoom.js"></script>
+    <script src="javascripts/jquery.actual.min.js"></script>
+    <script src="javascripts/mediaelement.min.js"></script>
+    
+    <script>
+        var lastSlideId = "image-view-1";
+        $(document).ready(function() {
+            
+            window.mySwipe = new Swipe(document.getElementById('slider'), {
+                callback: function(index,slide) {
+                    //console.log(slide.id)
+                    if (Zoomer.zoomers[lastSlideId]) {
+                        Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+                    }
+                    var videoId = lastSlideId+"_player";
+                    if ($('#'+videoId).length) {
+                        var myPlayer = _V_(videoId);
+                        if (myPlayer) {
+                            myPlayer.pause();
+                            //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                        }
+                    }
+                    lastSlideId = slide.id; // record this so we know what we're leaving next time
+                }
+            });
+            L.DomUtil.disableTextSelection();
+            Zoomer.zoom_image_by_class({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+            Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+            //Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": 'https://stewart.walkerart.org/zoomtest/wac_1729/{z}_{x}_{y}.jpg', "imageWidth": 2560, "imageHeight": 1702});
+            Zoomer.zoom_image_by_class({"container":"image-view-3", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_3691/{z}_{x}_{y}.jpg", "imageWidth": 1445, "imageHeight": 1920});
+            Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
+            
+            
+            
+            MediaElement('player1', {success: function(me) {
+	
+            	me.play();
+	
+            	me.addEventListener('timeupdate', function() {
+            		document.getElementById('time').innerHTML = me.currentTime;
+            	}, false);
+	
+            	document.getElementById('pp')['onclick'] = function() {
+            		if (me.paused)
+            			me.play();
+            		else
+            			me.pause();
+            	};
+
+            }});
+            $('.tombstone').click(function() {
+                $artwork-info = $(this).parent().children('.info').html();
+                $.colorbox({
+                    html: artwork-info
+                });
+            });
+
+        });
+    </script>
+    <script src="javascripts/scripts.js"></script>
+</body>
+</html>
