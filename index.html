@@ -71,7 +71,7 @@
     </script>
     
     <script type="text/template" id="zoomer">
-      <!--<div class="image-view-1 zoomer">
+      <!--<div class="<%= zoomer_class %> zoomer">
           <article class="info">
               <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
               <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
@@ -94,32 +94,36 @@
     
     <script>
         var lastSlideId = "image-view-1";
+        
+        var data1 = { title: "Title1",artist: "artist1",year: "year1",text: "text1",zoomer_class: "image-view-1"}
+        var data2 = { title: "Title2",artist: "artist2",year: "year2",text: "text2",video_src: "http://video-js.zencoder.com/oceans-clip.mp4" }
+        var video_template = _.template($('#video').html());
+        var zoomer_template = _.template($('#zoomer').html());
+        $(".swipe-wrap").append(zoomer_template(data1));
+        $(".swipe-wrap").append(video_template(data2));
+          
+          window.mySwipe = new Swipe(document.getElementById('slider'), {
+              callback: function(index,slide) {
+                  //console.log(slide.id)
+                  if (Zoomer.zoomers[lastSlideId]) {
+                      Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+                  }
+                  var videoId = lastSlideId+"_player";
+                  if ($('#'+videoId).length) {
+                      var myPlayer = _V_(videoId);
+                      if (myPlayer) {
+                          myPlayer.pause();
+                          //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                      }
+                  }
+                  lastSlideId = slide.id; // record this so we know what we're leaving next time
+              }
+          });
+        
+        
         $(document).ready(function() {
           
-          var data1 = { title: "Title1",artist: "artist1",year: "year1",text: "text1"}
-          var data2 = { title: "Title2",artist: "artist2",year: "year2",text: "text2",video_src: "http://video-js.zencoder.com/oceans-clip.mp4" }
-          var video_template = _.template($('#video').html());
-          var zoomer_template = _.template($('#zoomer').html());
-          $(".swipe-wrap").append(zoomer_template(data1));
-          $(".swipe-wrap").append(video_template(data2));
-            
-            window.mySwipe = new Swipe(document.getElementById('slider'), {
-                callback: function(index,slide) {
-                    //console.log(slide.id)
-                    if (Zoomer.zoomers[lastSlideId]) {
-                        Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
-                    }
-                    var videoId = lastSlideId+"_player";
-                    if ($('#'+videoId).length) {
-                        var myPlayer = _V_(videoId);
-                        if (myPlayer) {
-                            myPlayer.pause();
-                            //myPlayer.currentTime(0); // removes image? Maybe poster would help?
-                        }
-                    }
-                    lastSlideId = slide.id; // record this so we know what we're leaving next time
-                }
-            });
+          
             L.DomUtil.disableTextSelection();
             //Zoomer.zoom_image_by_class({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
             Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
