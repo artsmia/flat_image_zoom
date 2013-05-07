@@ -73,6 +73,10 @@
         </ul>
     </nav>
     
+    
+    
+    
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="javascripts/underscore-min.js"></script>
     <script src="javascripts/backbone-min.js"></script>
@@ -139,7 +143,25 @@
 
         });
     </script>
-
+    <script type="text/template" id="form-tpl">
+        <div class="image-view-3 zoomer">
+            <ul class="tombstone">
+                <li class="title"><%= title %></li>
+                <li class="artist"><%= name %></li>
+                <li class="year"><%= year %></li>
+            </ul>
+            <article class="info">
+                <p><%= text %></p>
+            </article>
+        </div>
+    </script>
+    
+ 
+    <script type="text/javascript">
+         var data2 = { title: "Title2",artist: "artist2",year: "year2",text: "text2" }
+         var compileTemplate2 = _.template($('#form-tpl').html());
+         $(".swipe-wrap").append(compileTemplate2(data2));
+    </script>
     <script src="javascripts/scripts.js"></script>
 </body>
 </html>
