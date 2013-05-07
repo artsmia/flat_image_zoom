@@ -83,6 +83,63 @@
     <script src="javascripts/flat_image_zoom.js"></script>
     <script src="javascripts/jquery.actual.min.js"></script>
     <script src="javascripts/mediaelement.min.js"></script>
+    
+    <script>
+        var lastSlideId = "image-view-1";
+        $(document).ready(function() {
+            
+            window.mySwipe = new Swipe(document.getElementById('slider'), {
+                callback: function(index,slide) {
+                    //console.log(slide.id)
+                    if (Zoomer.zoomers[lastSlideId]) {
+                        Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+                    }
+                    var videoId = lastSlideId+"_player";
+                    if ($('#'+videoId).length) {
+                        var myPlayer = _V_(videoId);
+                        if (myPlayer) {
+                            myPlayer.pause();
+                            //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                        }
+                    }
+                    lastSlideId = slide.id; // record this so we know what we're leaving next time
+                }
+            });
+            L.DomUtil.disableTextSelection();
+            Zoomer.zoom_image_by_class({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+            Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+            //Zoomer.zoom_image_by_class({"container":"image-view-1", "tileURL": 'https://stewart.walkerart.org/zoomtest/wac_1729/{z}_{x}_{y}.jpg', "imageWidth": 2560, "imageHeight": 1702});
+            Zoomer.zoom_image_by_class({"container":"image-view-3", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_3691/{z}_{x}_{y}.jpg", "imageWidth": 1445, "imageHeight": 1920});
+            Zoomer.zoom_image_by_class({"container":"image-view-4", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_11156/{z}_{x}_{y}.jpg", "imageWidth": 5920, "imageHeight": 3893});
+            
+            
+            
+            MediaElement('player1', {success: function(me) {
+	
+            	me.play();
+	
+            	me.addEventListener('timeupdate', function() {
+            		document.getElementById('time').innerHTML = me.currentTime;
+            	}, false);
+	
+            	document.getElementById('pp')['onclick'] = function() {
+            		if (me.paused)
+            			me.play();
+            		else
+            			me.pause();
+            	};
+
+            }});
+            $('.tombstone').click(function() {
+                $artwork-info = $(this).parent().children('.info').html();
+                $.colorbox({
+                    html: artwork-info
+                });
+            });
+
+        });
+    </script>
+
     <script src="javascripts/scripts.js"></script>
 </body>
 </html>
