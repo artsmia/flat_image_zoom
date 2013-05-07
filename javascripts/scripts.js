@@ -1,16 +1,22 @@
 var lastSlideId = 'image-view-1',
     artworkInfo = '',
     tombstoneTimeout = '';
+    
+function displayTombstone(duration) {
+    clearTimeout(tombstoneTimeout);
+    $('.tombstone').stop(true, true).delay(250).fadeIn(150);
+    tombstoneTimeout = setTimeout(function() {
+        $('.tombstone').stop(true, true).fadeOut(250);
+    }, duration);
+}
 
 $(document).ready(function() {
     
+    displayTombstone(3000);
+    
     window.mySwipe = new Swipe(document.getElementById('slider'), {
         callback: function(index,slide) {
-            clearTimeout(tombstoneTimeout);
-            $('.tombstone').stop(true, true).delay(250).fadeIn(150);
-            tombstoneTimeout = setTimeout(function() {
-                $('.tombstone').stop(true, true).fadeOut(250);
-            }, 3000);
+            displayTombstone(3000);
             //console.log(slide.id)
             if (Zoomer.zoomers[lastSlideId]) {
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
