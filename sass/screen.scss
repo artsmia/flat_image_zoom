@@ -36,9 +36,8 @@ a {
     text-decoration: none;
 }
 
-video {
-    max-width: 100%;
-    height: auto;
+.hidden{
+  display:none;
 }
 
 .intro {
@@ -86,6 +85,11 @@ video {
     }
 }
 
+
+video {
+    height: auto;
+    width:100%;
+}
 .video {
     display: table;
     width: 80%;
