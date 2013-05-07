@@ -1,10 +1,23 @@
 var lastSlideId = 'image-view-1',
-    artworkInfo = '';
+    artworkInfo = '',
+    tombstoneTimeout = '',
+    tombstoneDuration = 3000;
+    
+function displayTombstone() {
+    clearTimeout(tombstoneTimeout);
+    $('.tombstone').stop(true, true).delay(250).fadeIn(150);
+    tombstoneTimeout = setTimeout(function() {
+        $('.tombstone').stop(true, true).fadeOut(250);
+    }, tombstoneDuration);
+}
 
 $(document).ready(function() {
     
+    displayTombstone();
+    
     window.mySwipe = new Swipe(document.getElementById('slider'), {
         callback: function(index,slide) {
+            displayTombstone();
             //console.log(slide.id)
             if (Zoomer.zoomers[lastSlideId]) {
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
@@ -43,19 +56,24 @@ $(document).ready(function() {
     //
     //}});
     
-    $('.tombstone').click(function() {
+    $(document).click(function() {
+        displayTombstone();
+    });
+    
+    $('.info-link').click(function(event) {
+        event.stopPropagation();
+        event.preventDefault();
         //artworkInfo = $(this).parent().children('.info').html();
         artworkInfo = '<article class="info">\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>\
+                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
+                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
                        </article>';
         $.colorbox({
-            transition: 'fade',
-            width: '50%',
-            height: '90%',
-            speed: 150,
+            transition: 'none',
+            width: '60%',
+            initialWidth: '50%',
             fadeOut: 250,
-            opacity: 0.6,
+            opacity: 0.8,
             html: artworkInfo
         });
     });
