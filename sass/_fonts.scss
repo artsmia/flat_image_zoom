@@ -1,19 +1,13 @@
 @font-face {
-    font-family: 'Fox Regular';
-    src: url('../fonts/foxroman-webfont.eot');
-    src: url('../fonts/foxroman-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/foxroman-webfont.woff') format('woff'),
-         url('../fonts/foxroman-webfont.ttf') format('truetype');
+    font-family: 'Fox';
+    src: url('../fonts/foxroman-webfont.svg#foxregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fox Italic';
-    src: url('../fonts/foxitalic-webfont.eot');
-    src: url('../fonts/foxitalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/foxitalic-webfont.woff') format('woff'),
-         url('../fonts/foxitalic-webfont.ttf') format('truetype');
+    font-family: 'Fox';
+    src: url('../fonts/foxitalic-webfont.svg#foxitalic') format('svg');
     font-weight: normal;
     font-style: italic;
 }
