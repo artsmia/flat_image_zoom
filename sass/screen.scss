@@ -75,8 +75,10 @@ video {
 }
 
 .info {
+    hyphens: auto;
+    
     p {
-        text-indent: 66px;
+        text-indent: 44px;
         
         &:first-child {
             text-indent: 0;
