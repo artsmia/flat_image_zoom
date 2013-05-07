@@ -1,7 +1,9 @@
 var lastSlideId = 'image-view-1',
     artworkInfo = '',
     tombstoneTimeout = '',
-    tombstoneDuration = 3000;
+    tombstoneDuration = 3000,
+    introTimeout = '',
+    introDuration = 60000;
     
 function displayTombstone() {
     clearTimeout(tombstoneTimeout);
@@ -9,6 +11,14 @@ function displayTombstone() {
     tombstoneTimeout = setTimeout(function() {
         $('.tombstone').stop(true, true).fadeOut(250);
     }, tombstoneDuration);
+}
+
+function hideIntro() {
+    clearTimeout(introTimeout);
+    $('.intro-wrapper').hide();
+    introTimeout = setTimeout(function() {
+        $('.intro-wrapper').show();
+    }, introDuration);
 }
 
 $(document).ready(function() {
@@ -58,6 +68,7 @@ $(document).ready(function() {
     
     $(document).click(function() {
         displayTombstone();
+        hideIntro();
     });
     
     $('.info-link').click(function(event) {
