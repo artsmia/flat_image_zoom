@@ -29,10 +29,15 @@
         margin: 0 110px;
         overflow: visible;
         
+        #cboxLoadedContent {
+            padding: 50px 0;
+            max-height: 980px;
+        }
+        
         #cboxClose {
             display: block;
             position: absolute;
-            top: -19px;
+            top: 31px;
             left: -130px;
             width: 68px + 50px;
             height: 68px + 50px;

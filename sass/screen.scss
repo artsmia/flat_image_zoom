@@ -14,6 +14,7 @@ body,
 .zoomer {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -41,6 +42,7 @@ a {
 }
 
 .intro {
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -72,11 +74,6 @@ a {
     }
 }
 
-
-video {
-    height: auto;
-    width:100%;
-}
 .video {
     display: table;
     width: 80%;
@@ -86,6 +83,11 @@ video {
     .video-container {
         display: table-cell;
         vertical-align: middle;
+        
+        video {
+            width: 100%;
+            height: auto;
+        }
     }
 }
 
@@ -107,6 +109,7 @@ video {
 }
 
 .info {
+    -webkit-hyphens: auto;
     hyphens: auto;
     
     p {
@@ -115,6 +118,28 @@ video {
         &:first-child {
             text-indent: 0;
         }
+    }
+    
+    ul, ol {
+        margin: 22px 0;
+        
+        li {
+            margin-left: 44px;
+        }
+    }
+    
+    ul {
+        list-style-type: disc;
+    }
+    
+    ol {
+        list-style-type: decimal;
+    }
+    
+    blockquote {
+        margin: 44px 110px 44px 44px;
+        font-size: 25px;
+        line-height: 33px;
     }
 }
 

@@ -47,10 +47,10 @@
         <% if (type == "video"){%>
             <div id="<%= id %>" class="zoomer video">
                 <div class="video-container">
-                        <video    id="<%= player_id %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
+                    <video id="<%= player_id %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
                 </div>
                 <article class="info">
-                        <p><%= text %></p>
+                    <p><%= text %></p>
                 </article>
                 <ul class="hidden meta">
                     <li class="title"><%= title %></li>
@@ -65,7 +65,7 @@
         <% if (type == "zoomer"){%>
             <div class="zoomer <%= zoomer_class %>">
                 <article class="info">
-                        <p><%= text %></p>
+                    <p><%= text %></p>
                 </article>
                 <ul class="hidden meta">
                     <li class="title"><%= title %></li>
