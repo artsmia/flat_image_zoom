@@ -27,44 +27,51 @@ function swap_info(index,slide){
     $('#myForm').html($el.children('.slide-article').html());
 }
 
+
+
 var zoomer_template = _.template($('#zoomer').html());
 var lastSlideId = 'image-view-1';
 
 function slideInit(){
-    window.mySwipe = new Swipe(document.getElementById('slider'), {
-        callback: function(index,slide) {
-            displayTombstone();
-            swap_info(index,slide);
-            //console.log(slide.id)
-            if (Zoomer.zoomers[lastSlideId]) {
-                Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
-            }
-            var videoId = lastSlideId+"_player";
-            if ($('#'+videoId).length) {
-                var myPlayer = _V_(videoId);
-                if (myPlayer) {
-                    myPlayer.pause();
-                    //myPlayer.currentTime(0); // removes image? Maybe poster would help?
-                }
-            }
-            lastSlideId = slide.id; // record this so we know what we're leaving next time
-        }
-    });
-}
+ window.mySwipe = new Swipe(document.getElementById('slider'), {
+     callback: function(index,slide) {
+         displayTombstone();
+         swap_info(index,slide);
+         //console.log(slide.id)
+         if (Zoomer.zoomers[lastSlideId]) {
+             Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+         }
+         var videoId = lastSlideId+"_player";
+         if ($('#'+videoId).length) {
+             var myPlayer = _V_(videoId);
+             if (myPlayer) {
+                 myPlayer.pause();
+                 //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+             }
+         }
+         lastSlideId = slide.id; // record this so we know what we're leaving next time
+     }
+ });
+  
+ swap_info(1,".slide_index0");
+}   
+    
 
 $.getJSON('javascripts/test.json', function(data) {
-    slides = data.slides;
-    for (variable in slides) {
-        var clss = "test_class" + variable;
-        slides[variable].zoomer_class = clss;
-        $(".swipe-wrap").append(zoomer_template(slides[variable]));
-        if (slides[variable].type == "zoomer") {
-            Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
-        } else if(slides[variable].type == "video") {
-            MediaElement(slides[variable].player_id);
-        }
-    };
-    slideInit();
+  slides = data.slides;
+
+  for (variable in slides) {
+    var clss = "slide_index" + variable;
+    slides[variable].zoomer_class = clss;
+    $(".swipe-wrap").append(zoomer_template(slides[variable]));
+    if(slides[variable].type == "zoomer"){
+      Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
+    }else if(slides[variable].type == "video"){
+      MediaElement(slides[variable].player_id);
+    }
+    
+  };
+  slideInit();
 });
 
 $(document).ready(function() {
