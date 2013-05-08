@@ -10,7 +10,6 @@
 <body>
     <div class="intro">
         <video src="videos/intro.mp4" type="video/mp4" width="1920" height="1080" autoplay loop>
-        <!-- <img class="animated" interval="5" max="80" pattern="images/intro-#.png" width="1920" height="1080"> -->
     </div>
     
     <div id="slider" class="swipe">
@@ -41,45 +40,90 @@
     <script src="javascripts/swipe.js"></script>
     <script src="javascripts/leaflet-src.js"></script>
     <script src="javascripts/zoom_swipe.js"></script>
-    <script src="javascripts/flat_image_zoom.js"></script>
     <script src="javascripts/jquery.actual.min.js"></script>
     <script src="javascripts/mediaelement.min.js"></script>
-    
-    <script type="text/template" id="video">
-      <div id="video1" class="zoomer video">
-          <div class="video-container">
-              <video  id="player1" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
-          </div>
-          <article class="info">
-              <p><%= text %></p>
-          </article>
-          <ul class="hidden meta">
-            <li class="title"><%= title %></li>
-            <li class="artist"><%= artist %></li>
-            <li class="year"><%= year %></li>
-          </ul>
-      </div>
-    </script>
-    
+    <script src="javascripts/flat_image_zoom.js"></script>
     <script type="text/template" id="zoomer">
-      <!--<div class="image-view-1 zoomer">
-          <article class="info">
-              <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et.</p>
-              <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris.</p>
-          </article>
-      </div>-->
-      <div class="zoomer image-view-1">
-          <article class="info">
-              <p><%= text %></p>
-          </article>
-          <ul class="hidden meta">
-            <li class="title"><%= title %></li>
-            <li class="artist"><%= artist %></li>
-            <li class="year"><%= year %></li>
-          </ul>
-      </div>
+        <% if (type == "video"){%>
+            <div id="<%= id %>" class="zoomer video">
+                    <div class="video-container">
+                            <video    id="<%= player_id %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
+                    </div>
+                    <article class="info">
+                            <p><%= text %></p>
+                    </article>
+                    <ul class="hidden meta">
+                        <li class="title"><%= title %></li>
+                        <li class="artist"><%= artist %></li>
+                        <li class="year"><%= year %></li>
+                    </ul>
+            </div>
+                <%
+                    //MediaElement(player_id);
+                %>
+        <% } %>
+        <% if (type == "zoomer"){%>
+            <div class="zoomer <%= zoomer_class %>">
+                    <article class="info">
+                            <p><%= text %></p>
+                    </article>
+                    <ul class="hidden meta">
+                        <li class="title"><%= title %></li>
+                        <li class="artist"><%= artist %></li>
+                        <li class="year"><%= year %></li>
+                    </ul>
+                    <%
+                        $(document).ready(function() {
+                        
+                        });
+                    %>
+            </div>
+        <% } %>
     </script>
-    
+    <script>
+        var lastSlideId = 'image-view-1',
+            slides = {};
+        
+        var zoomer_template = _.template($('#zoomer').html());
+            
+        $.getJSON('javascripts/test.json', function(data) {
+            slides = data.slides;
+            
+            for (variable in slides) {
+                var clss = "test_class" + variable;
+                slides[variable].zoomer_class = clss;
+                $(".swipe-wrap").append(zoomer_template(slides[variable]));
+                if(slides[variable].type == "zoomer"){
+                    Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
+                }
+            };
+            slideInIt();
+        });
+        
+        function slideInIt(){
+            window.mySwipe = new Swipe(document.getElementById('slider'), {
+                callback: function(index,slide) {
+                    //console.log(slide.id)
+                    if (Zoomer.zoomers[lastSlideId]) {
+                        Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+                    }
+                    var videoId = lastSlideId+"_player";
+                    if ($('#'+videoId).length) {
+                        var myPlayer = _V_(videoId);
+                        if (myPlayer) {
+                            myPlayer.pause();
+                            //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                        }
+                    }
+                    lastSlideId = slide.id; // record this so we know what we're leaving next time
+                }
+            });
+        }
+        
+        $(document).ready(function() {
+            L.DomUtil.disableTextSelection();
+        });
+    </script>
     <script src="javascripts/scripts.js"></script>
     <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
