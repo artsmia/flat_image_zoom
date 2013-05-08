@@ -70,13 +70,12 @@ $(document).ready(function() {
             onComplete: function() {
                 $('#cboxLoadedContent article').scroller({
                     customClass: "walker-scroller",
-                    trackMargin: 22,
+                    trackMargin: 8,
                     handleSize: 60
                 });
                 
                 if (!$('#cboxLoadedContent article').hasClass('scroller-active')) {
                     $('#cboxLoadedContent .article-wrapper').addClass('locked');
-                    $('#cboxClose').addClass('no-scroll');
                 }
             }
         });

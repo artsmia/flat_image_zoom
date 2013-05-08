@@ -49,7 +49,7 @@
         #cboxClose {
             display: block;
             position: absolute;
-            top: 31px;
+            top: 18px;
             left: -130px;
             width: 68px + 50px;
             height: 68px + 50px;
@@ -57,10 +57,6 @@
             background: url(../images/close.png) center center no-repeat;
             @include hide-text;
             outline: 0;
-            
-            &.no-scroll {
-                top: 18px;
-            }
         }
     }
 }
