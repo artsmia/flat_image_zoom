@@ -30,8 +30,20 @@
         overflow: visible;
         
         #cboxLoadedContent {
-            padding: 50px 0;
-            max-height: 980px;
+            padding-top: 35px;
+            
+            .article-wrapper {
+                height: 1010px;
+                overflow: hidden;
+            
+                &.locked {
+                    height: auto;
+                }
+            
+                article {
+                    height: inherit;
+                }
+            }
         }
         
         #cboxClose {
@@ -45,6 +57,10 @@
             background: url(../images/close.png) center center no-repeat;
             @include hide-text;
             outline: 0;
+            
+            &.no-scroll {
+                top: 18px;
+            }
         }
     }
 }
