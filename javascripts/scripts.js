@@ -1,8 +1,8 @@
 var artworkInfo = '',
     tombstoneTimeout = '',
-    tombstoneDuration = 3000,
+    tombstoneDuration = 4000,
     introTimeout = '',
-    introDuration = 60000;
+    introDuration = 90000;
 
 function displayTombstone() {
     clearTimeout(tombstoneTimeout);
@@ -21,10 +21,10 @@ function hideIntro() {
 }
 
 function swap_info(index,slide){
-  var $el = $(slide);
-  console.log($el.children('.slide-article').html());
-  $('.tombstone').html($el.children('.meta').html());  
-  $('#myForm').html($el.children('.slide-article').html());
+    var $el = $(slide);
+    console.log($el.children('.slide-article').html());
+    $('.tombstone').html($el.children('.meta').html());  
+    $('#myForm').html($el.children('.slide-article').html());
 }
 
 
@@ -32,7 +32,6 @@ function swap_info(index,slide){
 var zoomer_template = _.template($('#zoomer').html());
 var lastSlideId = 'image-view-1';
 
-     
 function slideInit(){
  window.mySwipe = new Swipe(document.getElementById('slider'), {
      callback: function(index,slide) {
@@ -74,8 +73,6 @@ $.getJSON('javascripts/test.json', function(data) {
   slideInit();
 });
 
-
-
 $(document).ready(function() {
     
     displayTombstone();
@@ -100,14 +97,15 @@ $(document).ready(function() {
             onComplete: function() {
                 $('#cboxLoadedContent article').scroller({
                     customClass: "walker-scroller",
-                    trackMargin: 22,
+                    trackMargin: 8,
                     handleSize: 60
                 });
-                
                 if (!$('#cboxLoadedContent article').hasClass('scroller-active')) {
                     $('#cboxLoadedContent .article-wrapper').addClass('locked');
-                    $('#cboxClose').addClass('no-scroll');
                 }
+            },
+            onClosed: function() {
+                $('.locked').removeClass('locked');
             }
         });
     });
