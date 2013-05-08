@@ -46,17 +46,17 @@
     <script type="text/template" id="zoomer">
         <% if (type == "video"){%>
             <div id="<%= id %>" class="zoomer video">
-                    <div class="video-container">
-                            <video    id="<%= player_id %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
-                    </div>
-                    <article class="info">
-                            <p><%= text %></p>
-                    </article>
-                    <ul class="hidden meta">
-                        <li class="title"><%= title %></li>
-                        <li class="artist"><%= artist %></li>
-                        <li class="year"><%= year %></li>
-                    </ul>
+                <div class="video-container">
+                        <video    id="<%= player_id %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
+                </div>
+                <article class="info">
+                        <p><%= text %></p>
+                </article>
+                <ul class="hidden meta">
+                    <li class="title"><%= title %></li>
+                    <li class="artist"><%= artist %></li>
+                    <li class="year"><%= year %></li>
+                </ul>
             </div>
                 <%
                     //MediaElement(player_id);
@@ -64,19 +64,19 @@
         <% } %>
         <% if (type == "zoomer"){%>
             <div class="zoomer <%= zoomer_class %>">
-                    <article class="info">
-                            <p><%= text %></p>
-                    </article>
-                    <ul class="hidden meta">
-                        <li class="title"><%= title %></li>
-                        <li class="artist"><%= artist %></li>
-                        <li class="year"><%= year %></li>
-                    </ul>
-                    <%
-                        $(document).ready(function() {
-                        
-                        });
-                    %>
+                <article class="info">
+                        <p><%= text %></p>
+                </article>
+                <ul class="hidden meta">
+                    <li class="title"><%= title %></li>
+                    <li class="artist"><%= artist %></li>
+                    <li class="year"><%= year %></li>
+                </ul>
+                <%
+                    $(document).ready(function() {
+                    
+                    });
+                %>
             </div>
         <% } %>
     </script>
