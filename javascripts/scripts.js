@@ -1,8 +1,8 @@
 var artworkInfo = '',
     tombstoneTimeout = '',
-    tombstoneDuration = 3000,
+    tombstoneDuration = 4000,
     introTimeout = '',
-    introDuration = 60000;
+    introDuration = 90000;
 
 function displayTombstone() {
     clearTimeout(tombstoneTimeout);
@@ -33,6 +33,7 @@ var lastSlideId = 'image-view-1';
 function slideInit(){
    window.mySwipe = new Swipe(document.getElementById('slider'), {
        callback: function(index,slide) {
+           displayTombstone();
            swap_info(index,slide);
            //console.log(slide.id)
            if (Zoomer.zoomers[lastSlideId]) {
@@ -49,7 +50,6 @@ function slideInit(){
            lastSlideId = slide.id; // record this so we know what we're leaving next time
        }
    });
-
 }
 
 $.getJSON('javascripts/test.json', function(data) {
