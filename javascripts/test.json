@@ -19,6 +19,7 @@
           "artist": "artist2",
           "year": "year2",
           "text": "text2",
+          "video_poster":"http://video-js.zencoder.com/oceans-clip.jpg",
           "video_src": "http://video-js.zencoder.com/oceans-clip.mp4" 
       },
       { 

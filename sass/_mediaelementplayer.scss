@@ -848,3 +848,254 @@
 	cursor: pointer;
 }
 /* End: Postroll */
+
+$tertiary-color: #46b66e;
+
+.me-plugin {
+    position: absolute;
+}
+
+.mejs-embed, .mejs-embed body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000;
+    overflow: hidden;
+}
+
+.mejs-container-fullscreen {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 999999;
+}
+
+.mejs-container-fullscreen .mejs-mediaelement,
+.mejs-container-fullscreen video {
+    width: 100%;
+    height: 100%;
+}
+
+.mejs-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mejs-container {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    
+    .mejs-clear {
+        clear: both;
+    }
+    
+    .mejs-mediaelement {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .mejs-poster {
+        position: absolute;
+        top: 0;
+        left: 0;
+    
+        img {
+            display: block;
+            border: 0;
+            padding: 0;
+        }
+    }
+    
+    .mejs-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+    
+        &.mejs-overlay-play {
+            cursor: pointer;
+        
+            .mejs-overlay-button {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 54px;
+                height: 54px;
+                margin: -27px 0 0 -27px;
+                background: $tertiary-color image-url('garden-sprite.png') 17px -1187px no-repeat;
+                @include image-2x('garden-sprite@2x.png', 120px, 2750px);
+                -webkit-border-radius: 27px;
+                -moz-border-radius: 27px;
+                -ms-border-radius: 27px;
+                -o-border-radius: 27px;
+                border-radius: 27px;
+            }
+        }
+    
+        .mejs-overlay-loading {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: image-url('loading-inverse.gif') center center no-repeat;
+            @include image-2x('loading-inverse@2x.gif', 34px, 11px);
+        }
+    }
+    
+    .mejs-controls {
+        position: absolute;
+        width: 100%;
+        height: 28px;
+        
+        .mejs-button {
+            position: relative;
+            
+            button {
+                display: block;
+                height: 28px;
+                width: 28px;
+                border: 2px solid $tertiary-color;
+                background: transparent image-url('garden-sprite.png') no-repeat;
+                @include image-2x('garden-sprite@2x.png', 120px, 2750px);
+                -webkit-border-radius: 14px;
+                -moz-border-radius: 14px;
+                -ms-border-radius: 14px;
+                -o-border-radius: 14px;
+                border-radius: 14px;
+                cursor: pointer;
+            }
+            
+            &.mejs-play button {
+                background-position: 8px -1044px;
+            }
+            
+            &.mejs-pause button {
+                background-position: 7px -1094px;
+            }
+        }
+        
+        .mejs-time {
+            display: block;
+            color: $tertiary-color;
+            font-family: "Apercu Bold";
+            font-size: 11px;
+            line-height: 14px;
+        }
+    }
+    
+    // AUDIO
+    
+    &.mejs-audio {
+        .mejs-controls {
+            .mejs-button {
+                display: inline-block;
+                margin: 0 auto;
+            }
+            
+            .mejs-time {
+                margin-top: 9px;
+            }
+        }
+    }
+    
+    // VIDEO
+    
+    &.mejs-video {
+        margin-bottom: 10px;
+        
+        .mejs-controls {
+            bottom: 0;
+            padding: 5px 0;
+            height: 38px;
+            background: $main-bg image-url('bg.jpg');
+            
+            .mejs-button {
+                position: absolute;
+                
+                &.mejs-playpause-button {
+                    top: 5px;
+                    left: 5px;
+                    right: auto;
+                }
+                
+                &.mejs-fullscreen-button {
+                    top: 5px;
+                    left: auto;
+                    right: 5px;
+    
+                    button {
+                        background: image-url('garden-sprite.png') 6px -1144px no-repeat;
+                        @include image-2x('garden-sprite@2x.png', 120px, 2750px);
+                    }
+                }
+            }
+            
+            .mejs-time {
+                position: absolute;
+                top: 7px;
+                left: 36px;
+                right: 36px;
+            }
+            
+            .mejs-time-rail {
+                margin: 2px 42px 0;
+                
+                .mejs-time-total {
+                    display: inline-block;
+                    width: 100%;
+                    height: 8px;
+                    border: 2px solid $tertiary-color;
+                    border-top: 0;
+                    
+                    span {
+                        display: block;
+                        position: absolute;
+                        width: 0;
+                        height: 6px;
+                        cursor: pointer;
+                    }
+                    
+                    .mejs-time-buffering {
+                    }
+                    
+                    .mejs-time-loaded {
+                        background: #e2e7d6;
+                        -webkit-box-shadow: inset 0 0 8px 0 rgba(70, 182, 110, 0.07);
+                        box-shadow: inset 0 0 8px 0 rgba(70, 182, 110, 0.07);
+                    }
+                    
+                    .mejs-time-current {
+                        background: $tertiary-color;
+                    }
+                    
+                    .mejs-time-handle {
+                        display: none;
+                    }
+                    
+                    .mejs-time-float {
+                        position: absolute;
+                        display: none !important;
+                        
+                        .mejs-time-float-current {
+                        }
+                        
+                        .mejs-time-float-corner {
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
