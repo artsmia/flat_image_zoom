@@ -22,7 +22,6 @@ function hideIntro() {
 
 function swap_info(index,slide){
     var $el = $(slide);
-    console.log($el.children('.slide-article').html());
     $('.tombstone').html($el.children('.meta').html());  
     $('#myForm').html($el.children('.slide-article').html());
 }
@@ -37,7 +36,6 @@ function slideInit(){
      callback: function(index,slide) {
          displayTombstone();
          swap_info(index,slide);
-         //console.log(slide.id)
          if (Zoomer.zoomers[lastSlideId]) {
              Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
          }
