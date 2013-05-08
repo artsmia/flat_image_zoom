@@ -68,9 +68,7 @@
             </ul>
         </div>
           <%
-            $(document).ready(function() {
-              MediaElement(player_id);
-            });
+            //MediaElement(player_id);
           %>
       <% } %>
       <% if (type == "zoomer"){%>
@@ -85,7 +83,7 @@
             </ul>
             <%
               $(document).ready(function() {
-                Zoomer.zoom_image_by_class({"container":zoomer_class, "tileURL": zoomer_url, "imageWidth": zoomer_width, "imageHeight": zoomer_height});
+                
               });
             %>
         </div>
@@ -94,20 +92,36 @@
     
     
     <script>
-      var jqxhr = $.getJSON( "test.json", function() {
-        console.log( "success" );
-      })
-      .done(function() { console.log( "second success" ); })
-      .fail(function() { console.log( "error" ); })
-      .always(function() { console.log( "complete" ); });
-    
-    
+
         var lastSlideId = 'image-view-1',
             artworkInfo = '',
             tombstoneTimeout = '',
             tombstoneDuration = 3000,
             introTimeout = '',
+            slides = {},
             introDuration = 60000;
+        
+         var zoomer_template = _.template($('#zoomer').html());
+            
+            
+            
+            
+        $.getJSON('javascripts/test.json', function(data) {
+          slides = data.slides;
+
+          for (variable in slides) {
+            var clss = "test_class" + variable;
+            slides[variable].zoomer_class = clss;
+            $(".swipe-wrap").append(zoomer_template(slides[variable]));
+            if(slides[variable].type == "zoomer"){
+              Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
+            }
+            
+          };
+          slideInIt();
+        });
+        
+               
         
         function displayTombstone() {
             clearTimeout(tombstoneTimeout);
@@ -126,34 +140,28 @@
         }
         
         displayTombstone();
-        
-        var data1 = { type: "zoomer", title: "Title1",artist: "artist1",year: "year1",text: "text1",zoomer_class: "image-view-1",zoomer_url: "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg",zoomer_width: 4000 ,zoomer_height: 3187}
-        var data2 = { type: "video", id: "video1",player_id: "player1", title: "Title2",artist: "artist2",year: "year2",text: "text2",video_src: "http://video-js.zencoder.com/oceans-clip.mp4" }
-        
-        
-        var zoomer_template = _.template($('#zoomer').html());
-        
-        $(".swipe-wrap").append(zoomer_template(data1));
+       
           
-        $(".swipe-wrap").append(zoomer_template(data2));
+        function slideInIt(){
+          window.mySwipe = new Swipe(document.getElementById('slider'), {
+              callback: function(index,slide) {
+                  //console.log(slide.id)
+                  if (Zoomer.zoomers[lastSlideId]) {
+                      Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+                  }
+                  var videoId = lastSlideId+"_player";
+                  if ($('#'+videoId).length) {
+                      var myPlayer = _V_(videoId);
+                      if (myPlayer) {
+                          myPlayer.pause();
+                          //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                      }
+                  }
+                  lastSlideId = slide.id; // record this so we know what we're leaving next time
+              }
+          });
           
-        window.mySwipe = new Swipe(document.getElementById('slider'), {
-            callback: function(index,slide) {
-                //console.log(slide.id)
-                if (Zoomer.zoomers[lastSlideId]) {
-                    Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
-                }
-                var videoId = lastSlideId+"_player";
-                if ($('#'+videoId).length) {
-                    var myPlayer = _V_(videoId);
-                    if (myPlayer) {
-                        myPlayer.pause();
-                        //myPlayer.currentTime(0); // removes image? Maybe poster would help?
-                    }
-                }
-                lastSlideId = slide.id; // record this so we know what we're leaving next time
-            }
-        });
+        }
         
         
         $(document).ready(function() {           

@@ -27,10 +27,33 @@
           "artist": "artist1",
           "year": "year1",
           "text": "text1",
-          "zoomer_url": "http://cdn{s}.walkerart.org/wac_786/{z}_{x}_{y}.jpg",
+          "zoomer_url": "http://cdn{s}.walkerart.org/wac_12313/{z}_{x}_{y}.jpg",
           "zoomer_width": 4000 ,
-          "zoomer_height": 3187
+          "zoomer_height": 2975
+      
+      },
+      { 
+          "type": "zoomer",
+          "title": "Title1",
+          "artist": "artist1",
+          "year": "year1",
+          "text": "text1",
+          "zoomer_url": "http://cdn{s}.walkerart.org/wac_10690/{z}_{x}_{y}.jpg",
+          "zoomer_width": 5309 ,
+          "zoomer_height": 4000
+      
+      },
+      { 
+          "type": "zoomer",
+          "title": "Title1",
+          "artist": "artist1",
+          "year": "year1",
+          "text": "text1",
+          "zoomer_url": "http://cdn{s}.walkerart.org/wac_5986/{z}_{x}_{y}.jpg",
+          "zoomer_width": 3536 ,
+          "zoomer_height": 4000
       
       }
     ]
 }
+
