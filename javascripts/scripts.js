@@ -27,6 +27,8 @@ function swap_info(index,slide){
   $('#myForm').html($el.children('.slide-article').html());
 }
 
+
+
 var zoomer_template = _.template($('#zoomer').html());
 var lastSlideId = 'image-view-1';
 
@@ -50,7 +52,8 @@ function slideInit(){
          lastSlideId = slide.id; // record this so we know what we're leaving next time
      }
  });
-
+  
+ swap_info(1,".slide_index0");
 }   
     
     
@@ -58,7 +61,7 @@ $.getJSON('javascripts/test.json', function(data) {
   slides = data.slides;
 
   for (variable in slides) {
-    var clss = "test_class" + variable;
+    var clss = "slide_index" + variable;
     slides[variable].zoomer_class = clss;
     $(".swipe-wrap").append(zoomer_template(slides[variable]));
     if(slides[variable].type == "zoomer"){
