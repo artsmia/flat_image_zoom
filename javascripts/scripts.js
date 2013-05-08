@@ -2,30 +2,41 @@ var artworkInfo = '',
     tombstoneTimeout = '',
     tombstoneDuration = 3000,
     introTimeout = '',
-    slides = {},
-    introDuration = 60000,
-    zoomer_template = _.template($('#zoomer').html());
+    introDuration = 60000;
 
 function displayTombstone() {
-   clearTimeout(tombstoneTimeout);
-   $('.tombstone').stop(true, true).delay(250).fadeIn(150);
-   tombstoneTimeout = setTimeout(function() {
-       $('.tombstone').stop(true, true).fadeOut(250);
-   }, tombstoneDuration);
+    clearTimeout(tombstoneTimeout);
+    $('.tombstone').stop(true, true).delay(250).fadeIn(150);
+    tombstoneTimeout = setTimeout(function() {
+        $('.tombstone').stop(true, true).fadeOut(250);
+    }, tombstoneDuration);
 }
 
 function hideIntro() {
-
     clearTimeout(introTimeout);
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
         $('.intro').show();
     }, introDuration);
 }
-        
+
+function swap_info(index,slide){
+  var $el = $(slide);
+  console.log();
+  //console.log(index);
+  //console.log(slide);
+  $('.tombstone').html($el.children('.meta').html());  
+  $('#myForm').html('test');
+}
+
+var zoomer_template = _.template($('#zoomer').html());
+var lastSlideId = 'image-view-1';
+
+     
 function slideInit(){
  window.mySwipe = new Swipe(document.getElementById('slider'), {
      callback: function(index,slide) {
+         swap_info(index,slide);
          //console.log(slide.id)
          if (Zoomer.zoomers[lastSlideId]) {
              Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
@@ -62,12 +73,9 @@ $.getJSON('javascripts/test.json', function(data) {
   slideInit();
 });
 
-       
-
 
 
 $(document).ready(function() {
-    L.DomUtil.disableTextSelection();
     
     displayTombstone();
     
@@ -79,41 +87,27 @@ $(document).ready(function() {
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
-        artworkInfo = '<article class="info">\
+        artworkInfo = '<div class="article-wrapper" id="myForm"><article class="info">\
                            <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
                            <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
                            <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
                            <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                           <ul>\
-                           <li>Lorem ipsum dolor sit amet</li>\
-                           <li>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.</li>\
-                           </ul>\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                           <ol>\
-                           <li>Lorem ipsum dolor sit amet</li>\
-                           <li>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.</li>\
-                           </ol>\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                           <blockquote>\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           </blockquote>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                       </article>';
+                       </article></div>';
         $.colorbox({
             transition: 'none',
             width: '60%',
             initialWidth: '50%',
             fadeOut: 250,
             opacity: 0.8,
-            html: artworkInfo
+            inline:true, 
+            href:"#myForm",
+            onComplete: function() {
+                $('#cboxLoadedContent article').scroller({
+                    customClass: "walker-scroller",
+                    trackMargin: 15,
+                    handleSize: 40
+                });
+            }
         });
     });
     
