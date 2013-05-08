@@ -32,7 +32,9 @@
             <li><a href="" id="next" onclick="window.mySwipe.next(); return false;">Next</a></li>
         </ul>
     </nav>
-    
+
+    <div class="article-wrapper" id="myForm"><article class="info"></article></div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="javascripts/underscore-min.js"></script>
     <script src="javascripts/backbone-min.js"></script>
@@ -45,87 +47,34 @@
     <script src="javascripts/jquery.fs.scroller.min.js"></script>
     <script src="javascripts/flat_image_zoom.js"></script>
     <script type="text/template" id="zoomer">
-        <% if (type == "video"){%>
+        <% if (type == "video") {%>
             <div id="<%= id %>" class="zoomer video">
                 <div class="video-container">
-                    <video id="<%= player_id %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
+                    <video id="<%= player_id %>" poster="<%= video_poster %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
                 </div>
-                <article class="info">
+                <div class="hidden slide-article">
                     <p><%= text %></p>
-                </article>
+                </div>
                 <ul class="hidden meta">
-                    <li class="title"><%= title %></li>
-                    <li class="artist"><%= artist %></li>
-                    <li class="year"><%= year %></li>
+                  <li class="title"><%= title %></li>
+                  <li class="artist"><%= artist %></li>
+                  <li class="year"><%= year %></li>
                 </ul>
             </div>
-                <%
-                    //MediaElement(player_id);
-                %>
         <% } %>
-        <% if (type == "zoomer"){%>
+        <% if (type == "zoomer") {%>
             <div class="zoomer <%= zoomer_class %>">
-                <article class="info">
+                <div class="hidden slide-article">
                     <p><%= text %></p>
-                </article>
+                </div>
                 <ul class="hidden meta">
-                    <li class="title"><%= title %></li>
-                    <li class="artist"><%= artist %></li>
-                    <li class="year"><%= year %></li>
+                  <li class="title"><%= title %></li>
+                  <li class="artist"><%= artist %></li>
+                  <li class="year"><%= year %></li>
                 </ul>
-                <%
-                    $(document).ready(function() {
-                    
-                    });
-                %>
             </div>
         <% } %>
-    </script>
-    <script>
-        var lastSlideId = 'image-view-1',
-            slides = {};
-        
-        var zoomer_template = _.template($('#zoomer').html());
-            
-        $.getJSON('javascripts/test.json', function(data) {
-            slides = data.slides;
-            
-            for (variable in slides) {
-                var clss = "test_class" + variable;
-                slides[variable].zoomer_class = clss;
-                $(".swipe-wrap").append(zoomer_template(slides[variable]));
-                if(slides[variable].type == "zoomer"){
-                    Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
-                }
-            };
-            slideInIt();
-        });
-        
-        function slideInIt(){
-            window.mySwipe = new Swipe(document.getElementById('slider'), {
-                callback: function(index,slide) {
-                    //console.log(slide.id)
-                    if (Zoomer.zoomers[lastSlideId]) {
-                        Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
-                    }
-                    var videoId = lastSlideId+"_player";
-                    if ($('#'+videoId).length) {
-                        var myPlayer = _V_(videoId);
-                        if (myPlayer) {
-                            myPlayer.pause();
-                            //myPlayer.currentTime(0); // removes image? Maybe poster would help?
-                        }
-                    }
-                    lastSlideId = slide.id; // record this so we know what we're leaving next time
-                }
-            });
-        }
-        
-        $(document).ready(function() {
-            L.DomUtil.disableTextSelection();
-        });
     </script>
     <script src="javascripts/scripts.js"></script>
-    
 </body>
 </html>
