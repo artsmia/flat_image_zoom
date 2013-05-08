@@ -39,9 +39,7 @@ function slideInit(){
            }
            var videoId = lastSlideId + "_player";
            if ($('#' + videoId).length) {
-               $('.video-container video').each(function() {
-                   $(this).pause();
-               });
+               $(this).pause();
            }
            lastSlideId = slide.id; // record this so we know what we're leaving next time
        }
