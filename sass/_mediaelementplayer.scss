@@ -849,7 +849,60 @@
 }
 /* End: Postroll */
 
+$total-columns: 4;
+$column-width: 2em;
+$gutter-width: 2em;
+$grid-padding: $gutter-width;
+
+$container-style: magic;
+$container-width: 64em;
+
+$break: 12;
+
+$main-bg: #efebdf;
+$main-color: #222;
+$secondary-color: #9f9fa4;
 $tertiary-color: #46b66e;
+
+@font-face {
+    font-family: 'Walker';
+    src: font-url('walker-webfont.eot');
+    src: font-url('walker-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('walker-webfont.woff') format('woff'),
+         font-url('walker-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin rounded {
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    -ms-border-radius: 1px;
+    -o-border-radius: 1px;
+    border-radius: 1px;
+}
+
+@mixin hide-text {
+    text-indent: 300%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@mixin mobile-non-link {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+}
+
+@mixin image-2x($image, $width, $height) {
+    @media (min--moz-device-pixel-ratio: 1.3),
+           (-o-min-device-pixel-ratio: 2.6/2),
+           (-webkit-min-device-pixel-ratio: 1.3),
+           (min-device-pixel-ratio: 1.3),
+           (min-resolution: 1.3dppx) {
+        background-image: image-url($image);
+        background-size: $width $height;
+    }
+}
 
 .me-plugin {
     position: absolute;

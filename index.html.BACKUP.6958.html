@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>Info Lounge &mdash; Walker Art Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="stylesheets/screen.css" rel="stylesheet">
+    <script src="javascripts/modernizr.js"></script>
+</head>
+<body>
+    <div class="intro">
+        <video src="videos/intro.mp4" type="video/mp4" width="1920" height="1080" autoplay loop>
+    </div>
+    
+    <div id="slider" class="swipe">
+        <div class="swipe-wrap"></div>
+    </div>
+    
+    <ul class="tombstone">
+        <li class="title">Lorem Ipsum Dolor Sit</li>
+        <li class="artist">John Doe</li>
+        <li class="year">2013</li>
+    </ul>
+    
+    <div class="info-link">
+        <a href="">Info</a>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="" id="prev" onclick="window.mySwipe.prev(); return false;">Previous</a></li>
+            <li><a href="" id="next" onclick="window.mySwipe.next(); return false;">Next</a></li>
+        </ul>
+    </nav>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="javascripts/underscore-min.js"></script>
+    <script src="javascripts/backbone-min.js"></script>
+    <script src="javascripts/jquery.colorbox-min.js"></script>
+    <script src="javascripts/swipe.js"></script>
+    <script src="javascripts/leaflet-src.js"></script>
+    <script src="javascripts/zoom_swipe.js"></script>
+    <script src="javascripts/jquery.actual.min.js"></script>
+    <script src="javascripts/mediaelement.min.js"></script>
+    <script src="javascripts/flat_image_zoom.js"></script>
+    <script type="text/template" id="zoomer">
+<<<<<<< HEAD
+      <% if (type == "video"){%>
+        <div id="<%= id %>" class="zoomer video">
+            <div class="video-container">
+                <video  id="<%= player_id %>" poster="<%= video_poster %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
+            </div>
+            <article class="info">
+                <p><%= text %></p>
+            </article>
+            <ul class="hidden meta">
+              <li class="title"><%= title %></li>
+              <li class="artist"><%= artist %></li>
+              <li class="year"><%= year %></li>
+            </ul>
+        </div>
+      <% } %>
+      <% if (type == "zoomer"){%>
+        <div class="zoomer <%= zoomer_class %>">
+            <article class="info">
+                <p><%= text %></p>
+            </article>
+            <ul class="hidden meta">
+              <li class="title"><%= title %></li>
+              <li class="artist"><%= artist %></li>
+              <li class="year"><%= year %></li>
+            </ul>
+        </div>
+      <% } %>
+    </script>
+    
+    <script src="javascripts/scripts.js"></script>
+=======
+        <% if (type == "video"){%>
+            <div id="<%= id %>" class="zoomer video">
+                <div class="video-container">
+                    <video id="<%= player_id %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
+                </div>
+                <article class="info">
+                    <p><%= text %></p>
+                </article>
+                <ul class="hidden meta">
+                    <li class="title"><%= title %></li>
+                    <li class="artist"><%= artist %></li>
+                    <li class="year"><%= year %></li>
+                </ul>
+            </div>
+                <%
+                    //MediaElement(player_id);
+                %>
+        <% } %>
+        <% if (type == "zoomer"){%>
+            <div class="zoomer <%= zoomer_class %>">
+                <article class="info">
+                    <p><%= text %></p>
+                </article>
+                <ul class="hidden meta">
+                    <li class="title"><%= title %></li>
+                    <li class="artist"><%= artist %></li>
+                    <li class="year"><%= year %></li>
+                </ul>
+                <%
+                    $(document).ready(function() {
+                    
+                    });
+                %>
+            </div>
+        <% } %>
+    </script>
+    <script>
+        var lastSlideId = 'image-view-1',
+            slides = {};
+        
+        var zoomer_template = _.template($('#zoomer').html());
+            
+        $.getJSON('javascripts/test.json', function(data) {
+            slides = data.slides;
+            
+            for (variable in slides) {
+                var clss = "test_class" + variable;
+                slides[variable].zoomer_class = clss;
+                $(".swipe-wrap").append(zoomer_template(slides[variable]));
+                if(slides[variable].type == "zoomer"){
+                    Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
+                }
+            };
+            slideInIt();
+        });
+        
+        function slideInIt(){
+            window.mySwipe = new Swipe(document.getElementById('slider'), {
+                callback: function(index,slide) {
+                    //console.log(slide.id)
+                    if (Zoomer.zoomers[lastSlideId]) {
+                        Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+                    }
+                    var videoId = lastSlideId+"_player";
+                    if ($('#'+videoId).length) {
+                        var myPlayer = _V_(videoId);
+                        if (myPlayer) {
+                            myPlayer.pause();
+                            //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                        }
+                    }
+                    lastSlideId = slide.id; // record this so we know what we're leaving next time
+                }
+            });
+        }
+        
+        $(document).ready(function() {
+            L.DomUtil.disableTextSelection();
+        });
+    </script>
+    <script src="javascripts/scripts.js"></script>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+>>>>>>> 79952ac29d1c2a8d226ed892897dbcd4332216e5
+</body>
+</html>

@@ -14,6 +14,7 @@ body,
 .zoomer {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -36,31 +37,19 @@ a {
     text-decoration: none;
 }
 
-.hidden{
-  display:none;
+.hidden {
+    display: none;
 }
 
 .intro {
-    display: table;
+    display: none;
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000;
     z-index: 10001;
-
-    .intro-container {
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-    
-        h1 {
-            font-size: 400%;
-            line-height: 400%;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            word-spacing: 10px;
-        }
-    }
 }
 
 .swipe {
@@ -85,11 +74,6 @@ a {
     }
 }
 
-
-video {
-    height: auto;
-    width:100%;
-}
 .video {
     display: table;
     width: 80%;
@@ -99,6 +83,11 @@ video {
     .video-container {
         display: table-cell;
         vertical-align: middle;
+        
+        video {
+            width: 100%;
+            height: auto;
+        }
     }
 }
 
@@ -120,6 +109,7 @@ video {
 }
 
 .info {
+    -webkit-hyphens: auto;
     hyphens: auto;
     
     p {
@@ -128,6 +118,28 @@ video {
         &:first-child {
             text-indent: 0;
         }
+    }
+    
+    ul, ol {
+        margin: 44px 0;
+        
+        li {
+            margin: 0 44px 22px;
+        }
+    }
+    
+    ul {
+        list-style-type: disc;
+    }
+    
+    ol {
+        list-style-type: decimal;
+    }
+    
+    blockquote {
+        margin: 44px;
+        font-size: 25px;
+        line-height: 33px;
     }
 }
 
