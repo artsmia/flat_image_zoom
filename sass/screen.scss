@@ -4,6 +4,7 @@
 @import "leaflet";
 @import "colorbox";
 @import "mediaelementplayer";
+@import "scroller";
 
 * {
     @include box-sizing(border-box);
@@ -173,5 +174,26 @@ nav {
     
     .no-touch & {
         display: block;
+    }
+}
+
+.walker-scroller {
+    .scroller-bar {
+        background: transparent;
+        border-left: 0;
+        width: 3px;
+    }
+    
+    .scroller-track {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .scroller-handle {
+        background: #fff;
+        border: 0;
+        border-radius: 0;
+        height: 20px;
+        right: 0;
+        width: 3px;
     }
 }

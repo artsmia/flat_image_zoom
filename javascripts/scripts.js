@@ -22,11 +22,9 @@ function hideIntro() {
 
 function swap_info(index,slide){
   var $el = $(slide);
-  console.log();
-  //console.log(index);
-  //console.log(slide);
+  console.log($el.children('.slide-article').html());
   $('.tombstone').html($el.children('.meta').html());  
-  $('#myForm').html('test');
+  $('#myForm').html($el.children('.slide-article').html());
 }
 
 var zoomer_template = _.template($('#zoomer').html());
@@ -87,16 +85,11 @@ $(document).ready(function() {
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
-        artworkInfo = '<div class="article-wrapper" id="myForm"><article class="info">\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                           <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. <em>Praesent id metus massa, ut blandit odio.</em> Proin quis tortor orci. Etiam at risus et lorem ipsum.</p>\
-                           <p>Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p>\
-                       </article></div>';
+
         $.colorbox({
             transition: 'none',
             width: '60%',
-            initialWidth: '50%',
+            initialWidth: '60%',
             fadeOut: 250,
             opacity: 0.8,
             inline:true, 
@@ -104,9 +97,14 @@ $(document).ready(function() {
             onComplete: function() {
                 $('#cboxLoadedContent article').scroller({
                     customClass: "walker-scroller",
-                    trackMargin: 15,
-                    handleSize: 40
+                    trackMargin: 22,
+                    handleSize: 60
                 });
+                
+                if (!$('#cboxLoadedContent article').hasClass('scroller-active')) {
+                    $('#cboxLoadedContent .article-wrapper').addClass('locked');
+                    $('#cboxClose').addClass('no-scroll');
+                }
             }
         });
     });
