@@ -97,6 +97,9 @@ $(document).ready(function() {
                 if (!$('#cboxLoadedContent article').hasClass('scroller-active')) {
                     $('#cboxLoadedContent .article-wrapper').addClass('locked');
                 }
+            },
+            onClosed: function() {
+                $('.locked').removeClass('locked');
             }
         });
     });
