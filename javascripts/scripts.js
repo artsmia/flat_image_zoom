@@ -26,34 +26,29 @@ function swap_info(index,slide){
     $('#myForm').html($el.children('.slide-article').html());
 }
 
-
-
 var zoomer_template = _.template($('#zoomer').html());
 var lastSlideId = 'image-view-1';
 
 function slideInit(){
- window.mySwipe = new Swipe(document.getElementById('slider'), {
-     callback: function(index,slide) {
-         displayTombstone();
-         swap_info(index,slide);
-         if (Zoomer.zoomers[lastSlideId]) {
-             Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
-         }
-         var videoId = lastSlideId + "_player";
-         if ($('#' + videoId).length) {
-             var myPlayer = _V_(videoId);
-             if (myPlayer) {
-                 myPlayer.pause();
-                 //myPlayer.currentTime(0); // removes image? Maybe poster would help?
-             }
-         }
-         lastSlideId = slide.id; // record this so we know what we're leaving next time
-     }
- });
-  
- swap_info(1,".slide_index0");
-}   
+   window.mySwipe = new Swipe(document.getElementById('slider'), {
+       callback: function(index,slide) {
+           displayTombstone();
+           swap_info(index,slide);
+           if (Zoomer.zoomers[lastSlideId]) {
+               Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+           }
+           var videoId = lastSlideId + "_player";
+           if ($('#' + videoId).length) {
+               $('.video-container video').each(function() {
+                   $(this).pause();
+               });
+           }
+           lastSlideId = slide.id; // record this so we know what we're leaving next time
+       }
+   });
     
+   swap_info(1,".slide_index0");
+}
 
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
