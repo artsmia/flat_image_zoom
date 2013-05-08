@@ -31,25 +31,25 @@ var zoomer_template = _.template($('#zoomer').html());
 var lastSlideId = 'image-view-1';
 
 function slideInit(){
-   window.mySwipe = new Swipe(document.getElementById('slider'), {
-       callback: function(index,slide) {
-           displayTombstone();
-           swap_info(index,slide);
-           //console.log(slide.id)
-           if (Zoomer.zoomers[lastSlideId]) {
-               Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
-           }
-           var videoId = lastSlideId+"_player";
-           if ($('#'+videoId).length) {
-               var myPlayer = _V_(videoId);
-               if (myPlayer) {
-                   myPlayer.pause();
-                   //myPlayer.currentTime(0); // removes image? Maybe poster would help?
-               }
-           }
-           lastSlideId = slide.id; // record this so we know what we're leaving next time
-       }
-   });
+    window.mySwipe = new Swipe(document.getElementById('slider'), {
+        callback: function(index,slide) {
+            displayTombstone();
+            swap_info(index,slide);
+            //console.log(slide.id)
+            if (Zoomer.zoomers[lastSlideId]) {
+                Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+            }
+            var videoId = lastSlideId+"_player";
+            if ($('#'+videoId).length) {
+                var myPlayer = _V_(videoId);
+                if (myPlayer) {
+                    myPlayer.pause();
+                    //myPlayer.currentTime(0); // removes image? Maybe poster would help?
+                }
+            }
+            lastSlideId = slide.id; // record this so we know what we're leaving next time
+        }
+    });
 }
 
 $.getJSON('javascripts/test.json', function(data) {
@@ -74,6 +74,10 @@ $(document).ready(function() {
     $(document).on('click', function(event){
         displayTombstone();
         hideIntro();
+    });
+    
+    $('#colorbox').on('click', function(event) {
+        event.stopPropagation();
     });
     
     $('.info-link').on('click', function(event) {
