@@ -28,7 +28,7 @@ function swapInfo(index,slide){
     $('#myForm').html($el.children('.slide-article').html());
 }
 
-var zoomer_template = _.template($('#zoomer').html());
+var zoomerTemplate = _.template($('#zoomer').html());
 var lastSlideId = 'image-view-1';
 
 function slideInit(){
@@ -46,8 +46,7 @@ function slideInit(){
            lastSlideId = slide.id; // record this so we know what we're leaving next time
        }
    });
-    
-   swapInfo(1,".slide_index0");
+   swapInfo(1, '.slide_index0');
 }
 
 $.getJSON('javascripts/test.json', function(data) {
@@ -55,7 +54,7 @@ $.getJSON('javascripts/test.json', function(data) {
     for (variable in slides) {
         var clss = "slide_index" + variable;
         slides[variable].zoomer_class = clss;
-        $('.swipe-wrap').append(zoomer_template(slides[variable]));
+        $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
         if (slides[variable].type == "zoomer") {
             Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
         }
