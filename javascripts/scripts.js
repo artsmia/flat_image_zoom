@@ -1,4 +1,5 @@
 var artworkInfo = '',
+    slideHasVideo = false,
     tombstoneTimeout = '',
     introTimeout = '';
     
@@ -6,10 +7,15 @@ mejs.MediaFeatures.hasTouch = false;
 
 function displayTombstone() {
     clearTimeout(tombstoneTimeout);
+    if (slideHasVideo === true) {
+        $('.tombstone').addClass('on-video-slide');
+    } else {
+        $('.tombstone').removeClass('on-video-slide');
+    }
     $('.tombstone').stop(true, true).delay(250).fadeIn(150);
     tombstoneTimeout = setTimeout(function() {
         $('.tombstone').stop(true, true).fadeOut(250);
-    }, 4000);
+    }, 5000);
 }
 
 function hideIntro() {
@@ -30,21 +36,26 @@ var zoomerTemplate = _.template($('#zoomer').html());
 var lastSlideId = 'image-view-1';
 
 function slideInit(){
-   window.mySwipe = new Swipe(document.getElementById('slider'), {
-       callback: function(index,slide) {
-           displayTombstone();
-           swapInfo(index,slide);
-           if (Zoomer.zoomers[lastSlideId]) {
-               Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
-           }
-           var videoId = 'player' + lastSlideId;
-           if ($('#' + videoId).length) {
-               $(this).pause();
-           }
-           lastSlideId = slide.id; // record this so we know what we're leaving next time
-       }
-   });
-   swapInfo(1, '.slide-index-0');
+    window.mySwipe = new Swipe(document.getElementById('slider'), {
+        callback: function(index,slide) {
+            if ($(slide).hasClass('video')) {
+                slideHasVideo = true;
+            } else {
+                slideHasVideo = false;
+            }
+            displayTombstone();
+            swapInfo(index,slide);
+            if (Zoomer.zoomers[lastSlideId]) {
+                Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
+            }
+            var videoId = 'player' + lastSlideId;
+            if ($('#' + videoId).length) {
+                $(this).pause();
+            }
+            lastSlideId = slide.id; // record this so we know what we're leaving next time
+        }
+    });
+    swapInfo(1, '.slide-index-0');
 }
 
 $.getJSON('javascripts/test.json', function(data) {
@@ -74,6 +85,10 @@ $(document).ready(function() {
     $(document).on('click', function(event){
         displayTombstone();
         hideIntro();
+    });
+    
+    $('nav a').on('click', function(event) {
+        event.stopPropagation();
     });
     
     $('#colorbox').on('click', function(event) {

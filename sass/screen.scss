@@ -157,10 +157,15 @@ a {
     position: fixed;
     bottom: 0;
     left: 0;
-    max-width: 960px;
+    max-width: 640px;
     padding: 20px 40px 25px 30px;
     z-index: 9999;
     background: rgba(0, 0, 0, 0.5);
+    
+    &.on-video-slide {
+        padding-bottom: 22px;
+        bottom: 3px;
+    }
     
     .title {
         font-family: 'Fox Italic';
