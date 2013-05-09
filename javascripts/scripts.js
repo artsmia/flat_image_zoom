@@ -29,7 +29,7 @@ function hideIntro() {
 function swapInfo(index,slide){
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());  
-    $('#info').html('<article class="info">' + $el.children('.slide-article').html() + '</article>');
+    $('#info').html($el.children('.slide-article').html());
 }
 
 var zoomerTemplate = _.template($('#zoomer').html());
