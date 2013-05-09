@@ -3,6 +3,8 @@ var artworkInfo = '',
     tombstoneDuration = 4000,
     introTimeout = '',
     introDuration = 90000;
+    
+mejs.MediaFeatures.hasTouch = false;
 
 function displayTombstone() {
     clearTimeout(tombstoneTimeout);
@@ -20,7 +22,7 @@ function hideIntro() {
     }, introDuration);
 }
 
-function swap_info(index,slide){
+function swapInfo(index,slide){
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());  
     $('#myForm').html($el.children('.slide-article').html());
@@ -33,7 +35,7 @@ function slideInit(){
    window.mySwipe = new Swipe(document.getElementById('slider'), {
        callback: function(index,slide) {
            displayTombstone();
-           swap_info(index,slide);
+           swapInfo(index,slide);
            if (Zoomer.zoomers[lastSlideId]) {
                Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
            }
@@ -45,7 +47,7 @@ function slideInit(){
        }
    });
     
-   swap_info(1,".slide_index0");
+   swapInfo(1,".slide_index0");
 }
 
 $.getJSON('javascripts/test.json', function(data) {
@@ -53,7 +55,7 @@ $.getJSON('javascripts/test.json', function(data) {
     for (variable in slides) {
         var clss = "slide_index" + variable;
         slides[variable].zoomer_class = clss;
-        $(".swipe-wrap").append(zoomer_template(slides[variable]));
+        $('.swipe-wrap').append(zoomer_template(slides[variable]));
         if (slides[variable].type == "zoomer") {
             Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
         }
