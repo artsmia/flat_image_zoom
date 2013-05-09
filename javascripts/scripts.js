@@ -1,8 +1,6 @@
 var artworkInfo = '',
     tombstoneTimeout = '',
-    tombstoneDuration = 4000,
-    introTimeout = '',
-    introDuration = 90000;
+    introTimeout = '';
     
 mejs.MediaFeatures.hasTouch = false;
 
@@ -11,7 +9,7 @@ function displayTombstone() {
     $('.tombstone').stop(true, true).delay(250).fadeIn(150);
     tombstoneTimeout = setTimeout(function() {
         $('.tombstone').stop(true, true).fadeOut(250);
-    }, tombstoneDuration);
+    }, 4000);
 }
 
 function hideIntro() {
@@ -19,13 +17,13 @@ function hideIntro() {
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
         $('.intro').show();
-    }, introDuration);
+    }, 90000);
 }
 
 function swapInfo(index,slide){
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());  
-    $('#myForm').html($el.children('.slide-article').html());
+    $('#info').html($el.children('.slide-article').html());
 }
 
 var zoomerTemplate = _.template($('#zoomer').html());
@@ -39,7 +37,7 @@ function slideInit(){
            if (Zoomer.zoomers[lastSlideId]) {
                Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
            }
-           var videoId = lastSlideId + '_player';
+           var videoId = 'player' + lastSlideId;
            if ($('#' + videoId).length) {
                $(this).pause();
            }
@@ -92,8 +90,8 @@ $(document).ready(function() {
             initialWidth: '60%',
             fadeOut: 250,
             opacity: 0.8,
-            inline:true, 
-            href:'#myForm',
+            inline: true, 
+            href: '#info',
             onComplete: function() {
                 $('#cboxLoadedContent article').scroller({
                     customClass: 'walker-scroller',
@@ -101,7 +99,7 @@ $(document).ready(function() {
                     handleSize: 60
                 });
                 if (!$('#cboxLoadedContent article').hasClass('scroller-active')) {
-                    $('#cboxLoadedContent .article-wrapper').addClass('locked');
+                    $('#cboxLoadedContent .info-wrapper').addClass('locked');
                 }
             },
             onClosed: function() {
