@@ -29,7 +29,7 @@ function hideIntro() {
 function swapInfo(index,slide){
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());  
-    $('#info').html($el.children('.slide-article').html());
+    $('#info').html('<article class="info">' + $el.children('.slide-article').html() + '</article>');
 }
 
 var zoomerTemplate = _.template($('#zoomer').html());
@@ -65,7 +65,7 @@ $.getJSON('javascripts/test.json', function(data) {
         slides[variable].zoomer_class = clss;
         $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
         if (slides[variable].type == 'zoomer') {
-            Zoomer.zoom_image_by_class({'container':slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
+            Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
         }
         $('.video-container video').mediaelementplayer({
             videoWidth: 1920,
