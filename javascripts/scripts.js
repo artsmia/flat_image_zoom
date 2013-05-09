@@ -39,24 +39,24 @@ function slideInit(){
            if (Zoomer.zoomers[lastSlideId]) {
                Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
            }
-           var videoId = lastSlideId + "_player";
+           var videoId = lastSlideId + '_player';
            if ($('#' + videoId).length) {
                $(this).pause();
            }
            lastSlideId = slide.id; // record this so we know what we're leaving next time
        }
    });
-   swapInfo(1, '.slide_index0');
+   swapInfo(1, '.slide-index-0');
 }
 
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
     for (variable in slides) {
-        var clss = "slide_index" + variable;
+        var clss = 'slide-index-' + variable;
         slides[variable].zoomer_class = clss;
         $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
-        if (slides[variable].type == "zoomer") {
-            Zoomer.zoom_image_by_class({"container":slides[variable].zoomer_class, "tileURL": slides[variable].zoomer_url, "imageWidth": slides[variable].zoomer_width, "imageHeight": slides[variable].zoomer_height});
+        if (slides[variable].type == 'zoomer') {
+            Zoomer.zoom_image_by_class({'container':slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
         }
         $('.video-container video').mediaelementplayer({
             videoWidth: 1920,
@@ -93,10 +93,10 @@ $(document).ready(function() {
             fadeOut: 250,
             opacity: 0.8,
             inline:true, 
-            href:"#myForm",
+            href:'#myForm',
             onComplete: function() {
                 $('#cboxLoadedContent article').scroller({
-                    customClass: "walker-scroller",
+                    customClass: 'walker-scroller',
                     trackMargin: 8,
                     handleSize: 60
                 });
