@@ -82,7 +82,7 @@ $(document).ready(function() {
     
     displayTombstone();
     
-    $(document).on('click', function(event){
+    $(document).on('mousedown', function(event){
         displayTombstone();
         hideIntro();
     });
