@@ -83,7 +83,6 @@ function slideInit() {
     
 }
 
-
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
     for (variable in slides) {
