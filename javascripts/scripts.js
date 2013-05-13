@@ -28,6 +28,7 @@ function hideIntro() {
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
         $('.intro').show();
+        mySwipe.slide(1, 0);
     }, 90000);
 }
 
