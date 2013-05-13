@@ -1,7 +1,9 @@
 var artworkInfo = '',
     slideHasVideo = false,
     tombstoneTimeout = '',
-    introTimeout = '';
+    introTimeout = '',
+    zoomerTemplate = _.template($('#zoomer').html()),
+    lastSlideId = 'image-view-1';
     
 mejs.MediaFeatures.hasTouch = false;
 
@@ -31,9 +33,6 @@ function swapInfo(index,slide){
     $('.tombstone').html($el.children('.meta').html());  
     $('#info').html($el.children('.slide-article').html());
 }
-
-var zoomerTemplate = _.template($('#zoomer').html());
-var lastSlideId = 'image-view-1';
 
 function slideInit(){
     window.mySwipe = new Swipe(document.getElementById('slider'), {
