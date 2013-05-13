@@ -53,6 +53,7 @@
         left: 0;
     
         &.mejs-overlay-play {
+            
             .mejs-overlay-button {
                 position: absolute;
                 top: 50%;
@@ -106,4 +107,10 @@
             }
         }
     }
+}
+
+.mejs-overlay-play,
+.mejs-overlay-button {
+    -webkit-transform: translate3d(0,0,0) !important;
+    -webkit-transform: translateZ(0) !important;
 }
