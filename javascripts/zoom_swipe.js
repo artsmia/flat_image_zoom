@@ -8,7 +8,7 @@
 
 var Zoomer = Zoomer || {};
 Zoomer.guidCounter = 0; // use this to generate unique IDs for containers
-
+var Video = 
 Zoomer.zoom_image_by_class = function (zoomoptions) {
     Zoomer.loadExtraTiles = window.location.href.indexOf('longSwipe') !== -1 ? 2 : 6; // load full zoom extents 
     var baseContainer = zoomoptions['container'];
@@ -383,6 +383,9 @@ Swipe.prototype.onTouchEnd = function (e) {
 Swipe.prototype.onTransitionEnd = function (e) {
     this.previousSlideId = this.slides[this.index].id;
     if (this._getElemIndex(e.target) == this.index) { // only call transition end on the main slide item
+        $('.video-container video')[0].pause();
+        //the function works it just needs to be called when you transition away from a video slide instead of transition to a video slide
+        if ($(this.slides[this.index]).hasClass('video')) reload_video(this.slides[this.index]);
         
         if (this.index == 0) this.slide(this.slides.length-2, 0)
         if (this.index == this.slides.length-1) this.slide(1, 0)
@@ -393,6 +396,15 @@ Swipe.prototype.onTransitionEnd = function (e) {
     }
 };
 
+
+function reload_video (el){
+  $el = $(el);
+  $el.find('.mejs-poster').css("display", "block");
+  $el.find('.mejs-overlay-button').css("display", "block");
+  $el.find('.mejs-overlay-play').css("display", "block");
+  $('.video-container video')[0].setCurrentTime(0);
+}
+
 Swipe.prototype.getPos = function() {
     // return current index position with awareness it may be called on "dummy slide"
     var index = this.index;
@@ -400,4 +412,5 @@ Swipe.prototype.getPos = function() {
     if (this.index == this.slides.length-1) index = 1;
     return index-1;
 };
+7
 
