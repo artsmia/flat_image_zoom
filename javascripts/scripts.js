@@ -3,6 +3,7 @@ var artworkInfo = '',
     variable = '',
     clss = '',
     slideHasVideo = false,
+    playing = false,
     tombstoneTimeout = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
@@ -27,9 +28,9 @@ function hideIntro() {
     clearTimeout(introTimeout);
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
-        $('.intro').show();
-        mySwipe.slide(1, 0);
-    }, 90000);
+          $('.intro').show();
+          mySwipe.slide(1, 0);
+    }, 9000);
 }
 
 function swapInfo(index, slide) {
@@ -68,6 +69,18 @@ function slideInit() {
         }
     });
     swapInfo(1, '.slide-index-0');
+    
+    
+    $('.video-container video').on('playing',function(e) {
+      clearTimeout(introTimeout);
+    });
+    $('.video-container video').on('pause',function(e) {
+      hideIntro();
+    });
+    $('.video-container video').on('ended',function(e) {
+      hideIntro();
+    });
+    
 }
 
 
