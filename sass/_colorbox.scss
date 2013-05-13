@@ -57,6 +57,16 @@
             background: url(../images/close.png) center center no-repeat;
             @include hide-text;
             outline: 0;
+            
+            &:active {
+                opacity: 0.5;
+            }
         }
     }
+}
+
+.mejs-overlay-play,
+.mejs-overlay-button {
+    -webkit-transform: translate3d(0,0,0) !important;
+    -webkit-transform: translateZ(0) !important;
 }

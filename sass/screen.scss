@@ -17,7 +17,7 @@
 }
 
 .touch * {
-    cursor: url(../images/cursor.png), none !important; 
+    cursor: url(../images/cursor.png), none !important;
 }
 
 html,
@@ -26,6 +26,13 @@ body,
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+
+html {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -119,6 +126,10 @@ a {
         height: 100%;
         background: url(../images/info.png) center center no-repeat;
         @include hide-text;
+        
+        &:active {
+            opacity: 0.5;
+        }
     }
 }
 
