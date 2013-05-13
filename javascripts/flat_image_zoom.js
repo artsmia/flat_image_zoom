@@ -4,6 +4,8 @@
 /*jslint nomen: true, sloppy: true */
 /*global $: false, L: false, console: false, clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false */
 
+// Zoomer.zoom_image({"container":"image-view-2", "tileURL": "https://stewart.walkerart.org/zoomtest/wac_786/{z}_{x}_{y}.jpg", "imageWidth": 4000, "imageHeight": 3187});
+
 var Zoomer = Zoomer || {};
 Zoomer._realTileSize = 512; // static, permanent
 Zoomer.zoomers = [];
@@ -30,7 +32,6 @@ Zoomer.Map = L.Map.extend({
                 $('#' + this._container.id).actual('width'),
                 $('#' + this._container.id).actual('height')
             );
-
             this._sizeChanged = false;
         }
         return this._size.clone();
@@ -47,11 +48,15 @@ Zoomer.Map = L.Map.extend({
             max = this.getMaxZoom(),
             crs = this.options.crs,
             nextHigherZoom = (zoom <= -1) ? 0 : Math.ceil(zoom);
+        if (nextHigherZoom > max) { nextHigherZoom = max; }
         zoom = Math.max(min, Math.min(max, zoom));
         if (this._zoomer && this._zoomer.tiles) {
             nextHigherZoom = (this._zoomer.noTiles && min === max) ? 0 : nextHigherZoom;
             this._zoomer.tileLayerScale = crs.scale(zoom) / crs.scale(nextHigherZoom);
         }
+        // Fallback to scaling the tiles if no layer transform available
+        var useScale = L.DomUtil.TRANSFORM ? 1 : this._zoomer.tileLayerScale;
+        this._zoomer.tiles.options.tileSize = useScale*this._zoomer.currentMapTileSize;
         return zoom;
     },
 
@@ -245,18 +250,25 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
 
 // function to get img size across browsers (IE 8 doesn't have naturalHeight/Width)
 Zoomer._getNatural = function (DOMelement) {
+    if (DOMelement.naturalWidth) {
+        return {width: DOMelement.naturalWidth, height: DOMelement.naturalHeight};
+    }
     var img = new Image();
     img.src = DOMelement.src;
     return {width: img.width, height: img.height};
 };
+
 // we call this on every tile to handle non-square tiles at the edges of our "maps".
 Zoomer.scaleNonSquareTile = function (data) {
     var map = data.target._map,
         natural = Zoomer._getNatural(data.tile),
         inWidth = natural.width,
-        inHeight = natural.height;
-    data.tile.style.height = (inHeight + Zoomer.tilePad) + 'px';
-    data.tile.style.width = (inWidth + Zoomer.tilePad) + 'px';
+        inHeight = natural.height,
+        useScale = L.DomUtil.TRANSFORM ? 1 : map._zoomer.tileLayerScale;
+    // Fallback to scaling the tiles if no layer transform available
+    data.tile.style.height = (useScale * (inHeight + Zoomer.tilePad)) + 'px';
+    data.tile.style.width = (useScale * (inWidth + Zoomer.tilePad)) + 'px';
+    
     if (inHeight < map._zoomer.currentMapTileSize) {
         data.tile.style.marginBottom = Math.ceil((map._zoomer.currentMapTileSize - inHeight) + Zoomer.tilePad) + 'px';
     } else {
@@ -395,8 +407,8 @@ Zoomer.setupMap = function (zoomer) {
 
 Zoomer.createTiles = function (zoomer) {
     var tiles = new Zoomer.TileLayer(zoomer.tileURL, {
-        subdomains: ['','0','1','2'],
         noWrap: true,
+        subdomains: ['','0','1','2'],
         continuousWorld: false,
         maxZoom: zoomer.map.options.maxZoom,
         minZoom: zoomer.map.options.minZoom,
@@ -459,7 +471,7 @@ Zoomer.windowResized = function () {
     for (zoomerName in Zoomer.zoomers) {
         if (Zoomer.zoomers.hasOwnProperty(zoomerName)) {
             zoomer = Zoomer.zoomers[zoomerName];
-            Zoomer.zoom_image(zoomer.containerName, zoomer.tileURL, zoomer.imageWidth, zoomer.imageHeight);
+            Zoomer.zoom_image({"container":zoomer.containerName, "tileURL":zoomer.tileURL, "imageWidth":zoomer.imageWidth, "imageHeight":zoomer.imageHeight});
         }
     }
 };
