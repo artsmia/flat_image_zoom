@@ -82,7 +82,6 @@ $.getJSON('javascripts/test.json', function(data) {
 
 $(document).ready(function() {
 
-
     showTombstone();
 
     if (Modernizr.touch) {
