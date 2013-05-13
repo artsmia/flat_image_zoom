@@ -8,12 +8,6 @@
 
 * {
     @include box-sizing(border-box);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .touch * {
@@ -48,6 +42,12 @@ body {
 em {
     font-family: 'Fox Italic';
     font-style: italic;
+}
+
+strong {
+    font-family: Futura;
+    font-weight: bold;
+    font-size: 110%;
 }
 
 a {

@@ -12,6 +12,13 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Futura';
+    src: url('../fonts/futura-webfont.svg#futurtdemro1regular') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
 @mixin hide-text {
     text-indent: 300%;
     white-space: nowrap;
