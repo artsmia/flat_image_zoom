@@ -84,6 +84,7 @@ $(document).ready(function() {
     
     if (Modernizr.touch) {
         var interaction = 'touchstart';
+        $('body').attr('oncontextmenu', 'return false');
     } else {
         var interaction = 'mousedown';
     }
