@@ -75,7 +75,7 @@ $.getJSON('javascripts/test.json', function(data) {
             alwaysShowControls: true
         });
     };
-    slideInit();
+    setTimeout(slideInit,500); // don't initialize swipe until the zoomers are loaded
 });
 
 $(document).ready(function() {
