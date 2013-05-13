@@ -40,6 +40,7 @@ L.Draggable = L.Draggable.extend({
             // NS - actually, swipe can have the start: we ignore the move if we need to.
             L.DomEvent.preventDefault(e);
             L.DomEvent.stopPropagation(e);
+            console.log('leaflet dropped event: '+map._zoom +' '+ map.getMinZoom());
         }
         // WAC_END 
 
@@ -141,6 +142,12 @@ L.Draggable = L.Draggable.extend({
 });
 
 Swipe.prototype.handleEvent = function(e) {
+    console.log(this.index +' '+ this.slides.length);
+    if (e.type.indexOf('ransition')===-1 && (this.index===0 || this.index === this.slides.length)) {
+        // this a dummy slide about to disappear: stop all events
+        e.stopPropagation();
+        return;
+    }
     switch (e.type) {
       case 'touchstart': this.onTouchStart(e); break;
       case 'touchmove': this.onTouchMove(e); break;
