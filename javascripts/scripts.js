@@ -70,7 +70,6 @@ function slideInit() {
     swapInfo(1, '.slide-index-0');
 }
 
-
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
     for (variable in slides) {
