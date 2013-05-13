@@ -82,10 +82,17 @@ $(document).ready(function() {
     
     displayTombstone();
     
-    $(document).on('mousedown', function(event){
-        displayTombstone();
-        hideIntro();
-    });
+    if (Modernizr.touch) {
+        $(document).on('touchstart', function(event){
+            displayTombstone();
+            hideIntro();
+        });
+    } else {
+        $(document).on('mousedown', function(event){
+            displayTombstone();
+            hideIntro();
+        });
+    }
     
     $('nav a').on('click', function(event) {
         event.stopPropagation();
