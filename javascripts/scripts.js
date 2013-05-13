@@ -73,11 +73,9 @@ function slideInit() {
     
     $('.video-container video').on('playing',function(e) {
       clearTimeout(introTimeout);
-    });
-    $('.video-container video').on('pause',function(e) {
+    }).on('pause',function(e) {
       hideIntro();
-    });
-    $('.video-container video').on('ended',function(e) {
+    }).on('ended',function(e) {
       hideIntro();
     });
     
