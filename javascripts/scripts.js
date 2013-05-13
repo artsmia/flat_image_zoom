@@ -7,7 +7,7 @@ var artworkInfo = '',
     
 mejs.MediaFeatures.hasTouch = false;
 
-function displayTombstone() {
+function showTombstone() {
     clearTimeout(tombstoneTimeout);
     if (slideHasVideo === true) {
         $('.tombstone').addClass('on-video-slide');
@@ -42,7 +42,7 @@ function slideInit(){
             } else {
                 slideHasVideo = false;
             }
-            displayTombstone();
+            showTombstone();
             swapInfo(index,slide);
             if (Zoomer.zoomers[lastSlideId]) {
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
@@ -79,7 +79,7 @@ $.getJSON('javascripts/test.json', function(data) {
 
 $(document).ready(function() {
     
-    displayTombstone();
+    showTombstone();
     
     if (Modernizr.touch) {
         var interaction = 'touchstart';
@@ -89,7 +89,7 @@ $(document).ready(function() {
     }
     
     $(document).on(interaction, function(event){
-        displayTombstone();
+        showTombstone();
         hideIntro();
     });
     
