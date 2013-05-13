@@ -1,10 +1,13 @@
 var artworkInfo = '',
+    slides = '',
+    variable = '',
+    clss = '',
     slideHasVideo = false,
     tombstoneTimeout = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
     lastSlideId = 'image-view-1';
-    
+
 mejs.MediaFeatures.hasTouch = false;
 
 function showTombstone() {
@@ -28,22 +31,22 @@ function hideIntro() {
     }, 90000);
 }
 
-function swapInfo(index,slide){
+function swapInfo(index, slide) {
     var $el = $(slide);
-    $('.tombstone').html($el.children('.meta').html());  
+    $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
 }
 
-function slideInit(){
+function slideInit() {
     window.mySwipe = new Swipe(document.getElementById('slider'), {
-        callback: function(index,slide) {
+        callback: function(index, slide) {
             if ($(slide).hasClass('video')) {
                 slideHasVideo = true;
             } else {
                 slideHasVideo = false;
             }
             showTombstone();
-            swapInfo(index,slide);
+            swapInfo(index, slide);
             if (Zoomer.zoomers[lastSlideId]) {
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
             }
@@ -60,10 +63,10 @@ function slideInit(){
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
     for (variable in slides) {
-        var clss = 'slide-index-' + variable;
+        clss = 'slide-index-' + variable;
         slides[variable].zoomer_class = clss;
         $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
-        if (slides[variable].type == 'zoomer') {
+        if (slides[variable].type === 'zoomer') {
             Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
         }
         $('.video-container video').mediaelementplayer({
@@ -74,33 +77,34 @@ $.getJSON('javascripts/test.json', function(data) {
             alwaysShowControls: true
         });
     };
-    setTimeout(slideInit,500); // don't initialize swipe until the zoomers are loaded
+    setTimeout(slideInit, 500); // don't initialize swipe until the zoomers are loaded
 });
 
 $(document).ready(function() {
-    
+
     showTombstone();
-    
+
     if (Modernizr.touch) {
-        var interaction = 'touchstart';
+        $(document).on('touchstart', function() {
+            showTombstone();
+            hideIntro();
+        });
         $('body').attr('oncontextmenu', 'return false');
     } else {
-        var interaction = 'mousedown';
+        $(document).on('mousedown', function() {
+            showTombstone();
+            hideIntro();
+        });
     }
-    
-    $(document).on(interaction, function(event){
-        showTombstone();
-        hideIntro();
-    });
-    
+
     $('nav a').on('click', function(event) {
         event.stopPropagation();
     });
-    
+
     $('#colorbox').on('click', function(event) {
         event.stopPropagation();
     });
-    
+
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
@@ -111,7 +115,7 @@ $(document).ready(function() {
             initialWidth: '60%',
             fadeOut: 250,
             opacity: 0.8,
-            inline: true, 
+            inline: true,
             href: '#info',
             onComplete: function() {
                 $('#cboxLoadedContent article').scroller({
@@ -128,5 +132,5 @@ $(document).ready(function() {
             }
         });
     });
-    
+
 });
