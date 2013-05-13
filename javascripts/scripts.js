@@ -83,16 +83,15 @@ $(document).ready(function() {
     displayTombstone();
     
     if (Modernizr.touch) {
-        $(document).on('touchstart', function(event){
-            displayTombstone();
-            hideIntro();
-        });
+        var interaction = 'touchstart';
     } else {
-        $(document).on('mousedown', function(event){
-            displayTombstone();
-            hideIntro();
-        });
+        var interaction = 'mousedown';
     }
+    
+    $(document).on(interaction, function(event){
+        displayTombstone();
+        hideIntro();
+    });
     
     $('nav a').on('click', function(event) {
         event.stopPropagation();
