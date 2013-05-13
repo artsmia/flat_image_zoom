@@ -10,13 +10,9 @@ var Zoomer = Zoomer || {};
 Zoomer.guidCounter = 0; // use this to generate unique IDs for containers
 
 Zoomer.zoom_image_by_class = function (zoomoptions) {
-    var containerIn = zoomoptions['container'], 
-        tileURLIn = zoomoptions['tileURL'],
-        imageWidthIn = zoomoptions['imageWidth'],
-        imageHeightIn = zoomoptions['imageHeight'];
     Zoomer.loadExtraTiles = window.location.href.indexOf('longSwipe') !== -1 ? 2 : 6; // load full zoom extents 
-    var baseContainer = containerIn;
-    $('.' + containerIn).each(function() {
+    var baseContainer = zoomoptions['container'];
+    $('.' + zoomoptions['container']).each(function() {
         var containerId = baseContainer + Zoomer.guidCounter++;
         $(this).attr('id', containerId);
         var savedHtml = $(this).innerHTML;
@@ -41,6 +37,7 @@ L.Draggable = L.Draggable.extend({
         var map = Zoomer.getParentMapForElement(e.target);
         if (!L.Browser.touch || typeof Swipe !== 'function' || map._zoom > map.getMinZoom()) {
             // this is our event, we're going to drag. Don't pass to swipe library.
+            // NS - actually, swipe can have the start: we ignore the move if we need to.
             L.DomEvent.preventDefault(e);
             L.DomEvent.stopPropagation(e);
         }
@@ -96,18 +93,21 @@ L.Draggable = L.Draggable.extend({
 
         // WAC_START 
         var map = null;
-        if (e.target._layer) {
-            map = e.target._layer._map;
-        } else if (Zoomer.zoomers[e.target.id]) {
-            map = Zoomer.zoomers[e.target.id].map;
+        
+        if (e.target) {
+            if ( typeof e.target._layer !== "undefined") {
+                map = e.target._layer._map;
+            } else if (Zoomer.zoomers[e.target.id]) {
+                map = Zoomer.zoomers[e.target.id].map;
+            }
         }
         if (!L.Browser.touch || typeof Swipe !== 'function') {
             L.DomEvent.preventDefault(e);
         }
-        if (this._verticalPan === undefined) {
-            this._verticalPan = !!(this._verticalPan || Math.abs(diffVec.x) < Math.abs(diffVec.y));
+        if (map && this._verticalPan === undefined) {
+            this._verticalPan = !!(this._verticalPan || ((map.isAtEastEdge() && map.isAtWestEdge()) && Math.abs(diffVec.x) < Math.abs(diffVec.y)));
         }
-        if (!map || (diffVec.x > 0 && map.isAtEastEdge()) || (diffVec.x < 0 && map.isAtWestEdge())) {
+        if (L.Browser.touch && (!map || (diffVec.x > 0 && map.isAtEastEdge()) || (diffVec.x < 0 && map.isAtWestEdge()))) {
             // they are at the edge or otherwise not panning leaflet any more. Skip the pan animation
             if (map && this._verticalPan && (map._zoom > map.getMinZoom())) {
                 // vertical panning is allowed on vertical images if they're zoomed at all.
@@ -156,15 +156,32 @@ Swipe.prototype.handleEvent = function(e) {
     //e.stopPropagation();
 };
 
+// custom current slide ID
+Swipe.prototype.getCurrentSlideId = function () {
+    if (!this.slides) {
+        return this.element.children[0].id;
+    }
+    return this.slides[this.index].id;
+}
+Swipe.prototype.getPreviousSlideId = function () {
+    return this.previousSlideId;
+}
 // custom START: gutter extension
 Swipe.prototype.setup = function() {
     // WAC CUSTOM START
+    if (this.element.children.length < 2) {
+        this.container.style.visibility = 'visible';
+        return;
+    }
     if (!this.slides) {
         this.element.appendChild(this.element.children[0].cloneNode(true))
         this.element.insertBefore(this.element.children[this.element.children.length-2].cloneNode(true), this.element.firstChild);
         this.index++;
     }
     this.gutter = 10;
+    this.currentSlideId = this.element.children[0].id;
+    this.previousSlideId = this.element.children[0].id;
+    
     this.slideDuration = window.location.href.indexOf('longSwipe') !== -1 ? 500 : 250; // 250 if small, 500 if big
     // WAC CUSTOM END
 
@@ -244,7 +261,7 @@ Swipe.prototype.onTouchMove = function(e) {
     }
 
     // custom START
-    if (e.target._layer) {
+    if (e.target && typeof e.target._layer !== "undefined") {
         var map = e.target._layer._map;
         map._getEdgeDeltas(); // load these once
         if (map && !((_this.deltaX > 0 && map.isAtEastEdge()) || (_this.deltaX < 0 && map.isAtWestEdge()))) {
@@ -286,6 +303,7 @@ Swipe.prototype.onTouchMove = function(e) {
     }
 };
 
+// use slideDuration to allow for bigger screen interaction
 Swipe.prototype.onTouchEnd = function (e) {
 
     var _this = this;
@@ -329,12 +347,22 @@ Swipe.prototype.onTouchEnd = function (e) {
 Swipe.prototype.onTransitionEnd = function (e) {
     if (this._getElemIndex(e.target) == this.index) { // only call transition end on the main slide item
         
+        this.previousSlideId = this.slides[this.index].id;
+        
         if (this.index == 0) this.slide(this.slides.length-2, 0)
         if (this.index == this.slides.length-1) this.slide(1, 0)
         if (this.delay) this.begin();
 
         this.transitionEnd(this.index, this.slides[this.index]);
-
+        this.currentSlideId = this.slides[this.index].id;
     }
+};
+
+Swipe.prototype.getPos = function() {
+    // return current index position with awareness it may be called on "dummy slide"
+    var index = this.index;
+    if (this.index == 0) index = this.slides.length-2;
+    if (this.index == this.slides.length-1) index = 1;
+    return index-1;
 };
 
