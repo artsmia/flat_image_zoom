@@ -8,7 +8,7 @@
 
 var Zoomer = Zoomer || {};
 Zoomer.guidCounter = 0; // use this to generate unique IDs for containers
-
+var Video = 
 Zoomer.zoom_image_by_class = function (zoomoptions) {
     var containerIn = zoomoptions['container'], 
         tileURLIn = zoomoptions['tileURL'],
@@ -327,8 +327,10 @@ Swipe.prototype.onTouchEnd = function (e) {
 
 
 Swipe.prototype.onTransitionEnd = function (e) {
+    
     if (this._getElemIndex(e.target) == this.index) { // only call transition end on the main slide item
-        
+        $('.video-container video')[0].pause();
+        if ($(this.slides[this.index]).hasClass('video')) reload_video(this.slides[this.index]);
         if (this.index == 0) this.slide(this.slides.length-2, 0)
         if (this.index == this.slides.length-1) this.slide(1, 0)
         if (this.delay) this.begin();
@@ -337,4 +339,12 @@ Swipe.prototype.onTransitionEnd = function (e) {
 
     }
 };
+
+function reload_video (el){
+  //console.log(el);
+  //$el = $(el);
+  //console.log($el.find('.mjs-poster'))
+  //$el.find('.mejs-overlay-play').css("display", "block");
+  //$('.video-container video')[0].setCurrentTime(0);
+}
 

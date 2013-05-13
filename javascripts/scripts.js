@@ -43,7 +43,7 @@ function slideInit(){
             } else {
                 slideHasVideo = false;
             }
-            displayTombstone();
+            //displayTombstone();
             swapInfo(index,slide);
             if (Zoomer.zoomers[lastSlideId]) {
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
@@ -80,10 +80,10 @@ $.getJSON('javascripts/test.json', function(data) {
 
 $(document).ready(function() {
     
-    displayTombstone();
+    //displayTombstone();
     
     $(document).on('click', function(event){
-        displayTombstone();
+        //displayTombstone();
         hideIntro();
     });
     
