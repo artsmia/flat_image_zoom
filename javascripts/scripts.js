@@ -28,6 +28,7 @@ function hideIntro() {
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
         $('.intro').show();
+        mySwipe.slide(1, 0);
     }, 90000);
 }
 
@@ -51,10 +52,19 @@ function slideInit() {
                 console.log(lastSlideId);
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
             }
-            var videoId = 'player' + lastSlideId;
-            if ($('#' + videoId).length) {
-                $(this).pause();
+            for (var i = 0; i < $('.video-container video').length; i++) {
+              $('.video-container video')[i].pause();
+              $('.video-container video')[i].setCurrentTime(0);
             }
+            var videoId = '#' + lastSlideId;
+            if ($(videoId).hasClass('video')) {
+                $el = $(videoId);
+                $el.find('.mejs-poster').css("display", "block");
+                $el.find('.mejs-overlay-button').css("display", "block");
+                $el.find('.mejs-overlay-play').css("display", "block");
+            }
+            
+            
             lastSlideId = slide.id; // record this so we know what we're leaving next time
         }
     });
@@ -62,23 +72,25 @@ function slideInit() {
     swapInfo(1, '.slide-index-0');
 }
 
+
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
     for (variable in slides) {
-        clss = 'slide-index-' + variable;
-        slides[variable].zoomer_class = clss;
+        slides[variable].zoomer_class = 'slide-index-' + variable;
+        slides[variable].id = 'video'+variable;
+        slides[variable].player_id = 'player'+variable;
         $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
         if (slides[variable].type === 'zoomer') {
             Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
         }
-        $('.video-container video').mediaelementplayer({
-            videoWidth: 1920,
-            videoHeight: 1080,
-            startVolume: 1,
-            features: ['progress'],
-            alwaysShowControls: true
-        });
     };
+    $('.video-container video').mediaelementplayer({
+        videoWidth: 1920,
+        videoHeight: 1080,
+        startVolume: 1,
+        features: ['progress'],
+        alwaysShowControls: true
+    });
     setTimeout(slideInit, 500); // don't initialize swipe until the zoomers are loaded
 });
 
