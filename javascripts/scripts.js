@@ -50,15 +50,25 @@ function slideInit() {
             if (Zoomer.zoomers[lastSlideId]) {
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
             }
-            var videoId = 'player' + lastSlideId;
-            if ($('#' + videoId).length) {
-                $(this).pause();
+            
+            $('.video-container video')[0].pause();
+            $('.video-container video')[0].setCurrentTime(0);
+            
+            var videoId = '#' + lastSlideId;
+            if ($(videoId).hasClass('video')) {
+                $el = $(videoId);
+                $el.find('.mejs-poster').css("display", "block");
+                $el.find('.mejs-overlay-button').css("display", "block");
+                $el.find('.mejs-overlay-play').css("display", "block");
             }
+            
+            
             lastSlideId = slide.id; // record this so we know what we're leaving next time
         }
     });
     swapInfo(1, '.slide-index-0');
 }
+
 
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
