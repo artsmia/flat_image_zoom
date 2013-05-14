@@ -59,6 +59,15 @@ module.exports = function(grunt) {
       }
     },
     
+    compass: {
+      dist: {
+        options: {
+          sassDir: 'sass',
+          cssDir: 'stylesheets'
+        }
+      }
+    },
+    
     uglify: {
       options: {
         // the banner is inserted at the top of the output
@@ -87,6 +96,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-compass');
 
   // Default task(s).
   grunt.registerTask('default', ['concat', 'uglify']);
