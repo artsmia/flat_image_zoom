@@ -11,18 +11,18 @@ Zoomer.guidCounter = 0; // use this to generate unique IDs for containers
 var Video = 
 Zoomer.zoom_image_by_class = function (zoomoptions) {
     Zoomer.loadExtraTiles = window.location.href.indexOf('longSwipe') !== -1 ? 2 : 6; // load full zoom extents 
-    var baseContainer = zoomoptions['container'];
-    $('.' + zoomoptions['container']).each(function() {
+    var baseContainer = zoomoptions.container;
+    $('.' + zoomoptions.container).each(function() {
         var containerId = baseContainer + Zoomer.guidCounter++;
         $(this).attr('id', containerId);
         var savedHtml = $(this).innerHTML;
-        zoomoptions['container'] = containerId;
+        zoomoptions.container = containerId;
         Zoomer.zoom_image(zoomoptions);
         if (savedHtml) {
             this.insertBefore(savedHtml, this.firstChild);
         }
     });
-}
+};
 
 // override Draggable so we can control who gets the panning events: swipe library or leaflet
 L.Draggable = L.Draggable.extend({
@@ -162,10 +162,10 @@ Swipe.prototype.getCurrentSlideId = function () {
         return this.element.children[0].id;
     }
     return this.slides[this.index].id;
-}
+};
 Swipe.prototype.getPreviousSlideId = function () {
     return this.previousSlideId;
-}
+};
 // custom START: gutter extension
 Swipe.prototype.setup = function() {
     // WAC CUSTOM START
@@ -174,7 +174,7 @@ Swipe.prototype.setup = function() {
         return;
     }
     if (!this.slides) {
-        this.element.appendChild(this.element.children[0].cloneNode(true))
+        this.element.appendChild(this.element.children[0].cloneNode(true));
         this.element.insertBefore(this.element.children[this.element.children.length-2].cloneNode(true), this.element.firstChild);
         this.index++;
     }
@@ -284,15 +284,14 @@ Swipe.prototype.onTouchMove = function(e) {
       clearTimeout(_this.interval);
 
       // increase resistance if first or last slide
+        // if first slide and sliding left
+        // or if last slide and sliding right
+        // and if sliding at all
       _this.deltaX = 
         _this.deltaX / 
-          ( (!_this.index && _this.deltaX > 0               // if first slide and sliding left
-            || _this.index == _this.length - 1              // or if last slide and sliding right
-            && _this.deltaX < 0                            // and if sliding at all
-          ) ?                      
-          ( Math.abs(_this.deltaX) / _this.width + 1 )      // determine resistance level
-          : 1 );                                          // no resistance if false
-      
+          ( (!_this.index && _this.deltaX > 0 || _this.index === _this.length - 1 && _this.deltaX < 0 ) ?                      
+          ( Math.abs(_this.deltaX) / _this.width + 1 )  : 1 ); 
+          
       // translate immediately 1:1
       _this._move([_this.index-1,_this.index,_this.index+1],_this.deltaX);
 
@@ -351,8 +350,8 @@ Swipe.prototype.onTransitionEnd = function (e) {
         
         this.previousSlideId = this.slides[this.index].id;
         
-        if (this.index == 0) this.slide(this.slides.length-2, 0)
-        if (this.index == this.slides.length-1) this.slide(1, 0)
+        if (this.index == 0) this.slide(this.slides.length-2, 0);
+        if (this.index == this.slides.length-1) this.slide(1, 0);
         if (this.delay) this.begin();
 
         this.transitionEnd(this.index, this.slides[this.index]);
@@ -370,5 +369,5 @@ Swipe.prototype.getPos = function() {
     if (this.index == this.slides.length-1) index = 1;
     return index-1;
 };
-7
+
 
