@@ -49,11 +49,11 @@ module.exports = function(grunt) {
           //'javascripts/jquery.colorbox-min.js',
           //'javascripts/swipe.js',
           //'javascripts/leaflet-src.js',
-          'javascripts/zoom_swipe.js',
+          //'javascripts/zoom_swipe.js',
           //'javascripts/jquery.actual.min.js',
           //'javascripts/mediaelement-and-player.min.js',
           //'javascripts/jquery.fs.scroller.min.js',
-          'javascripts/flat_image_zoom.js',
+          //'javascripts/flat_image_zoom.js',
           'javascripts/scripts.js'
         ]
       }

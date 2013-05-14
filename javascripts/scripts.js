@@ -131,7 +131,11 @@ $(document).ready(function() {
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
-
+        
+        for (var i = 0; i < $('.video-container video').length; i++) {
+          $('.video-container video')[i].pause();
+        }
+        
         $.colorbox({
             transition: 'none',
             width: '60%',
