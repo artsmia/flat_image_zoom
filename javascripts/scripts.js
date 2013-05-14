@@ -8,7 +8,7 @@ var artworkInfo = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
     lastSlideId = 'image-view-1';
-
+ 
 mejs.MediaFeatures.hasTouch = false;
 
 function showTombstone() {
@@ -83,7 +83,7 @@ function slideInit() {
 
 $.getJSON('javascripts/test.json', function(data) {
     slides = data.slides;
-    for (variable in slides) {
+    for (var variable in slides) {
         slides[variable].zoomer_class = 'slide-index-' + variable;
         slides[variable].id = 'video'+variable;
         slides[variable].player_id = 'player'+variable;
@@ -91,7 +91,8 @@ $.getJSON('javascripts/test.json', function(data) {
         if (slides[variable].type === 'zoomer') {
             Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
         }
-    };
+    }
+    
     $('.video-container video').mediaelementplayer({
         videoWidth: 1920,
         videoHeight: 1080,

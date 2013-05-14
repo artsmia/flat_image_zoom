@@ -183,7 +183,7 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
 
         if (this._scale === 1) { return; }
         // WAC_START limit scale to zoom extents
-        var zoom = map.getScaleZoom(this._scale)
+        var zoom = map.getScaleZoom(this._scale);
         if (zoom > map.getMaxZoom()) {
             this._scale = map.getZoomScale(map.getMaxZoom());
         }
@@ -393,7 +393,7 @@ Zoomer.setupMap = function (zoomer) {
         zoomer.map.on('zoomend', zoomer.map.panToContainImage);
         zoomer.map.on('moveend', zoomer.map.panToContainImage);
         zoomer.map.on('click', Zoomer.zoomAtMouseLocation);
-        zoomer.map.options['touchZoom']=true; // now we DO want this option...
+        zoomer.map.options.touchZoom = true; // now we DO want this option...
         zoomer.map.addHandler('touchZoom', Zoomer.Map.TouchZoom); // ...but use ours.
     }
     zoomer.map._zoomer = zoomer;
@@ -426,10 +426,10 @@ Zoomer.createTiles = function (zoomer) {
 
 // this function sets everything up, and can be called multiple times for: viewport resized, new image to load, etc.
 Zoomer.zoom_image = function (zoomoptions) {
-    var containerIn = zoomoptions['container'], 
-        tileURLIn = zoomoptions['tileURL'],
-        imageWidthIn = zoomoptions['imageWidth'],
-        imageHeightIn = zoomoptions['imageHeight'],
+    var containerIn = zoomoptions.container, 
+        tileURLIn = zoomoptions.tileURL,
+        imageWidthIn = zoomoptions.imageWidth,
+        imageHeightIn = zoomoptions.imageHeight,
         container = $('#' + containerIn),
         zoomer = {};
     if (!Zoomer.zoomers[containerIn]) {
