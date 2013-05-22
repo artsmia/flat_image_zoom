@@ -30,7 +30,7 @@ function hideIntro() {
     introTimeout = setTimeout(function() {
           $('.intro').show();
           mySwipe.slide(1, 0);
-    }, 9000);
+    }, 90000);
 }
 
 function swapInfo(index, slide) {
