@@ -83,15 +83,17 @@ function slideInit() {
     
 }
 
-$.getJSON('javascripts/test.json', function(data) {
+$.getJSON('javascripts/garden.json', function(data) {
     slides = data.slides;
     for (var variable in slides) {
-        slides[variable].zoomer_class = 'slide-index-' + variable;
-        slides[variable].id = 'video'+variable;
-        slides[variable].player_id = 'player'+variable;
-        $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
-        if (slides[variable].type === 'zoomer') {
-            Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
+        if (slides[variable]) {
+            slides[variable].zoomer_class = 'slide-index-' + variable;
+            slides[variable].id = 'video'+variable;
+            slides[variable].player_id = 'player'+variable;
+            $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
+            if (slides[variable].type === 'zoomer') {
+                Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
+            }
         }
     }
     
