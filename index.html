@@ -34,8 +34,11 @@
     </nav>
 
     <div class="info-wrapper" id="info"></div>
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <!--
+
+    <script src="javascripts/jquery-2.0.0.min.js"></script>
     <script src="javascripts/underscore-min.js"></script>
     <script src="javascripts/backbone-min.js"></script>
     <script src="javascripts/jquery.colorbox-min.js"></script>
@@ -46,13 +49,14 @@
     <script src="javascripts/mediaelement-and-player.min.js"></script>
     <script src="javascripts/jquery.fs.scroller.min.js"></script>
     <script src="javascripts/flat_image_zoom.js"></script>
+    -->
     <script type="text/template" id="zoomer">
         <% if (type == "video") {%>
             <div id="<%= id %>" class="zoomer video">
                 <div class="video-container">
                     <video id="<%= player_id %>" poster="<%= video_poster %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
                 </div>
-                <div class="hidden slide-article"><article class="info"><%= text %></article></div>
+                <div class="hidden slide-article"><article class="info"><%= text.body %></article></div>
                 <ul class="hidden meta">
                     <li class="title"><%= title %></li>
                     <li class="artist"><%= artist %></li>
@@ -62,7 +66,7 @@
         <% } %>
         <% if (type == "zoomer") {%>
             <div class="zoomer <%= zoomer_class %>">
-                <div class="hidden slide-article"><article class="info"><%= text %></article></div>
+                <div class="hidden slide-article"><article class="info"><%= text.body %></article></div>
                 <ul class="hidden meta">
                     <li class="title"><%= title %></li>
                     <li class="artist"><%= artist %></li>
@@ -71,6 +75,7 @@
             </div>
         <% } %>
     </script>
-    <script src="javascripts/scripts.js"></script>
+    <!-- <script src="javascripts/scripts.js"></script> -->
+    <script src="build/wac_infowalls.js"></script>
 </body>
 </html>

@@ -3,11 +3,12 @@ var artworkInfo = '',
     variable = '',
     clss = '',
     slideHasVideo = false,
+    playing = false,
     tombstoneTimeout = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
     lastSlideId = 'image-view-1';
-
+ 
 mejs.MediaFeatures.hasTouch = false;
 
 function showTombstone() {
@@ -27,9 +28,9 @@ function hideIntro() {
     clearTimeout(introTimeout);
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
-        $('.intro').show();
-        mySwipe.slide(1, 0);
-    }, 90000);
+          $('.intro').show();
+          mySwipe.slide(1, 0);
+    }, 9000);
 }
 
 function swapInfo(index, slide) {
@@ -94,19 +95,31 @@ function initDone() {
     z.map.options.touchZoom = false;
     z.map.options.dragging = false;
     z.map.options.doubleClickZoom = false;
+    
+    $('.video-container video').on('playing',function(e) {
+      clearTimeout(introTimeout);
+    }).on('pause',function(e) {
+      hideIntro();
+    }).on('ended',function(e) {
+      hideIntro();
+    });
 }
 
-$.getJSON('javascripts/test.json', function(data) {
+
+$.getJSON('javascripts/garden.json', function(data) {
     slides = data.slides;
-    for (variable in slides) {
-        slides[variable].zoomer_class = 'slide-index-' + variable;
-        slides[variable].id = 'video'+variable;
-        slides[variable].player_id = 'player'+variable;
-        $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
-        if (slides[variable].type === 'zoomer') {
-            Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
+    for (var variable in slides) {
+        if (slides[variable]) {
+            slides[variable].zoomer_class = 'slide-index-' + variable;
+            slides[variable].id = 'video'+variable;
+            slides[variable].player_id = 'player'+variable;
+            $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
+            if (slides[variable].type === 'zoomer') {
+                Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
+            }
         }
-    };
+    }
+    
     $('.video-container video').mediaelementplayer({
         videoWidth: 1920,
         videoHeight: 1080,
@@ -145,7 +158,11 @@ $(document).ready(function() {
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
-
+        
+        for (var i = 0; i < $('.video-container video').length; i++) {
+          $('.video-container video')[i].pause();
+        }
+        
         $.colorbox({
             transition: 'none',
             width: '60%',
