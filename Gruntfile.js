@@ -72,9 +72,9 @@ module.exports = function(grunt) {
       options: {
         // the banner is inserted at the top of the output
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
-        report : 'gzip',
+        //report : 'gzip',
         // to help optimize the varibale names and stuff like that
-        compress : true
+        //compress : true
       },
       dist: {
         files: {
