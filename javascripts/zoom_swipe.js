@@ -38,9 +38,9 @@ L.Draggable = L.Draggable.extend({
         if (!L.Browser.touch || typeof Swipe !== 'function' || map._zoom > map.getMinZoom()) {
             // this is our event, we're going to drag. Don't pass to swipe library.
             // NS - actually, swipe can have the start: we ignore the move if we need to.
-            L.DomEvent.preventDefault(e);
-            L.DomEvent.stopPropagation(e);
-            console.log('leaflet dropped event: '+map._zoom +' '+ map.getMinZoom());
+            //L.DomEvent.preventDefault(e);
+            //L.DomEvent.stopPropagation(e);
+            //console.log('leaflet dropped event: '+map._zoom +' '+ map.getMinZoom());
         }
         // WAC_END 
 
@@ -143,10 +143,11 @@ L.Draggable = L.Draggable.extend({
 
 Swipe.prototype.handleEvent = function(e) {
     console.log(this.index +' '+ this.slides.length);
-    if (e.type.indexOf('ransition')===-1 && (this.index===0 || this.index === this.slides.length)) {
+    if (e.type.indexOf('touch')>-1 && (this.index===0 || this.index === this.slides.length-1)) {
         // this a dummy slide about to disappear: stop all events
-        e.stopPropagation();
-        return;
+        //console.log("dropping "+e.type);
+        //e.stopPropagation();
+        //return;
     }
     switch (e.type) {
       case 'touchstart': this.onTouchStart(e); break;
@@ -173,6 +174,17 @@ Swipe.prototype.getCurrentSlideId = function () {
 Swipe.prototype.getPreviousSlideId = function () {
     return this.previousSlideId;
 }
+
+function makeDummyZoomer(dummy) {
+    var zoomer = Zoomer.zoomers[dummy.id.replace('_dummy','')];
+    Zoomer.zoom_image({"container":dummy.id, "tileURL":zoomer.tileURL, "imageWidth":zoomer.imageWidth, "imageHeight":zoomer.imageHeight});
+    zoomer = Zoomer.zoomers[dummy.id];
+    zoomer.map.options['maxZoom'] = zoomer.map._zoom;
+    zoomer.map.touchZoom.removeHooks();
+    zoomer.map.dragging.removeHooks()
+    zoomer.map.on('click', jQuery.noop);
+}
+
 // custom START: gutter extension
 Swipe.prototype.setup = function() {
     // WAC CUSTOM START
@@ -181,8 +193,17 @@ Swipe.prototype.setup = function() {
         return;
     }
     if (!this.slides) {
-        this.element.appendChild(this.element.children[0].cloneNode(true))
-        this.element.insertBefore(this.element.children[this.element.children.length-2].cloneNode(true), this.element.firstChild);
+        // XXX do a shallow clone, set the id and class, then make a new zoomer with shit turned off
+        var dummy = this.element.children[0].cloneNode(false)
+        dummy.id = dummy.id+'_dummy';
+        this.element.appendChild(dummy);
+        makeDummyZoomer(dummy);
+        
+        
+        dummy = this.element.children[this.element.children.length-2].cloneNode(false),
+        dummy.id = dummy.id+'_dummy';
+        this.element.insertBefore(dummy, this.element.firstChild);
+        makeDummyZoomer(dummy);
         this.index++;
     }
     this.gutter = 10;
