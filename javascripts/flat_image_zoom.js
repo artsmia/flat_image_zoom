@@ -392,7 +392,7 @@ Zoomer.setupMap = function (zoomer) {
         });
         zoomer.map.on('zoomend', zoomer.map.panToContainImage);
         zoomer.map.on('moveend', zoomer.map.panToContainImage);
-        zoomer.map.on('click', Zoomer.zoomAtMouseLocation);
+        zoomer.map.on('dblclick', Zoomer.zoomAtMouseLocation);
         zoomer.map.options.touchZoom = true; // now we DO want this option...
         zoomer.map.addHandler('touchZoom', Zoomer.Map.TouchZoom); // ...but use ours.
     }
