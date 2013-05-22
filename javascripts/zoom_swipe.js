@@ -40,6 +40,7 @@ L.Draggable = L.Draggable.extend({
             // NS - actually, swipe can have the start: we ignore the move if we need to.
             L.DomEvent.preventDefault(e);
             L.DomEvent.stopPropagation(e);
+            console.log('leaflet dropped event: '+map._zoom +' '+ map.getMinZoom());
         }
         // WAC_END 
 
@@ -141,6 +142,12 @@ L.Draggable = L.Draggable.extend({
 });
 
 Swipe.prototype.handleEvent = function(e) {
+    console.log(this.index +' '+ this.slides.length);
+    if (e.type.indexOf('ransition')===-1 && (this.index===0 || this.index === this.slides.length)) {
+        // this a dummy slide about to disappear: stop all events
+        e.stopPropagation();
+        return;
+    }
     switch (e.type) {
       case 'touchstart': this.onTouchStart(e); break;
       case 'touchmove': this.onTouchMove(e); break;
@@ -240,17 +247,49 @@ Swipe.prototype.setup = function() {
 
 };
 Zoomer.isPinching = undefined;
+Zoomer.multiTouchSwipeCount = 0;
+
+Swipe.prototype.onTouchStart = function(e) {
+    Zoomer.multiTouchSwipeCount = 0;
+    Zoomer.isPinching = undefined;
+    console.log('touch start: '+e.touches.length);
+
+    var _this = this;
+    
+    _this.start = {
+
+      // get touch coordinates for delta calculations in onTouchMove
+      pageX: e.touches[0].pageX,
+      pageY: e.touches[0].pageY,
+
+      // set initial timestamp of touch sequence
+      time: Number( new Date() )
+
+    };
+
+    // used for testing first onTouchMove event
+    _this.isScrolling = undefined;
+    
+    // reset deltaX
+    _this.deltaX = 0;
+
+};
+
 Swipe.prototype.onTouchMove = function(e) {
     var _this = this;
 
-    // ensure swiping with one touch and not pinching
-    if(e.touches.length > 1 || e.scale && e.scale !== 1) {
-        // WAC CUSTOM START
+    // WAC CUSTOM START
+    console.log('move: '+e.touches.length+' '+Zoomer.isPinching);
+    // ensure not pinching (2 touch = pinch, anything else = swipe)
+    if(e.touches.length == 2 || e.scale && e.scale !== 1) {
         Zoomer.isPinching = true;
         return;
-        // WAC CUSTOM END
     }
+    if (e.touches.length > Zoomer.multiTouchSwipeCount) Zoomer.multiTouchSwipeCount = e.touches.length;
+    if (e.touches.length < Zoomer.multiTouchSwipeCount) return; // stop moving, fingers coming up
+    // WAC CUSTOM END
     if (Zoomer.isPinching) {
+        // they WERE pinching, now not.
         _this.start.pageX = e.touches[0].pageX;
         Zoomer.isPinching = undefined;
     }
@@ -305,7 +344,8 @@ Swipe.prototype.onTouchMove = function(e) {
 
 // use slideDuration to allow for bigger screen interaction
 Swipe.prototype.onTouchEnd = function (e) {
-
+    if (!(Zoomer.multiTouchSwipeCount > 0 && e.touches.length < Zoomer.multiTouchSwipeCount)) return; // first finger up = do it and ignore remaining end events
+    Zoomer.isPinching = undefined;
     var _this = this;
 
     // determine if slide attempt triggers next/prev slide
@@ -340,18 +380,18 @@ Swipe.prototype.onTouchEnd = function (e) {
       }
 
     }
+    _this.deltaX = 0;
+    
 
   },
 
 
 Swipe.prototype.onTransitionEnd = function (e) {
-    
+    this.previousSlideId = this.slides[this.index].id;
     if (this._getElemIndex(e.target) == this.index) { // only call transition end on the main slide item
         
-        this.previousSlideId = this.slides[this.index].id;
-        
-        if (this.index == 0) this.slide(this.slides.length-2, 0);
-        if (this.index == this.slides.length-1) this.slide(1, 0);
+        if (this.index == 0) this.slide(this.slides.length-2, 0)
+        if (this.index == this.slides.length-1) this.slide(1, 0)
         if (this.delay) this.begin();
 
         this.transitionEnd(this.index, this.slides[this.index]);

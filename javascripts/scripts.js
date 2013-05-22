@@ -50,6 +50,7 @@ function slideInit() {
             showTombstone();
             swapInfo(index, slide);
             if (Zoomer.zoomers[lastSlideId]) {
+                console.log(lastSlideId);
                 Zoomer.zoomers[lastSlideId].map.centerImageAtExtents();
             }
             for (var i = 0; i < $('.video-container video').length; i++) {
@@ -68,6 +69,7 @@ function slideInit() {
             lastSlideId = slide.id; // record this so we know what we're leaving next time
         }
     });
+    lastSlideId = window.mySwipe.slides[window.mySwipe.index].id;
     swapInfo(1, '.slide-index-0');
     
     
