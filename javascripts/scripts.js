@@ -39,6 +39,34 @@ function swapInfo(index, slide) {
     $('#info').html($el.children('.slide-article').html());
 }
 
+function showInfo() {
+    for (var i = 0; i < $('.video-container video').length; i++) {
+        $('.video-container video')[i].pause();
+    }
+    $.colorbox({
+        transition: 'none',
+        width: '60%',
+        initialWidth: '60%',
+        fadeOut: 250,
+        opacity: 0.8,
+        inline: true,
+        href: '#info',
+        onComplete: function() {
+            $('#cboxLoadedContent article').scroller({
+                customClass: 'walker-scroller',
+                trackMargin: 8,
+                handleSize: 60
+            });
+            if (!$('#cboxLoadedContent article').hasClass('scroller-active')) {
+                $('#cboxLoadedContent .info-wrapper').addClass('locked');
+            }
+        },
+        onClosed: function() {
+            $('.locked').removeClass('locked');
+        }
+    });
+}
+
 lastSlideStack = [];
 
 function slideInit() {
@@ -158,33 +186,16 @@ $(document).ready(function() {
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
-        
-        for (var i = 0; i < $('.video-container video').length; i++) {
-            $('.video-container video')[i].pause();
-        }
-        
-        $.colorbox({
-            transition: 'none',
-            width: '60%',
-            initialWidth: '60%',
-            fadeOut: 250,
-            opacity: 0.8,
-            inline: true,
-            href: '#info',
-            onComplete: function() {
-                $('#cboxLoadedContent article').scroller({
-                    customClass: 'walker-scroller',
-                    trackMargin: 8,
-                    handleSize: 60
-                });
-                if (!$('#cboxLoadedContent article').hasClass('scroller-active')) {
-                    $('#cboxLoadedContent .info-wrapper').addClass('locked');
-                }
-            },
-            onClosed: function() {
-                $('.locked').removeClass('locked');
-            }
-        });
     });
+    
+    if (Modernizr.touch) {
+        $('.info-link').on('touchstart', function() {
+            showInfo();
+        });
+    } else {
+        $('.info-link').on('mousedown', function() {
+            showInfo();
+        });
+    }
 
 });
