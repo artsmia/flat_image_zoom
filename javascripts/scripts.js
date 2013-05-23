@@ -103,9 +103,9 @@ function slideInit() {
             var videoId = '#' + lastSlideId;
             if ($(videoId).hasClass('video')) {
                 $el = $(videoId);
-                $el.find('.mejs-poster').css("display", "block");
-                $el.find('.mejs-overlay-button').css("display", "block");
-                $el.find('.mejs-overlay-play').css("display", "block");
+                $el.find('.mejs-poster').css('display', 'block');
+                $el.find('.mejs-overlay-button').css('display', 'block');
+                $el.find('.mejs-overlay-play').css('display', 'block');
             }
             lastSlideId = slide.id; // record this so we know what we're leaving next time
         }
