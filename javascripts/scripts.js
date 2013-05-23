@@ -30,9 +30,9 @@ function hideIntro() {
     clearTimeout(introTimeout);
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
-        $('.intro').show();
-        $.colorbox.close();
-        mySwipe.slide(1, 0);
+        //$('.intro').show();
+        //$.colorbox.close();
+        //mySwipe.slide(1, 0);
     }, 45000);
 }
 
