@@ -7,8 +7,7 @@ var artworkInfo = '',
     tombstoneTimeout = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
-    lastSlideId = 'image-view-1',
-    slideCount = '';
+    lastSlideId = 'image-view-1';
  
 mejs.MediaFeatures.hasTouch = false;
 
@@ -38,7 +37,8 @@ function swapInfo(index, slide) {
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
-    $('.status').html(index + '/' + slideCount);
+    $('.status .status-pointer .current').html(index);
+    $('.status .status-bar').css('width', ((index/slides.length) * 100) + '%');
 }
 
 function showInfo() {
@@ -152,7 +152,7 @@ $.getJSON('javascripts/garden.json', function(data) {
         features: ['progress'],
         alwaysShowControls: true
     });
-    slideCount = slides.length;
+    $('.status .status-pointer .total').html(slides.length);
     setTimeout(slideInit, 500); // don't initialize swipe until the zoomers are loaded
 });
 
