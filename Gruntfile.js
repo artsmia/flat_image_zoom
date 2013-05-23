@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    
+
     concat: {
       options: {
         // define a string to put between each file in the concatenated output
@@ -12,8 +12,9 @@ module.exports = function(grunt) {
       dist: {
         // the files to concatenate
         //src: ['javascripts/*.js'],
-        
-        src: [          
+
+        src: [
+          'javascripts/jquery-2.0.0.min.js',
           'javascripts/underscore-min.js',
           'javascripts/backbone-min.js',
           'javascripts/jquery.colorbox-min.js',
@@ -30,7 +31,7 @@ module.exports = function(grunt) {
         dest: 'build/<%= pkg.name %>.js'
       }
     },
-    
+
     jshint: {
       options: {
         curly: true,
@@ -41,9 +42,9 @@ module.exports = function(grunt) {
           jQuery: true
         },
       },
-  
+
       files: {
-        src: [          
+        src: [
           //'javascripts/underscore-min.js',
           //'javascripts/backbone-min.js',
           //'javascripts/jquery.colorbox-min.js',
@@ -58,7 +59,7 @@ module.exports = function(grunt) {
         ]
       }
     },
-    
+
     compass: {
       dist: {
         options: {
@@ -67,7 +68,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     uglify: {
       options: {
         // the banner is inserted at the top of the output
@@ -82,12 +83,12 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     watch: {
       files: ['javascripts/*.js'],
       tasks: ['concat', 'uglify'],
-    }    
-    
+    }
+
   });
 
 
@@ -105,4 +106,4 @@ module.exports = function(grunt) {
 };
 
 
-  
+

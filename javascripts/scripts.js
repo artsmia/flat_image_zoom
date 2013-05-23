@@ -28,9 +28,9 @@ function hideIntro() {
     clearTimeout(introTimeout);
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
-          $('.intro').show();
-          mySwipe.slide(1, 0);
-    }, 90000);
+        $('.intro').show();
+        mySwipe.slide(1, 0);
+    }, 45000);
 }
 
 function swapInfo(index, slide) {
@@ -160,7 +160,7 @@ $(document).ready(function() {
         event.preventDefault();
         
         for (var i = 0; i < $('.video-container video').length; i++) {
-          $('.video-container video')[i].pause();
+            $('.video-container video')[i].pause();
         }
         
         $.colorbox({
