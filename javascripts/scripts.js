@@ -31,6 +31,7 @@ function hideIntro() {
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
         $('.intro').show();
+        $.colorbox.close();
         mySwipe.slide(1, 0);
     }, 45000);
 }
@@ -39,7 +40,7 @@ function swapInfo(index, slide) {
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
-    if ( (index > 0) && (index < ($('.swipe-wrap > div').length - 1))) {
+    if ((index > 0) && (index < ($('.swipe-wrap > div').length - 1))) {
         $('.status .status-pointer .current').html(index);
         $('.status .status-bar').css('width', ((index/($('.swipe-wrap > div').length - 2)) * 100) + '%');
     }
@@ -188,16 +189,7 @@ $(document).ready(function() {
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
+        showInfo();
     });
-    
-    if (Modernizr.touch) {
-        $('.info-link').on('touchstart', function() {
-            showInfo();
-        });
-    } else {
-        $('.info-link').on('mousedown', function() {
-            showInfo();
-        });
-    }
 
 });
