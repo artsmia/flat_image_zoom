@@ -32,7 +32,7 @@ html {
 body {
     background: #000;
     color: #fff;
-    font-family: 'Fox Regular', Helvetica, Arial, sans-serif;
+    font-family: 'Fox Regular', Fox-Roman, Helvetica, Arial, sans-serif;
     font-size: 34px;
     line-height: 44px;
     text-rendering: optimizeLegibility;
@@ -40,12 +40,12 @@ body {
 }
 
 em {
-    font-family: 'Fox Italic';
+    font-family: 'Fox Italic', Fox-Italic, Helvetica, Arial, sans-serif;
     font-style: italic;
 }
 
 strong {
-    font-family: Futura;
+    font-family: Futura, Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 110%;
 }
@@ -218,7 +218,7 @@ a {
     }
     
     .title {
-        font-family: 'Fox Italic';
+        font-family: 'Fox Italic', Fox-Italic, Helvetica, Arial, sans-serif;
         font-style: italic;
     }
 }
