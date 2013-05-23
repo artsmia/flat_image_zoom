@@ -125,14 +125,13 @@ function initDone() {
     z.map.options.doubleClickZoom = false;
     
     $('.video-container video').on('playing',function(e) {
-      clearTimeout(introTimeout);
+        clearTimeout(introTimeout);
     }).on('pause',function(e) {
-      hideIntro();
+        hideIntro();
     }).on('ended',function(e) {
-      hideIntro();
+        hideIntro();
     });
 }
-
 
 $.getJSON('javascripts/garden.json', function(data) {
     slides = data.slides;
