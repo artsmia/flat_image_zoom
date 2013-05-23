@@ -7,7 +7,8 @@ var artworkInfo = '',
     tombstoneTimeout = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
-    lastSlideId = 'image-view-1';
+    lastSlideId = 'image-view-1',
+    slideCount = '';
  
 mejs.MediaFeatures.hasTouch = false;
 
@@ -37,6 +38,7 @@ function swapInfo(index, slide) {
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
+    $('.status').html(index + '/' + slideCount);
 }
 
 function showInfo() {
@@ -105,7 +107,7 @@ function slideInit() {
     });
     lastSlideId = window.mySwipe.slides[window.mySwipe.index].id;
     swapInfo(1, '.slide-index-0');
-    setTimeout(initDone,500);
+    setTimeout(initDone, 500);
 }
 
 function initDone() {
@@ -121,12 +123,11 @@ function initDone() {
     z.map.options.touchZoom = false;
     z.map.options.dragging = false;
     z.map.options.doubleClickZoom = false;
-    
-    $('.video-container video').on('playing',function(e) {
+    $('.video-container video').on('playing', function() {
         clearTimeout(introTimeout);
-    }).on('pause',function(e) {
+    }).on('pause',function() {
         hideIntro();
-    }).on('ended',function(e) {
+    }).on('ended',function() {
         hideIntro();
     });
 }
@@ -136,15 +137,14 @@ $.getJSON('javascripts/garden.json', function(data) {
     for (var variable in slides) {
         if (slides[variable]) {
             slides[variable].zoomer_class = 'slide-index-' + variable;
-            slides[variable].id = 'video'+variable;
-            slides[variable].player_id = 'player'+variable;
+            slides[variable].id = 'video' + variable;
+            slides[variable].player_id = 'player' + variable;
             $('.swipe-wrap').append(zoomerTemplate(slides[variable]));
             if (slides[variable].type === 'zoomer') {
                 Zoomer.zoom_image_by_class({'container': slides[variable].zoomer_class, 'tileURL': slides[variable].zoomer_url, 'imageWidth': slides[variable].zoomer_width, 'imageHeight': slides[variable].zoomer_height});
             }
         }
     }
-    
     $('.video-container video').mediaelementplayer({
         videoWidth: 1920,
         videoHeight: 1080,
@@ -152,6 +152,7 @@ $.getJSON('javascripts/garden.json', function(data) {
         features: ['progress'],
         alwaysShowControls: true
     });
+    slideCount = slides.length;
     setTimeout(slideInit, 500); // don't initialize swipe until the zoomers are loaded
 });
 
