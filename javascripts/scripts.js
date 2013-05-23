@@ -39,8 +39,10 @@ function swapInfo(index, slide) {
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
-    $('.status .status-pointer .current').html(index);
-    $('.status .status-bar').css('width', ((index/slides.length) * 100) + '%');
+    if ( (index > 0) && (index < ($('.swipe-wrap > div').length - 1))) {
+        $('.status .status-pointer .current').html(index);
+        $('.status .status-bar').css('width', ((index/($('.swipe-wrap > div').length - 2)) * 100) + '%');
+    }
 }
 
 function showInfo() {
@@ -154,7 +156,7 @@ $.getJSON('javascripts/garden.json', function(data) {
         features: ['progress'],
         alwaysShowControls: true
     });
-    $('.status .status-pointer .total').html(slides.length);
+    $('.status .status-pointer .total').html($('.swipe-wrap > div').length.toString());
     setTimeout(slideInit, 500); // don't initialize swipe until the zoomers are loaded
 });
 
