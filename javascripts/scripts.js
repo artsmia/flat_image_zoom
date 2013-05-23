@@ -90,8 +90,8 @@ function slideInit() {
                 }, 500);
             }
             for (var i = 0; i < $('.video-container video').length; i++) {
-              $('.video-container video')[i].pause();
-              $('.video-container video')[i].setCurrentTime(0);
+                $('.video-container video')[i].pause();
+                $('.video-container video')[i].setCurrentTime(0);
             }
             var videoId = '#' + lastSlideId;
             if ($(videoId).hasClass('video')) {
@@ -100,8 +100,6 @@ function slideInit() {
                 $el.find('.mejs-overlay-button').css("display", "block");
                 $el.find('.mejs-overlay-play').css("display", "block");
             }
-            
-            
             lastSlideId = slide.id; // record this so we know what we're leaving next time
         }
     });
