@@ -19,7 +19,7 @@ function showTombstone() {
         $('.tombstone').removeClass('on-video-slide');
     }
     $('.tombstone').stop(true, true).delay(250).fadeIn(150);
-    $('.status').stop(true, true).fadeIn(150);
+    $('.status').stop(true, true).delay(250).fadeIn(150);
     tombstoneTimeout = setTimeout(function() {
         $('.tombstone').stop(true, true).fadeOut(250);
         $('.status').stop(true, true).fadeOut(250);
