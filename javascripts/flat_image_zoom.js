@@ -186,6 +186,7 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
         this._scale = p1.distanceTo(p2) / this._startDist;
         this._delta = p1._add(p2)._divideBy(2)._subtract(this._startCenter);
         var deltaX = this._delta.x;
+        this._delta = new L.Point(0,0);
 
         if (this._scale === 1) { return; }
 
@@ -225,6 +226,25 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
         
         L.DomEvent.preventDefault(e);
     },
+
+	_updateOnMove: function () {
+		var map = this._map,
+		    origin = this._getScaleOrigin(),
+		    center = map.layerPointToLatLng(origin);
+
+		map.fire('zoomanim', {
+			center: center,
+			zoom: map.getScaleZoom(this._scale)
+		});
+
+		// Used 2 translates instead of transform-origin because of a very strange bug -
+		// it didn't count the origin on the first touch-zoom but worked correctly afterwards
+
+		map._tileBg.style[L.DomUtil.TRANSFORM] =
+		        L.DomUtil.getTranslateString(this._delta) + ' ' +
+		        L.DomUtil.getScaleString(this._scale, this._startCenter);
+	},
+	
     // override so we can stop pinch zooms wherever they are, don't snap to next round zoom level
     _onTouchEnd: function () {
         if (!this._moved || !this._zooming) { return; }
