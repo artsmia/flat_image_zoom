@@ -168,21 +168,31 @@ Zoomer.getParentMapForElement = function (element) {
     return null;
 };
 
+Zoomer.abortedZoom = false;
 Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
     // override so we can limit pinches to max / min zoom dynamically
     _onTouchMove: function (e) {
+        console.log('_onTouchMove');
         if (!e.touches || e.touches.length !== 2) { return; }
 
         var map = this._map;
 
         var p1 = map.mouseEventToLayerPoint(e.touches[0]),
             p2 = map.mouseEventToLayerPoint(e.touches[1]);
+            
+            
+        // WAC_START limit scale to zoom extents
+        var deltaZ = p1.distanceTo(p2) - this._startDist;
 
         this._scale = p1.distanceTo(p2) / this._startDist;
         this._delta = p1._add(p2)._divideBy(2)._subtract(this._startCenter);
+        var deltaX = this._delta.x;
+		console.log("Z: "+ deltaZ +" X: "+deltaX);
+		console.log(p1.distanceTo(p2) +" "+ this._startDist +" "+ this._scale);
 
         if (this._scale === 1) { return; }
-        // WAC_START limit scale to zoom extents
+
+		
         var zoom = map.getScaleZoom(this._scale);
         if (zoom > map.getMaxZoom()) {
             this._scale = map.getZoomScale(map.getMaxZoom());
@@ -207,7 +217,15 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
         this._animRequest = L.Util.requestAnimFrame(
             this._updateOnMove, this, true, this._map._container
         );
-
+        
+		if (Math.abs(deltaX) > Math.abs(deltaZ)) {
+            this._moved = true;
+            Zoomer.abortedZoom = true;
+		    // let it be a swipe
+            return this._onTouchEnd();
+        }
+        Zoomer.abortedZoom = false;
+        
         L.DomEvent.preventDefault(e);
     },
     // override so we can stop pinch zooms wherever they are, don't snap to next round zoom level
@@ -243,7 +261,10 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
         // when you let them stop wherever the actual scale is always 1
         var scale = 1;
         // WAC_END
-
+        
+        console.log("TILEBG-----------------");
+        console.log(map._tileBg);
+        console.log(map._tileBg.offsetWidth);
         map._runAnimation(center, zoom, scale, origin, true);
     }
 });

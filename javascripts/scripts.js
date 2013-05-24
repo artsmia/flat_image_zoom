@@ -78,6 +78,7 @@ lastSlideStack = [];
 function slideInit() {
     window.mySwipe = new Swipe(document.getElementById('slider'), {
         callback: function(index, slide) {
+            Zoomer.advancingSlide = false;
             if ($(slide).hasClass('video')) {
                 slideHasVideo = true;
             } else {
@@ -90,14 +91,15 @@ function slideInit() {
                 setTimeout(function() {
                     var lastId = lastSlideStack.pop();
                     if (lastId.indexOf('_dummy') < 0) {
-                        console.log("recenter: " +lastId);
+                        console.log("recenter: "+slide.id);
                         Zoomer.zoomers[lastId].map.centerImageAtExtents();
+                        //Zoomer.zoomers[lastId].map._animatingZoom = false; 
                     }
                 }, 500);
             }
             for (var i = 0; i < $('.video-container video').length; i++) {
                 $('.video-container video')[i].pause();
-                $('.video-container video')[i].setCurrentTime(0);
+                //$('.video-container video')[i].setCurrentTime(0);
             }
             var videoId = '#' + lastSlideId;
             if ($(videoId).hasClass('video')) {
@@ -115,10 +117,6 @@ function slideInit() {
 }
 
 function initDone() {
-    console.log('init done');
-    console.log(window.mySwipe.slides);
-    console.log(Zoomer.zoomers[window.mySwipe.slides[0].id]);
-    console.log(Zoomer.zoomers[window.mySwipe.slides[window.mySwipe.slides.length-1].id]);
     var z = Zoomer.zoomers[window.mySwipe.slides[0].id];
     z.map.options.touchZoom = false;
     z.map.options.dragging = false;
