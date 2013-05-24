@@ -105,20 +105,16 @@ L.Draggable = L.Draggable.extend({
         if (map && this._verticalPan === undefined) {
             this._verticalPan = !!(this._verticalPan || ((map.isAtEastEdge() && map.isAtWestEdge()) && Math.abs(diffVec.x) < Math.abs(diffVec.y)));
         }
-        if (L.Browser.touch && (!map || (diffVec.x > 0 && map.isAtEastEdge()) || (diffVec.x < 0 && map.isAtWestEdge()))) {
+        console.log(diffVec.y);
+        if (L.Browser.touch && (!map || (diffVec.x > Zoomer.lastDiffX && map.isAtEastEdge()) || (diffVec.x < Zoomer.lastDiffX && map.isAtWestEdge()))) {
             // they are at the edge or otherwise not panning leaflet any more. Skip the pan animation
-            if (map && this._verticalPan && (map._zoom > map.getMinZoom())) {
-                // vertical panning is allowed on vertical images if they're zoomed at all.
-                // not a swipe event, we want it but remove the X
-                diffVec.x = 0;
-            } else {
-                // don't prevent default in swipe.touchmove if you uncomment these
-                //if ((diffVec.x > 0 && Zoomer.wasAtEastEdge) || (diffVec.x < 0 && Zoomer.wasAtWestEdge)) {
-                    this._simulateClick = false; // this prevents click action
-                    return;
-                //}
-            }
+            if (Zoomer.lastDiffX) { diffVec.x=Zoomer.lastDiffX; }
         }
+        if (L.Browser.touch && (!map || (diffVec.y > Zoomer.lastDiffY && map.isAtNorthEdge()) || (diffVec.y < Zoomer.lastDiffY && map.isAtSouthEdge()))) {
+            if (Zoomer.lastDiffY) { diffVec.y=Zoomer.lastDiffY; }
+        }
+        Zoomer.lastDiffY=diffVec.y;
+        Zoomer.lastDiffX=diffVec.x;
         // WAC_END
 
         if (!this._moved) {

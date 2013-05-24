@@ -132,12 +132,19 @@ Zoomer.Map = L.Map.extend({
     },
     isAtEastEdge: function () {
         this._getEdgeDeltas();
-        console.log(this._edgeDeltas.de +" "+ this._edgeDeltas.dw);
         return ((this._edgeDeltas.de > 0 && this._edgeDeltas.dw >= -1) || (this._edgeDeltas.de < 0 && this._edgeDeltas.dw > 0));
     },
     isAtWestEdge: function () {
         this._getEdgeDeltas();
         return ((this._edgeDeltas.dw < 0 && this._edgeDeltas.de <= 1) || (this._edgeDeltas.de < 0 && this._edgeDeltas.dw > 0));
+    },
+    isAtNorthEdge: function () {
+        this._getEdgeDeltas();
+        return ((this._edgeDeltas.ds > 0 && this._edgeDeltas.dn >= -1) || (this._edgeDeltas.ds < 0 && this._edgeDeltas.dn > 0));
+    },
+    isAtSouthEdge: function () {
+        this._getEdgeDeltas();
+        return ((this._edgeDeltas.dn < 0 && this._edgeDeltas.ds <= 1) || (this._edgeDeltas.ds < 0 && this._edgeDeltas.dn > 0));
     }
 });
 Zoomer.edgeDetectSlop = 5;
