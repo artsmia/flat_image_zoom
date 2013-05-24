@@ -23,7 +23,7 @@ Zoomer.zoom_image_by_class = function (zoomoptions) {
         }
     });
 };
-
+    
 // override Draggable so we can control who gets the panning events: swipe library or leaflet
 L.Draggable = L.Draggable.extend({
     _onDown: function (e) {
@@ -35,13 +35,10 @@ L.Draggable = L.Draggable.extend({
 
         // WAC_START 
         var map = Zoomer.getParentMapForElement(e.target);
-        if (!L.Browser.touch || typeof Swipe !== 'function' || map._zoom > map.getMinZoom()) {
-            // this is our event, we're going to drag. Don't pass to swipe library.
-            // NS - actually, swipe can have the start: we ignore the move if we need to.
-            //L.DomEvent.preventDefault(e);
-            //L.DomEvent.stopPropagation(e);
-            //console.log('leaflet dropped event: '+map._zoom +' '+ map.getMinZoom());
-        }
+        console.log('start L.Draggable--------------------');
+        
+        Zoomer.wasAtEastEdge=undefined;
+        Zoomer.wasAtWestEdge=undefined;
         // WAC_END 
 
         if (L.Draggable._disabled) { return; }
@@ -115,8 +112,11 @@ L.Draggable = L.Draggable.extend({
                 // not a swipe event, we want it but remove the X
                 diffVec.x = 0;
             } else {
-                this._simulateClick = false; // this prevents click action
-                return;
+                // don't prevent default in swipe.touchmove if you uncomment these
+                //if ((diffVec.x > 0 && Zoomer.wasAtEastEdge) || (diffVec.x < 0 && Zoomer.wasAtWestEdge)) {
+                    this._simulateClick = false; // this prevents click action
+                    return;
+                //}
             }
         }
         // WAC_END
@@ -274,6 +274,11 @@ Zoomer.deltaD = 0; // distance between touches (pinch)
 Swipe.prototype.onTouchStart = function(e) {
     Zoomer.multiTouchSwipeCount = 0;
     Zoomer.isPinching = undefined;
+    if(!e.noReset) {
+        console.log('start Swipe--------------------');
+        Zoomer.wasAtEastEdge=undefined;
+        Zoomer.wasAtWestEdge=undefined;
+    }
 
     var _this = this;
     
@@ -324,11 +329,16 @@ Swipe.prototype.onTouchMove = function(e) {
     // custom START
     if (e.target && typeof e.target._layer !== "undefined") {
         var map = e.target._layer._map;
-        map._getEdgeDeltas(); // load these once
-        if (map && !((_this.deltaX > 0 && map.isAtEastEdge()) || (_this.deltaX < 0 && map.isAtWestEdge()))) {
-            // they are inside the image and the touch should go to leaflet to pan.
-            e.preventDefault();
-            return this.onTouchStart(e);
+        
+        if (map) {
+            if (Zoomer.wasAtEastEdge === undefined) { Zoomer.wasAtEastEdge = map.isAtEastEdge(); }
+            if (Zoomer.wasAtWestEdge === undefined) { Zoomer.wasAtWestEdge = map.isAtWestEdge(); }
+            if (!((Zoomer.wasAtEastEdge && map.isAtEastEdge()) || (Zoomer.wasAtWestEdge && map.isAtWestEdge()))) {
+                // they are inside the image and the touch should go to leaflet to pan.
+                e.preventDefault();
+                e.noReset = true;
+                return this.onTouchStart(e);
+            }
         }
     }
     // custom END

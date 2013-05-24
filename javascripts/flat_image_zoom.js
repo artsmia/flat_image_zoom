@@ -132,13 +132,15 @@ Zoomer.Map = L.Map.extend({
     },
     isAtEastEdge: function () {
         this._getEdgeDeltas();
-        return ((this._edgeDeltas.de > 0 && this._edgeDeltas.dw > 0) || (this._edgeDeltas.de < 0 && this._edgeDeltas.dw > 0));
+        console.log(this._edgeDeltas.de +" "+ this._edgeDeltas.dw);
+        return ((this._edgeDeltas.de > 0 && this._edgeDeltas.dw >= -1) || (this._edgeDeltas.de < 0 && this._edgeDeltas.dw > 0));
     },
     isAtWestEdge: function () {
         this._getEdgeDeltas();
-        return ((this._edgeDeltas.dw < 0 && this._edgeDeltas.de < 0) || (this._edgeDeltas.de < 0 && this._edgeDeltas.dw > 0));
+        return ((this._edgeDeltas.dw < 0 && this._edgeDeltas.de <= 1) || (this._edgeDeltas.de < 0 && this._edgeDeltas.dw > 0));
     }
 });
+Zoomer.edgeDetectSlop = 5;
 
 Zoomer.zoomAtMouseLocation = function (e) {
     var map = e.target,
