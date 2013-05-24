@@ -172,7 +172,6 @@ Zoomer.abortedZoom = false;
 Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
     // override so we can limit pinches to max / min zoom dynamically
     _onTouchMove: function (e) {
-        console.log('_onTouchMove');
         if (!e.touches || e.touches.length !== 2) { return; }
 
         var map = this._map;
@@ -187,8 +186,6 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
         this._scale = p1.distanceTo(p2) / this._startDist;
         this._delta = p1._add(p2)._divideBy(2)._subtract(this._startCenter);
         var deltaX = this._delta.x;
-		console.log("Z: "+ deltaZ +" X: "+deltaX);
-		console.log(p1.distanceTo(p2) +" "+ this._startDist +" "+ this._scale);
 
         if (this._scale === 1) { return; }
 
@@ -262,9 +259,6 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
         var scale = 1;
         // WAC_END
         
-        console.log("TILEBG-----------------");
-        console.log(map._tileBg);
-        console.log(map._tileBg.offsetWidth);
         map._runAnimation(center, zoom, scale, origin, true);
     }
 });

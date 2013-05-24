@@ -274,7 +274,6 @@ Zoomer.deltaD = 0; // distance between touches (pinch)
 Swipe.prototype.onTouchStart = function(e) {
     Zoomer.multiTouchSwipeCount = 0;
     Zoomer.isPinching = undefined;
-    console.log('touch start: '+e.touches.length);
 
     var _this = this;
     
@@ -301,12 +300,10 @@ Swipe.prototype.onTouchMove = function(e) {
     var _this = this;
 
     // WAC CUSTOM START
-    console.log('move: '+e.touches.length+' '+Zoomer.isPinching);
     // ensure not pinching (2 touch = pinch, anything else = swipe)
-    if(!Zoomer.abortedZoom && (e.touches.length == 2 || e.scale && e.scale !== 1)) {
+    if(!Zoomer.slideHasVideo && !Zoomer.abortedZoom && (e.touches.length == 2 || e.scale && e.scale !== 1)) {
         Zoomer.isPinching = true;
         Zoomer.abortedZoom = false;
-        console.log("abort, think we're still pinching: "+e.scale);
         return;
     }
     if (e.touches.length > Zoomer.multiTouchSwipeCount) Zoomer.multiTouchSwipeCount = e.touches.length;

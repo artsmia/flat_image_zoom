@@ -6497,9 +6497,7 @@ L.Map.TouchZoom = L.Handler.extend({
 
 	_onTouchStart: function (e) {
 		var map = this._map;
-        console.log("_onTouchStart");
-        console.log(map._animatingZoom); // XXX somehow the transitin isn't finishing.
-        console.log(this._zooming);
+
 		if (!e.touches || e.touches.length !== 2 || map._animatingZoom || this._zooming) { return; }
 
 		var p1 = map.mouseEventToLayerPoint(e.touches[0]),

@@ -2,7 +2,6 @@ var artworkInfo = '',
     slides = '',
     variable = '',
     clss = '',
-    slideHasVideo = false,
     playing = false,
     tombstoneTimeout = '',
     introTimeout = '',
@@ -11,9 +10,11 @@ var artworkInfo = '',
  
 mejs.MediaFeatures.hasTouch = false;
 
+Zoomer.slideHasVideo = false;
+
 function showTombstone() {
     clearTimeout(tombstoneTimeout);
-    if (slideHasVideo === true) {
+    if (Zoomer.slideHasVideo === true) {
         $('.tombstone').addClass('on-video-slide');
     } else {
         $('.tombstone').removeClass('on-video-slide');
@@ -81,9 +82,9 @@ function slideInit() {
         callback: function(index, slide) {
             Zoomer.advancingSlide = false;
             if ($(slide).hasClass('video')) {
-                slideHasVideo = true;
+                Zoomer.slideHasVideo = true;
             } else {
-                slideHasVideo = false;
+                Zoomer.slideHasVideo = false;
             }
             showTombstone();
             swapInfo(index, slide);
@@ -92,15 +93,15 @@ function slideInit() {
                 setTimeout(function() {
                     var lastId = lastSlideStack.pop();
                     if (lastId.indexOf('_dummy') < 0) {
-                        console.log("recenter: "+slide.id);
                         Zoomer.zoomers[lastId].map.centerImageAtExtents();
-                        //Zoomer.zoomers[lastId].map._animatingZoom = false; 
                     }
                 }, 500);
             }
             for (var i = 0; i < $('.video-container video').length; i++) {
                 $('.video-container video')[i].pause();
-                //$('.video-container video')[i].setCurrentTime(0);
+                if ($('.video-container video')[i].currentTime > 0) {
+                    $('.video-container video')[i].setCurrentTime(0);
+                }
             }
             var videoId = '#' + lastSlideId;
             if ($(videoId).hasClass('video')) {
