@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         //src: ['javascripts/*.js'],
 
         src: [
-          'javascripts/jquery-2.0.0.min.js',
+          'javascripts/jquery-2.0.1.min.js',
           'javascripts/underscore-min.js',
           'javascripts/backbone-min.js',
           'javascripts/jquery.colorbox-min.js',
