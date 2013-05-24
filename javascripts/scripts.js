@@ -34,7 +34,7 @@ function hideIntro() {
         $('.intro').show();
         $.colorbox.close();
         mySwipe.slide(1, 0);
-    }, 45000);
+    }, 90000);
 }
 
 function swapInfo(index, slide) {
