@@ -31,6 +31,7 @@ function hideIntro() {
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
         $('.intro').show();
+        $.colorbox.close();
         mySwipe.slide(1, 0);
     }, 45000);
 }
@@ -39,7 +40,7 @@ function swapInfo(index, slide) {
     var $el = $(slide);
     $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
-    if ( (index > 0) && (index < ($('.swipe-wrap > div').length - 1))) {
+    if ((index > 0) && (index < ($('.swipe-wrap > div').length - 1))) {
         $('.status .status-pointer .current').html(index);
         $('.status .status-bar').css('width', ((index/($('.swipe-wrap > div').length - 2)) * 100) + '%');
     }
@@ -104,9 +105,9 @@ function slideInit() {
             var videoId = '#' + lastSlideId;
             if ($(videoId).hasClass('video')) {
                 $el = $(videoId);
-                $el.find('.mejs-poster').css("display", "block");
-                $el.find('.mejs-overlay-button').css("display", "block");
-                $el.find('.mejs-overlay-play').css("display", "block");
+                $el.find('.mejs-poster').css('display', 'block');
+                $el.find('.mejs-overlay-button').css('display', 'block');
+                $el.find('.mejs-overlay-play').css('display', 'block');
             }
             lastSlideId = slide.id; // record this so we know what we're leaving next time
         }
@@ -186,16 +187,7 @@ $(document).ready(function() {
     $('.info-link').on('click', function(event) {
         event.stopPropagation();
         event.preventDefault();
+        showInfo();
     });
-    
-    if (Modernizr.touch) {
-        $('.info-link').on('touchstart', function() {
-            showInfo();
-        });
-    } else {
-        $('.info-link').on('mousedown', function() {
-            showInfo();
-        });
-    }
 
 });

@@ -31,6 +31,7 @@
         
         #cboxLoadedContent {
             padding-top: 35px;
+            overflow: hidden !important;
             
             .info-wrapper {
                 height: 1010px;
@@ -41,7 +42,8 @@
                 }
             
                 article {
-                    height: inherit;
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
