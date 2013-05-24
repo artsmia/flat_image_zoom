@@ -142,7 +142,6 @@ L.Draggable = L.Draggable.extend({
 });
 
 Swipe.prototype.handleEvent = function(e) {
-    console.log(this.index +' '+ this.slides.length);
     if (e.type.indexOf('touch')>-1 && (this.index===0 || this.index === this.slides.length-1)) {
         // this a dummy slide about to disappear: stop all events
         //console.log("dropping "+e.type);
@@ -269,11 +268,12 @@ Swipe.prototype.setup = function() {
 };
 Zoomer.isPinching = undefined;
 Zoomer.multiTouchSwipeCount = 0;
+Zoomer.deltaX = 0; // horizontal distance travelled
+Zoomer.deltaD = 0; // distance between touches (pinch)
 
 Swipe.prototype.onTouchStart = function(e) {
     Zoomer.multiTouchSwipeCount = 0;
     Zoomer.isPinching = undefined;
-    console.log('touch start: '+e.touches.length);
 
     var _this = this;
     
@@ -300,10 +300,10 @@ Swipe.prototype.onTouchMove = function(e) {
     var _this = this;
 
     // WAC CUSTOM START
-    console.log('move: '+e.touches.length+' '+Zoomer.isPinching);
     // ensure not pinching (2 touch = pinch, anything else = swipe)
-    if(e.touches.length == 2 || e.scale && e.scale !== 1) {
+    if(!Zoomer.slideHasVideo && !Zoomer.abortedZoom && (e.touches.length == 2 || e.scale && e.scale !== 1)) {
         Zoomer.isPinching = true;
+        Zoomer.abortedZoom = false;
         return;
     }
     if (e.touches.length > Zoomer.multiTouchSwipeCount) Zoomer.multiTouchSwipeCount = e.touches.length;
@@ -383,9 +383,11 @@ Swipe.prototype.onTouchEnd = function (e) {
         direction = _this.deltaX < 0; // true:right false:left
 
     // if not scrolling vertically
-    if (!_this.isScrolling) {
+    if (!_this.isScrolling && _this.start) {
 
       if (isValidSlide && !isPastBounds) {
+        Zoomer.abortedZoom = false;
+        _this.start = {};
         if (direction) {
           _this._stack([_this.index-1],-1);
           _this._slide([_this.index,_this.index+1],-_this.width,_this.speed);
