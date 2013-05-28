@@ -47,11 +47,12 @@ function swapInfo(index, slide) {
     }
 }
 
+var cbox = undefined;
 function showInfo() {
     for (var i = 0; i < $('.video-container video').length; i++) {
         $('.video-container video')[i].pause();
     }
-    $.colorbox({
+    cbox=$.colorbox({
         transition: 'none',
         width: '60%',
         initialWidth: '60%',
@@ -185,10 +186,21 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 
-    $('.info-link').on('click', function(event) {
+    $('.info-link').on('touchend', function(event) {
         event.stopPropagation();
         event.preventDefault();
         showInfo();
+    });
+    
+    $('#cboxOverlay').on('touchend', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            cbox.colorbox.close();
+    });
+    $('#colorbox').on('touchend', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            cbox.colorbox.close();
     });
 
 });
