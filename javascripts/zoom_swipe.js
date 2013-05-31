@@ -204,7 +204,7 @@ Swipe.prototype.setup = function() {
     this.previousSlideId = this.element.children[0].id;
     
     //this.slideDuration = window.location.href.indexOf('longSwipe') !== -1 ? 500 : 250; // 250 if small, 500 if big
-    this.slideDuration = 500; // assume big screen for this project
+    this.slideDuration = 1000; // assume big screen for this project
     // WAC CUSTOM END
 
     // get and measure amt of slides
