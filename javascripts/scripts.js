@@ -81,6 +81,9 @@ lastSlideStack = [];
 function slideInit() {
     window.mySwipe = new Swipe(document.getElementById('slider'), {
         callback: function(index, slide) {
+            if (Zoomer.zoomers[slide.id]) {
+                Zoomer.zoomers[slide.id].map.touchZoom._zooming=false;
+            }
             Zoomer.advancingSlide = false;
             if ($(slide).hasClass('video')) {
                 Zoomer.slideHasVideo = true;
@@ -95,6 +98,7 @@ function slideInit() {
                     var lastId = lastSlideStack.pop();
                     if (lastId.indexOf('_dummy') < 0) {
                         Zoomer.zoomers[lastId].map.centerImageAtExtents();
+                        Zoomer.zoomers[lastId].map.touchZoom._zooming=false;
                     }
                 }, 500);
             }

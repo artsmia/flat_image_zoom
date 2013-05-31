@@ -316,7 +316,7 @@ Swipe.prototype.onTouchMove = function(e) {
 
     // determine if scrolling test has run - one time test
     if ( typeof _this.isScrolling == 'undefined') {
-      _this.isScrolling = !!( _this.isScrolling || Math.abs(_this.deltaX) < Math.abs(e.touches[0].pageY - _this.start.pageY) );
+      //_this.isScrolling = !!( _this.isScrolling || Math.abs(_this.deltaX) < Math.abs(e.touches[0].pageY - _this.start.pageY) );
     }
 
     // custom START
@@ -391,8 +391,8 @@ Swipe.prototype.onTouchEnd = function (e) {
       var mapIdle = true,
         zoomer = Zoomer.zoomers[this.slides[this.index].id];
       if (zoomer && !zoomer.map.isIdle()) {
-          console.log('skipping slide, not idle: '+this.slides[this.index].id);
-          mapIdle = false
+          mapIdle = false;
+          Zoomer.abortedZoom = false;
       }
 
       if (isValidSlide && !isPastBounds && mapIdle) {
