@@ -35,7 +35,6 @@ L.Draggable = L.Draggable.extend({
 
         // WAC_START 
         var map = Zoomer.getParentMapForElement(e.target);
-        console.log('start L.Draggable--------------------');
         
         Zoomer.wasAtEastEdge=undefined;
         Zoomer.wasAtWestEdge=undefined;
@@ -105,7 +104,6 @@ L.Draggable = L.Draggable.extend({
         if (map && this._verticalPan === undefined) {
             this._verticalPan = !!(this._verticalPan || ((map.isAtEastEdge() && map.isAtWestEdge()) && Math.abs(diffVec.x) < Math.abs(diffVec.y)));
         }
-        console.log(diffVec.y);
         if (L.Browser.touch && (!map || (diffVec.x > Zoomer.lastDiffX && map.isAtEastEdge()) || (diffVec.x < Zoomer.lastDiffX && map.isAtWestEdge()))) {
             // they are at the edge or otherwise not panning leaflet any more. Skip the pan animation
             if (Zoomer.lastDiffX) { diffVec.x=Zoomer.lastDiffX; }
@@ -271,7 +269,6 @@ Swipe.prototype.onTouchStart = function(e) {
     Zoomer.multiTouchSwipeCount = 0;
     Zoomer.isPinching = undefined;
     if(!e.noReset) {
-        console.log('start Swipe--------------------');
         Zoomer.wasAtEastEdge=undefined;
         Zoomer.wasAtWestEdge=undefined;
     }
@@ -391,7 +388,14 @@ Swipe.prototype.onTouchEnd = function (e) {
     // if not scrolling vertically
     if (!_this.isScrolling && _this.start) {
 
-      if (isValidSlide && !isPastBounds) {
+      var mapIdle = true,
+        zoomer = Zoomer.zoomers[this.slides[this.index].id];
+      if (zoomer && !zoomer.map.isIdle()) {
+          console.log('skipping slide, not idle: '+this.slides[this.index].id);
+          mapIdle = false
+      }
+
+      if (isValidSlide && !isPastBounds && mapIdle) {
         Zoomer.abortedZoom = false;
         _this.start = {};
         if (direction) {

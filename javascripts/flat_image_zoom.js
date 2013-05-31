@@ -21,6 +21,14 @@ Zoomer.Map = L.Map.extend({
         console.log(this._zoomer.containerName + ' -------------');
         console.log(msg);
     },
+    
+    isIdle: function () {
+        // are we all done doing everything??
+        console.log(this._animatingZoom +' '+ this.touchZoom._zooming +' '+ (this._draggable && this._draggable._moved));
+        var mapIdle = !(this._animatingZoom || this.touchZoom._zooming || (this._draggable && this._draggable._moved));
+        console.log('mapIdle: '+mapIdle);
+        return mapIdle;
+    },
 
     ////////////////////////////////////////////////////////////////////////
     // override some core map methods
@@ -157,7 +165,7 @@ Zoomer.zoomAtMouseLocation = function (e) {
         viewHalf = map.getSize()._divideBy(2),
         centerOffset = e.containerPoint._subtract(viewHalf)._multiplyBy(1 - 1 / scale),
         newCenterPoint = map._getTopLeftPoint()._add(viewHalf)._add(centerOffset);
-    if (zoom === map._zoom) {
+    if (zoom === map._zoom || !map.isIdle()) {
         return;
     }
     map.setView(map.unproject(newCenterPoint), zoom);

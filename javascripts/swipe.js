@@ -318,8 +318,15 @@ Swipe.prototype = {
 
     // if not scrolling vertically
     if (!_this.isScrolling) {
+    
+      var mapIdle = true,
+        zoomer = Zoomer.zoomers[this.slides[this.index]];
+      if (!zoomer || !zoomer.map.isIdle()) {
+          console.log('skipping slide, not idle');
+          mapIdle = false
+      }
 
-      if (isValidSlide && !isPastBounds) {
+      if (isValidSlide && !isPastBounds && mapIdle) {
         if (direction) {
           _this._stack([_this.index-1],-1);
           _this._slide([_this.index,_this.index+1],-_this.width,_this.speed);
@@ -352,6 +359,14 @@ Swipe.prototype = {
 
   slide: function(to, speed) {
     
+    var mapIdle = true,
+        zoomer = Zoomer.zoomers[this.slides[this.index].id];
+      if (zoomer && !zoomer.map.isIdle()) {
+          console.log('skipping slide, not idle: '+this.slides[this.index].id);
+          console.log(zoomer);
+          mapIdle = false
+      }
+    if (!mapIdle) {return;}
     var from = this.index;
 
     if (from == to) return; // do nothing if already on requested slide
