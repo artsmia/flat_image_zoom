@@ -45,6 +45,12 @@ function swapInfo(index, slide) {
         $('.status .status-pointer .current').html(index);
         $('.status .status-bar').css('width', ((index/($('.swipe-wrap > div').length - 2)) * 100) + '%');
     }
+    console.log("'"+$('#info').children()[0].innerHTML+"'");
+    if ($('#info').children()[0].innerHTML) {
+        $('.info-link').show(500);
+    } else {
+        $('.info-link').hide(500);
+    }
 }
 
 var cbox = undefined;
