@@ -21,13 +21,17 @@
       }
     },
     {
+      "type": "autoplay",
+      "video_src": "http://10.1.6.75/media/intro.mp4"
+    },
+    {
       "type": "video",
       "title": "Untitled",
       "artist": "Jim Hodges",
       "year": "2011",
       "text": "",
       "video_poster": "http://s3.amazonaws.com/walker.aoc/garden-video/hodges.jpg",
-      "video_src": "file://media/hodges.mp4",
+      "video_src": "http://10.1.6.75/media/hodges.mp4",
       "original_src": "http://s3.amazonaws.com/walker.aoc/garden-video/hodges.mp4"
     },
     {

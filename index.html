@@ -8,9 +8,6 @@
     <script src="javascripts/modernizr.js"></script>
 </head>
 <body>
-    <div class="intro">
-        <video src="videos/intro.mp4" type="video/mp4" width="1920" height="1080" autoplay loop>
-    </div>
     
     <div class="status">
         <div class="status-bar">
@@ -56,6 +53,14 @@
     <script src="javascripts/flat_image_zoom.js"></script>
 
     <script type="text/template" id="zoomer">
+        <% if (type == 'autoplay') {%>
+            <div id='<%= id %>' class='zoomer video'>
+                <div class='intro-video-container'>
+                    <video id='<%= player_id %>' src='<%= video_src %>' type='video/mp4' controls="none" autoplay loop></video>
+                </div>
+                <div class='hidden slide-article'><article class="info"></article></div>
+            </div>
+        <% } %>
         <% if (type == "video") {%>
             <div id="<%= id %>" class="zoomer video">
                 <div class="video-container">

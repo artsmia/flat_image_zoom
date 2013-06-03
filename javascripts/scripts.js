@@ -31,13 +31,13 @@ function showTombstone() {
 }
 
 function hideIntro() {
-    _gaq.push(['_trackEvent','Infolounge','Wakeup','ScreenId',screenId]);
     clearTimeout(introTimeout);
-    $('.intro').stop(true, true).fadeOut(500);
+    //$('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
-        $('.intro').show();
+        //$('.intro').show();
         $.colorbox.close();
-        mySwipe.slide(1, 0);
+        mySwipe.slide(2, 0);
+        if (_gaq) { _gaq.push(['_trackEvent','Infolounge','Wakeup','ScreenId',screenId]); }
     }, 90000);
 }
 
@@ -58,6 +58,7 @@ function swapInfo(index, slide) {
 
 var cbox = undefined;
 function showInfo() {
+    if (_gaq) { _gaq.push(['_trackEvent','Infolounge','Info','ScreenId',screenId]); }
     for (var i = 0; i < $('.video-container video').length; i++) {
         $('.video-container video')[i].pause();
     }
@@ -148,6 +149,7 @@ function initDone() {
     }).on('ended',function() {
         hideIntro();
     });
+    mySwipe.next();
 }
 
 $.getJSON('javascripts/garden.json', function(data) {
