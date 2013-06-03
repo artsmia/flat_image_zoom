@@ -35,7 +35,6 @@ L.Draggable = L.Draggable.extend({
 
         // WAC_START 
         var map = Zoomer.getParentMapForElement(e.target);
-        console.log('start L.Draggable--------------------');
         
         Zoomer.wasAtEastEdge=undefined;
         Zoomer.wasAtWestEdge=undefined;
@@ -105,7 +104,6 @@ L.Draggable = L.Draggable.extend({
         if (map && this._verticalPan === undefined) {
             this._verticalPan = !!(this._verticalPan || ((map.isAtEastEdge() && map.isAtWestEdge()) && Math.abs(diffVec.x) < Math.abs(diffVec.y)));
         }
-        console.log(diffVec.y);
         if (L.Browser.touch && (!map || (diffVec.x > Zoomer.lastDiffX && map.isAtEastEdge()) || (diffVec.x < Zoomer.lastDiffX && map.isAtWestEdge()))) {
             // they are at the edge or otherwise not panning leaflet any more. Skip the pan animation
             if (Zoomer.lastDiffX) { diffVec.x=Zoomer.lastDiffX; }
@@ -206,7 +204,7 @@ Swipe.prototype.setup = function() {
     this.previousSlideId = this.element.children[0].id;
     
     //this.slideDuration = window.location.href.indexOf('longSwipe') !== -1 ? 500 : 250; // 250 if small, 500 if big
-    this.slideDuration = 500; // assume big screen for this project
+    this.slideDuration = 1000; // assume big screen for this project
     // WAC CUSTOM END
 
     // get and measure amt of slides
@@ -271,7 +269,6 @@ Swipe.prototype.onTouchStart = function(e) {
     Zoomer.multiTouchSwipeCount = 0;
     Zoomer.isPinching = undefined;
     if(!e.noReset) {
-        console.log('start Swipe--------------------');
         Zoomer.wasAtEastEdge=undefined;
         Zoomer.wasAtWestEdge=undefined;
     }
@@ -319,7 +316,7 @@ Swipe.prototype.onTouchMove = function(e) {
 
     // determine if scrolling test has run - one time test
     if ( typeof _this.isScrolling == 'undefined') {
-      _this.isScrolling = !!( _this.isScrolling || Math.abs(_this.deltaX) < Math.abs(e.touches[0].pageY - _this.start.pageY) );
+      //_this.isScrolling = !!( _this.isScrolling || Math.abs(_this.deltaX) < Math.abs(e.touches[0].pageY - _this.start.pageY) );
     }
 
     // custom START
@@ -391,7 +388,14 @@ Swipe.prototype.onTouchEnd = function (e) {
     // if not scrolling vertically
     if (!_this.isScrolling && _this.start) {
 
-      if (isValidSlide && !isPastBounds) {
+      var mapIdle = true,
+        zoomer = Zoomer.zoomers[this.slides[this.index].id];
+      if (zoomer && !zoomer.map.isIdle()) {
+          mapIdle = false;
+          Zoomer.abortedZoom = false;
+      }
+
+      if (isValidSlide && !isPastBounds && mapIdle) {
         Zoomer.abortedZoom = false;
         _this.start = {};
         if (direction) {

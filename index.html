@@ -8,9 +8,6 @@
     <script src="javascripts/modernizr.js"></script>
 </head>
 <body>
-    <div class="intro">
-        <video src="videos/intro.mp4" type="video/mp4" width="1920" height="1080" autoplay loop>
-    </div>
     
     <div class="status">
         <div class="status-bar">
@@ -56,31 +53,51 @@
     <script src="javascripts/flat_image_zoom.js"></script>
 
     <script type="text/template" id="zoomer">
+        <% if (type == 'autoplay') {%>
+            <div id='<%= id %>' class='zoomer video'>
+                <div class='intro-video-container'>
+                    <video id='<%= player_id %>' src='<%= video_src %>' type='video/mp4' autoplay loop></video>
+                </div>
+                <div class='hidden slide-article'><article class="info"></article></div>
+            </div>
+        <% } %>
         <% if (type == "video") {%>
             <div id="<%= id %>" class="zoomer video">
                 <div class="video-container">
                     <video id="<%= player_id %>" poster="<%= video_poster %>" src="<%= video_src %>" type="video/mp4" controls="controls"></video>
                 </div>
-                <div class="hidden slide-article"><article class="info"><%= text.body %></article></div>
+                <div class="hidden slide-article"><article class="info"><%= smarten(text.body) %></article></div>
                 <ul class="hidden meta">
-                    <li class="title"><%= title %></li>
-                    <li class="artist"><%= artist %></li>
-                    <li class="year"><%= year %></li>
+                    <li class="title"><%= smarten(title) %></li>
+                    <li class="artist"><%= smarten(artist) %></li>
+                    <li class="year"><%= smarten(year) %></li>
                 </ul>
             </div>
         <% } %>
         <% if (type == "zoomer") {%>
             <div class="zoomer <%= zoomer_class %>">
-                <div class="hidden slide-article"><article class="info"><%= text.body %></article></div>
+                <div class="hidden slide-article"><article class="info"><%= smarten(text.body) %></article></div>
                 <ul class="hidden meta">
-                    <li class="title"><%= title %></li>
-                    <li class="artist"><%= artist %></li>
-                    <li class="year"><%= year %></li>
+                    <li class="title"><%= smarten(title) %></li>
+                    <li class="artist"><%= smarten(artist) %></li>
+                    <li class="year"><%= smarten(year) %></li>
                 </ul>
             </div>
         <% } %>
     </script>
     <script src="javascripts/scripts.js"></script>
     <!-- <script src="build/wac_infowalls.js"></script> -->
+    <script>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-624638-1']);
+        _gaq.push(['_setDomainName', '.walkerart.org']);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 </body>
 </html>

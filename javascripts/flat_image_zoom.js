@@ -21,6 +21,19 @@ Zoomer.Map = L.Map.extend({
         console.log(this._zoomer.containerName + ' -------------');
         console.log(msg);
     },
+    
+    isIdle: function () {
+        // are we all done doing everything??
+        var mapIdle = Zoomer.abortedZoom || !(this._animatingZoom || this.touchZoom._zooming || (this._draggable && this._draggable._moved));
+        return mapIdle;
+    },
+    
+	_backupTransitionEnd: function () {
+		if (this._animatingZoom) {
+			this._onZoomTransitionEnd();
+			//this.touchZoom._zooming=false; // recover this state, somehow
+		}
+	},
 
     ////////////////////////////////////////////////////////////////////////
     // override some core map methods
@@ -157,7 +170,7 @@ Zoomer.zoomAtMouseLocation = function (e) {
         viewHalf = map.getSize()._divideBy(2),
         centerOffset = e.containerPoint._subtract(viewHalf)._multiplyBy(1 - 1 / scale),
         newCenterPoint = map._getTopLeftPoint()._add(viewHalf)._add(centerOffset);
-    if (zoom === map._zoom) {
+    if (zoom === map._zoom || !map.isIdle()) {
         return;
     }
     map.setView(map.unproject(newCenterPoint), zoom);
@@ -181,6 +194,10 @@ Zoomer.abortedZoom = false;
 Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
     // override so we can limit pinches to max / min zoom dynamically
     _onTouchMove: function (e) {
+        if (e.touches && e.touches.length > 2) {
+            // multi-finger swipe: abort the zoom!
+            return this._abortZoom();
+        }
         if (!e.touches || e.touches.length !== 2) { return; }
 
         var map = this._map;
@@ -226,14 +243,23 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
         );
         
 		if (Math.abs(deltaX) > Math.abs(deltaZ)) {
-            this._moved = true;
-            Zoomer.abortedZoom = true;
-		    // let it be a swipe
-            return this._onTouchEnd();
+            return this._abortZoom();
         }
         Zoomer.abortedZoom = false;
         
         L.DomEvent.preventDefault(e);
+    },
+    
+    _abortZoom: function() {
+        if (this._zooming && this._moved) {
+            Zoomer.abortedZoom = true;
+	        // let it be a swipe
+            return this._onTouchEnd();
+        }
+        this._zooming = false;
+		L.DomEvent
+		    .off(document, 'touchmove', this._onTouchMove)
+		    .off(document, 'touchend', this._onTouchEnd);
     },
 
 	_updateOnMove: function () {
@@ -256,6 +282,7 @@ Zoomer.Map.TouchZoom = L.Map.TouchZoom.extend({
 	
     // override so we can stop pinch zooms wherever they are, don't snap to next round zoom level
     _onTouchEnd: function () {
+        setTimeout(L.bind(this._map._backupTransitionEnd,this._map),1000);
         if (!this._moved || !this._zooming) { return; }
 
         var map = this._map;

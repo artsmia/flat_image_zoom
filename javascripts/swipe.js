@@ -319,7 +319,7 @@ Swipe.prototype = {
     // if not scrolling vertically
     if (!_this.isScrolling) {
 
-      if (isValidSlide && !isPastBounds) {
+      if (isValidSlide && !isPastBounds && mapIdle) {
         if (direction) {
           _this._stack([_this.index-1],-1);
           _this._slide([_this.index,_this.index+1],-_this.width,_this.speed);

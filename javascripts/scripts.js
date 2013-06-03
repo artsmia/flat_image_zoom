@@ -6,13 +6,18 @@ var artworkInfo = '',
     tombstoneTimeout = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
-    lastSlideId = 'image-view-1';
+    lastSlideId = 'image-view-1',
+    screenId = 'development';
+    
+screenId=window.location.hash?window.location.hash.substr(1):screenId; // use for logging which screen is in use
  
 mejs.MediaFeatures.hasTouch = false;
 
 Zoomer.slideHasVideo = false;
+Zoomer.skipTombstone = false;
 
 function showTombstone() {
+    if (Zoomer.skipTombstone) { return; }
     clearTimeout(tombstoneTimeout);
     if (Zoomer.slideHasVideo === true) {
         $('.tombstone').addClass('on-video-slide');
@@ -29,11 +34,12 @@ function showTombstone() {
 
 function hideIntro() {
     clearTimeout(introTimeout);
-    $('.intro').stop(true, true).fadeOut(500);
+    //$('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
-        $('.intro').show();
+        //$('.intro').show();
         $.colorbox.close();
-        mySwipe.slide(1, 0);
+        mySwipe.slide(2, 0);
+        if (_gaq) { _gaq.push(['_trackEvent','Infolounge','Wakeup','ScreenId',screenId]); }
     }, 90000);
 }
 
@@ -42,13 +48,29 @@ function swapInfo(index, slide) {
     $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
     if ((index > 0) && (index < ($('.swipe-wrap > div').length - 1))) {
+        index = index-1;
+        if (index < 1) { index = ($('.swipe-wrap > div').length - 2); }
         $('.status .status-pointer .current').html(index);
         $('.status .status-bar').css('width', ((index/($('.swipe-wrap > div').length - 2)) * 100) + '%');
+    }
+    if ($('#info').children()[0].innerHTML) {
+        $('.info-link').show(500);
+    } else {
+        $('.info-link').hide(500);
+    }
+    console.log($el.children('.meta').html());
+    if ($el.children('.meta').html()) {
+        $('.tombstone').fadeIn(150);
+        Zoomer.skipTombstone = false;
+    } else {
+        $('.tombstone').fadeOut(150);
+        Zoomer.skipTombstone = true;
     }
 }
 
 var cbox = undefined;
 function showInfo() {
+    if (_gaq) { _gaq.push(['_trackEvent','Infolounge','Info','ScreenId',screenId]); }
     for (var i = 0; i < $('.video-container video').length; i++) {
         $('.video-container video')[i].pause();
     }
@@ -81,6 +103,9 @@ lastSlideStack = [];
 function slideInit() {
     window.mySwipe = new Swipe(document.getElementById('slider'), {
         callback: function(index, slide) {
+            if (Zoomer.zoomers[slide.id]) {
+                Zoomer.zoomers[slide.id].map.touchZoom._zooming=false;
+            }
             Zoomer.advancingSlide = false;
             if ($(slide).hasClass('video')) {
                 Zoomer.slideHasVideo = true;
@@ -95,6 +120,7 @@ function slideInit() {
                     var lastId = lastSlideStack.pop();
                     if (lastId.indexOf('_dummy') < 0) {
                         Zoomer.zoomers[lastId].map.centerImageAtExtents();
+                        Zoomer.zoomers[lastId].map.touchZoom._zooming=false;
                     }
                 }, 500);
             }
@@ -135,6 +161,7 @@ function initDone() {
     }).on('ended',function() {
         hideIntro();
     });
+    mySwipe.next();
 }
 
 $.getJSON('javascripts/garden.json', function(data) {
@@ -192,15 +219,27 @@ $(document).ready(function() {
         showInfo();
     });
     
-    $('#cboxOverlay').on('touchend', function(event) {
-            event.stopPropagation();
-            event.preventDefault();
-            cbox.colorbox.close();
-    });
-    $('#colorbox').on('touchend', function(event) {
-            event.stopPropagation();
-            event.preventDefault();
-            cbox.colorbox.close();
-    });
+    $('#cboxOverlay').on('touchend', cboxTouchEnd);
+    $('#colorbox').on('touchend', cboxTouchEnd);
 
 });
+
+function cboxTouchEnd(event) {
+    console.log(event);
+    if (event.target.nodeName == 'P') { return; }
+    event.stopPropagation();
+    event.preventDefault();
+    cbox.colorbox.close();
+};
+
+// Change straight quotes to curly and double hyphens to em-dashes.
+function smarten(a) {
+  if (!a) { return a; }
+  a = a.replace(/(^|[-\u2014\s(\["])'/g, "$1\u2018");       // opening singles
+  a = a.replace(/'/g, "\u2019");                            // closing singles & apostrophes
+  a = a.replace(/(^|[-\u2014/\[(\u2018\s])"/g, "$1\u201c"); // opening doubles
+  a = a.replace(/"/g, "\u201d");                            // closing doubles
+  a = a.replace(/--/g, "\u2014");                           // em-dashes
+  return a
+};
+
