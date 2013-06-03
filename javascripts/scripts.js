@@ -14,8 +14,10 @@ screenId=window.location.hash?window.location.hash.substr(1):screenId; // use fo
 mejs.MediaFeatures.hasTouch = false;
 
 Zoomer.slideHasVideo = false;
+Zoomer.skipTombstone = false;
 
 function showTombstone() {
+    if (Zoomer.skipTombstone) { return; }
     clearTimeout(tombstoneTimeout);
     if (Zoomer.slideHasVideo === true) {
         $('.tombstone').addClass('on-video-slide');
@@ -46,6 +48,8 @@ function swapInfo(index, slide) {
     $('.tombstone').html($el.children('.meta').html());
     $('#info').html($el.children('.slide-article').html());
     if ((index > 0) && (index < ($('.swipe-wrap > div').length - 1))) {
+        index = index-1;
+        if (index < 1) { index = ($('.swipe-wrap > div').length - 2); }
         $('.status .status-pointer .current').html(index);
         $('.status .status-bar').css('width', ((index/($('.swipe-wrap > div').length - 2)) * 100) + '%');
     }
@@ -53,6 +57,14 @@ function swapInfo(index, slide) {
         $('.info-link').show(500);
     } else {
         $('.info-link').hide(500);
+    }
+    console.log($el.children('.meta').html());
+    if ($el.children('.meta').html()) {
+        $('.tombstone').fadeIn(150);
+        Zoomer.skipTombstone = false;
+    } else {
+        $('.tombstone').fadeOut(150);
+        Zoomer.skipTombstone = true;
     }
 }
 
