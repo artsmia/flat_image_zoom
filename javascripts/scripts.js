@@ -6,7 +6,10 @@ var artworkInfo = '',
     tombstoneTimeout = '',
     introTimeout = '',
     zoomerTemplate = _.template($('#zoomer').html()),
-    lastSlideId = 'image-view-1';
+    lastSlideId = 'image-view-1',
+    screenId = 'development';
+    
+screenId=window.location.hash?window.location.hash.substr(1):screenId; // use for logging which screen is in use
  
 mejs.MediaFeatures.hasTouch = false;
 
@@ -28,6 +31,7 @@ function showTombstone() {
 }
 
 function hideIntro() {
+    _gaq.push(['_trackEvent','Infolounge','Wakeup','ScreenId',screenId]);
     clearTimeout(introTimeout);
     $('.intro').stop(true, true).fadeOut(500);
     introTimeout = setTimeout(function() {
