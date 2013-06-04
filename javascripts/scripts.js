@@ -40,7 +40,6 @@ function hideIntro() {
         $.colorbox.close();
         mySwipe.slide(2, 0);
         _gaq.push(['_trackEvent','Infolounge','Wakeup',screenId]);
-        console.log('WAKEUP');
     }, 90000);
 }
 
