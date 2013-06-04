@@ -10,7 +10,7 @@ var artworkInfo = '',
     screenId = 'development';
     
 screenId=window.location.hash?window.location.hash.substr(1):screenId; // use for logging which screen is in use
- 
+
 mejs.MediaFeatures.hasTouch = false;
 
 Zoomer.slideHasVideo = false;
@@ -39,7 +39,8 @@ function hideIntro() {
         //$('.intro').show();
         $.colorbox.close();
         mySwipe.slide(2, 0);
-        if (_gaq) { _gaq.push(['_trackEvent','Infolounge','Wakeup','ScreenId',screenId]); }
+        _gaq.push(['_trackEvent','Infolounge','Wakeup',screenId]);
+        console.log('WAKEUP');
     }, 90000);
 }
 
@@ -58,7 +59,6 @@ function swapInfo(index, slide) {
     } else {
         $('.info-link').hide(500);
     }
-    console.log($el.children('.meta').html());
     if ($el.children('.meta').html()) {
         $('.tombstone').fadeIn(150);
         Zoomer.skipTombstone = false;
@@ -70,7 +70,7 @@ function swapInfo(index, slide) {
 
 var cbox = undefined;
 function showInfo() {
-    if (_gaq) { _gaq.push(['_trackEvent','Infolounge','Info','ScreenId',screenId]); }
+    _gaq.push(['_trackEvent','Infolounge','Info',screenId]);
     for (var i = 0; i < $('.video-container video').length; i++) {
         $('.video-container video')[i].pause();
     }
@@ -225,7 +225,6 @@ $(document).ready(function() {
 });
 
 function cboxTouchEnd(event) {
-    console.log(event);
     if (event.target.nodeName == 'P') { return; }
     event.stopPropagation();
     event.preventDefault();
