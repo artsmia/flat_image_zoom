@@ -25,6 +25,26 @@
       "video_src": "http://10.1.6.75/media/intro.mp4"
     },
     {
+      "type": "zoomer",
+      "url": "http://www.walkerart.org/collections/artworks/spoonbridge-and-cherry",
+      "title": "Spoonbridge and Cherry",
+      "artist": "Claes Oldenburg, Coosje van Bruggen",
+      "year": "1985&ndash;1988",
+      "thumbnail": "http://cdn1.walkerart.org/public/collections-thumbs/wac_786/740x590.jpeg",
+      "zoomer_url": "http://cdn{s}.walkerart.org/public/collections-tiled/wac_786/{z}_{x}_{y}.jpg",
+      "zoomer_width": 4000,
+      "zoomer_height": 3187,
+      "text": {
+        "title": "Claes Oldenburg &amp; Coosje van Bruggen",
+        "author_string": "Minneapolis Sculpture Garden",
+        "publish_date_string": "1998",
+        "citation": "Jenkins, Janet, ed. <em>Minneapolis Sculpture Garden</em>. Minneapolis, MN: Walker Art Center, 1998, no. 33.",
+        "rights": "© 1998 Walker Art Center",
+        "body": "<p>Claes Oldenburg is best known for his ingenious, oversized renditions of ordinary objects, like the giant &ldquo;soft&rdquo; three-way plug and overturned bag of french fries in the Walker&rsquo;s own collection. He and Coosje van Bruggen, his wife and collaborator, had already created a number of large-scale public sculptures, including the <em>Batcolumn</em> in Chicago, when they were asked to design a fountain-sculpture for the planned Minneapolis Sculpture Garden. The spoon had appeared as a motif in a number of Oldenburg&rsquo;s drawings and plans over the years, inspired by a novelty item (a spoon resting on a glob of fake chocolate) he had acquired in 1962. Eventually the utensil emerged--in humorously gigantic scale--as the theme of the Minneapolis project. Van Bruggen contributed the cherry as a playful reference to the Garden&rsquo;s formal geometry, which reminded her of Versailles and the exaggerated dining etiquette Louis XIV imposed there. She also conceived the pond&rsquo;s shape in the form of linden seed. (Linden trees are planted along the <em>allées</em> that stretch before the fountain.) The complex fabrication of the 5,800 pound spoon and 1,200 pound cherry was carried out at two shipbuilding yards in New England. The sculpture has become a beloved icon in the Garden, whether glaceed with snow in the Minnesota winters or gleaming in the warmer months, with water flowing over the surface of the cherry and a fine mist rising from its stem.</p>",
+        "blank": "node"
+      }
+    },
+    {
       "type": "video",
       "title": "Untitled",
       "artist": "Jim Hodges",
@@ -311,26 +331,6 @@
         "citation": "Jenkins, Janet, ed. <em>Minneapolis Sculpture Garden</em>. Minneapolis, MN: Walker Art Center, 1998, no. 18.",
         "rights": "© 1998 Walker Art Center",
         "body": "<p>This unnamed, archetypal goddess, with her massive, splayed thighs supported on a primitive altar of rough-hewn pillars, is a potent symbol of fertility. According to the artist, she represents &ldquo;the birth of the universe.&rdquo; Like a number of American sculptors practicing in New York during the 1940s and 1950s, Nakian worked in a style that paralleled the development of Abstract Expressionist painting. The roughly worked, patinated surfaces of his sculptures and their fragmented, abstract forms mirror the aggressive shapes and textures that the New York School painters achieved in their canvases. Nakian forged a uniquely personal style in his sculpture, inspired by Greek and Roman art and classical mythology.</p>",
-        "blank": "node"
-      }
-    },
-    {
-      "type": "zoomer",
-      "url": "http://www.walkerart.org/collections/artworks/spoonbridge-and-cherry",
-      "title": "Spoonbridge and Cherry",
-      "artist": "Claes Oldenburg, Coosje van Bruggen",
-      "year": "1985&ndash;1988",
-      "thumbnail": "http://cdn1.walkerart.org/public/collections-thumbs/wac_786/740x590.jpeg",
-      "zoomer_url": "http://cdn{s}.walkerart.org/public/collections-tiled/wac_786/{z}_{x}_{y}.jpg",
-      "zoomer_width": 4000,
-      "zoomer_height": 3187,
-      "text": {
-        "title": "Claes Oldenburg &amp; Coosje van Bruggen",
-        "author_string": "Minneapolis Sculpture Garden",
-        "publish_date_string": "1998",
-        "citation": "Jenkins, Janet, ed. <em>Minneapolis Sculpture Garden</em>. Minneapolis, MN: Walker Art Center, 1998, no. 33.",
-        "rights": "© 1998 Walker Art Center",
-        "body": "<p>Claes Oldenburg is best known for his ingenious, oversized renditions of ordinary objects, like the giant &ldquo;soft&rdquo; three-way plug and overturned bag of french fries in the Walker&rsquo;s own collection. He and Coosje van Bruggen, his wife and collaborator, had already created a number of large-scale public sculptures, including the <em>Batcolumn</em> in Chicago, when they were asked to design a fountain-sculpture for the planned Minneapolis Sculpture Garden. The spoon had appeared as a motif in a number of Oldenburg&rsquo;s drawings and plans over the years, inspired by a novelty item (a spoon resting on a glob of fake chocolate) he had acquired in 1962. Eventually the utensil emerged—in humorously gigantic scale—as the theme of the Minneapolis project. Van Bruggen contributed the cherry as a playful reference to the Garden&rsquo;s formal geometry, which reminded her of Versailles and the exaggerated dining etiquette Louis XIV imposed there. She also conceived the pond&rsquo;s shape in the form of linden seed. (Linden trees are planted along the <em>allées</em> that stretch before the fountain.) The complex fabrication of the 5,800 pound spoon and 1,200 pound cherry was carried out at two shipbuilding yards in New England. The sculpture has become a beloved icon in the Garden, whether glaceed with snow in the Minnesota winters or gleaming in the warmer months, with water flowing over the surface of the cherry and a fine mist rising from its stem.</p>",
         "blank": "node"
       }
     },
