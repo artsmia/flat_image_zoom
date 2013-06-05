@@ -105,6 +105,7 @@ function slideInit() {
             if (Zoomer.zoomers[slide.id]) {
                 Zoomer.zoomers[slide.id].map.touchZoom._zooming=false;
             }
+            Zoomer.skipTombstone = false;
             Zoomer.advancingSlide = false;
             if ($(slide).hasClass('video')) {
                 Zoomer.slideHasVideo = true;
