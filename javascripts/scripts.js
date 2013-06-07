@@ -127,6 +127,7 @@ function slideInit() {
             for (var i = 0; i < $('.video-container video').length; i++) {
                 $('.video-container video')[i].pause();
                 if ($('.video-container video')[i].currentTime > 0) {
+                    _gaq.push(['_trackEvent','Infolounge','VideoSkipped',screenId,Math.floor($('.video-container video')[i].currentTime)]);
                     $('.video-container video')[i].setCurrentTime(0);
                 }
             }
@@ -156,10 +157,12 @@ function initDone() {
     z.map.options.doubleClickZoom = false;
     $('.video-container video').on('playing', function() {
         clearTimeout(introTimeout);
+        _gaq.push(['_trackEvent','Infolounge','VideoPlay',screenId]);
     }).on('pause',function() {
         hideIntro();
     }).on('ended',function() {
         hideIntro();
+        _gaq.push(['_trackEvent','Infolounge','VideoFinished',screenId]);
     });
     mySwipe.next();
 }
