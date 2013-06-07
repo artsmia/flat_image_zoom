@@ -39,7 +39,7 @@ function hideIntro() {
         //$('.intro').show();
         $.colorbox.close();
         mySwipe.slide(2, 0);
-        _gaq.push(['_trackEvent','Infolounge','Wakeup',screenId]);
+        _gaq.push(['_trackEvent',screenId,'Wakeup']);
     }, 90000);
 }
 
@@ -69,7 +69,7 @@ function swapInfo(index, slide) {
 
 var cbox = undefined;
 function showInfo() {
-    _gaq.push(['_trackEvent','Infolounge','Info',screenId]);
+    _gaq.push(['_trackEvent',screenId,'Info']);
     for (var i = 0; i < $('.video-container video').length; i++) {
         $('.video-container video')[i].pause();
     }
@@ -127,7 +127,7 @@ function slideInit() {
             for (var i = 0; i < $('.video-container video').length; i++) {
                 $('.video-container video')[i].pause();
                 if ($('.video-container video')[i].currentTime > 0) {
-                    _gaq.push(['_trackEvent','Infolounge','VideoSkipped',screenId,Math.floor($('.video-container video')[i].currentTime)]);
+                    _gaq.push(['_trackEvent',screenId,'VideoSkipped',Math.floor($('.video-container video')[i].currentTime)]);
                     $('.video-container video')[i].setCurrentTime(0);
                 }
             }
@@ -157,12 +157,12 @@ function initDone() {
     z.map.options.doubleClickZoom = false;
     $('.video-container video').on('playing', function() {
         clearTimeout(introTimeout);
-        _gaq.push(['_trackEvent','Infolounge','VideoPlay',screenId]);
+        _gaq.push(['_trackEvent',screenId,'VideoPlay']);
     }).on('pause',function() {
         hideIntro();
     }).on('ended',function() {
         hideIntro();
-        _gaq.push(['_trackEvent','Infolounge','VideoFinished',screenId]);
+        _gaq.push(['_trackEvent',screenId,'VideoFinished']);
     });
     mySwipe.next();
 }
