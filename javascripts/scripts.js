@@ -127,7 +127,9 @@ function slideInit() {
             for (var i = 0; i < $('.video-container video').length; i++) {
                 $('.video-container video')[i].pause();
                 if ($('.video-container video')[i].currentTime > 0) {
-                    _gaq.push(['_trackEvent',screenId,'VideoSkipped',Math.floor($('.video-container video')[i].currentTime)]);
+                    var skipTime = Math.floor($('.video-container video')[i].currentTime);
+                    skipTime = skipTime.toString();
+                    _gaq.push(['_trackEvent',screenId,'VideoSkipped',skipTime]);
                     $('.video-container video')[i].setCurrentTime(0);
                 }
             }
