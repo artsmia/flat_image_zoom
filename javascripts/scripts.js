@@ -39,7 +39,7 @@ function hideIntro() {
         //$('.intro').show();
         $.colorbox.close();
         mySwipe.slide(2, 0);
-        _gaq.push(['_trackEvent','Infolounge','Wakeup',screenId]);
+        _gaq.push(['_trackEvent',screenId,'Wakeup']);
     }, 90000);
 }
 
@@ -69,7 +69,7 @@ function swapInfo(index, slide) {
 
 var cbox = undefined;
 function showInfo() {
-    _gaq.push(['_trackEvent','Infolounge','Info',screenId]);
+    _gaq.push(['_trackEvent',screenId,'Info']);
     for (var i = 0; i < $('.video-container video').length; i++) {
         $('.video-container video')[i].pause();
     }
@@ -105,6 +105,7 @@ function slideInit() {
             if (Zoomer.zoomers[slide.id]) {
                 Zoomer.zoomers[slide.id].map.touchZoom._zooming=false;
             }
+            Zoomer.skipTombstone = false;
             Zoomer.advancingSlide = false;
             if ($(slide).hasClass('video')) {
                 Zoomer.slideHasVideo = true;
@@ -126,6 +127,9 @@ function slideInit() {
             for (var i = 0; i < $('.video-container video').length; i++) {
                 $('.video-container video')[i].pause();
                 if ($('.video-container video')[i].currentTime > 0) {
+                    var skipTime = Math.floor($('.video-container video')[i].currentTime);
+                    skipTime = skipTime.toString();
+                    _gaq.push(['_trackEvent',screenId,'VideoSkipped',skipTime]);
                     $('.video-container video')[i].setCurrentTime(0);
                 }
             }
@@ -155,10 +159,12 @@ function initDone() {
     z.map.options.doubleClickZoom = false;
     $('.video-container video').on('playing', function() {
         clearTimeout(introTimeout);
+        _gaq.push(['_trackEvent',screenId,'VideoPlay']);
     }).on('pause',function() {
         hideIntro();
     }).on('ended',function() {
         hideIntro();
+        _gaq.push(['_trackEvent',screenId,'VideoFinished']);
     });
     mySwipe.next();
 }
