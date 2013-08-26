@@ -9,7 +9,8 @@ var artworkInfo = '',
     lastSlideId = 'image-view-1',
     screenId = 'development';
     
-screenId=window.location.hash?window.location.hash.substr(1):screenId; // use for logging which screen is in use
+// use for logging which screen is in use, and which json to load
+screenId=window.location.hash?window.location.hash.substr(1):screenId;
 
 mejs.MediaFeatures.hasTouch = false;
 
@@ -169,7 +170,7 @@ function initDone() {
     mySwipe.next();
 }
 
-$.getJSON('javascripts/garden.json', function(data) {
+$.getJSON('javascripts/'+screenId+'.json', function(data) {
     slides = data.slides;
     for (var variable in slides) {
         if (slides[variable]) {
