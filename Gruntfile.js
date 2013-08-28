@@ -16,16 +16,10 @@ module.exports = function(grunt) {
         src: [
           'javascripts/jquery-2.0.1.min.js',
           'javascripts/underscore-min.js',
-          'javascripts/backbone-min.js',
-          'javascripts/jquery.colorbox-min.js',
-          'javascripts/swipe.js',
           'javascripts/leaflet-src.js',
           'javascripts/zoom_swipe.js',
           'javascripts/jquery.actual.min.js',
-          'javascripts/mediaelement-and-player.min.js',
-          'javascripts/jquery.fs.scroller.min.js',
           'javascripts/flat_image_zoom.js',
-          'javascripts/scripts.js'
         ],
         // the location of the resulting JS file
         dest: 'build/<%= pkg.name %>.js'
@@ -44,28 +38,7 @@ module.exports = function(grunt) {
       },
 
       files: {
-        src: [
-          //'javascripts/underscore-min.js',
-          //'javascripts/backbone-min.js',
-          //'javascripts/jquery.colorbox-min.js',
-          //'javascripts/swipe.js',
-          //'javascripts/leaflet-src.js',
-          //'javascripts/zoom_swipe.js',
-          //'javascripts/jquery.actual.min.js',
-          //'javascripts/mediaelement-and-player.min.js',
-          //'javascripts/jquery.fs.scroller.min.js',
-          //'javascripts/flat_image_zoom.js',
-          'javascripts/scripts.js'
-        ]
-      }
-    },
-
-    compass: {
-      dist: {
-        options: {
-          sassDir: 'sass',
-          cssDir: 'stylesheets'
-        }
+        src: [ ]
       }
     },
 
@@ -91,7 +64,6 @@ module.exports = function(grunt) {
 
   });
 
-
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -102,8 +74,4 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['concat', 'uglify']);
-
 };
-
-
-
